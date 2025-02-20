@@ -28,16 +28,6 @@ const MainMenu = () => {
 						? "main-menu__link main-menu__link--active"
 						: "main-menu__link"
 				}
-				to="/about"
-			>
-				About
-			</NavLink>
-			<NavLink
-				className={({ isActive }) =>
-					isActive
-						? "main-menu__link main-menu__link--active"
-						: "main-menu__link"
-				}
 				to="/experience"
 			>
 				Experience

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import Divisor from "../divisor/Divisor";
-import TechStack from "../techStak/techStack";
+import TechStack from "../techStak/TechStack";
 
 import stackContent from "../../data/techStack.json";
 import "./tabedNavigation.scss";
