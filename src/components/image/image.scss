@@ -1,0 +1,13 @@
+.image {
+    display: flex;
+    align-items: center;
+}
+
+.image__small_rounded {
+    img {
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.5);
+    }
+}

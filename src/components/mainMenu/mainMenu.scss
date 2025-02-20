@@ -1,0 +1,33 @@
+.main-menu {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    &__link,
+    &__dropdown-title {
+        font-size: 14px;
+        text-decoration: none;
+        color: #030303;
+        transition: color 0.3s ease, background 0.3s ease;
+
+        &:hover {
+            color: #007bff;
+        }
+
+        &:active {
+            color: #0056b3;
+        }
+
+        &--active {
+            color: #007bff;
+            border-bottom: 1px solid #007bff;
+        }
+    }
+
+    &__dropdown-menu {
+        position: absolute;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+}
