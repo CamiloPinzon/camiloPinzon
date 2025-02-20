@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+import Divisor from "../divisor/Divisor";
+import TechStack from "../techStak/techStack";
+
+import stackContent from "../../data/techStack.json";
 import "./tabedNavigation.scss";
 
 const TabedNavigation = () => {
@@ -18,14 +22,17 @@ const TabedNavigation = () => {
 				>
 					Tech Stak
 				</div>
-				<div
-					className="tabed-navigation__tabs-tab"
-					onClick={() => handleTab(1)}
-				>
-					Skills
-				</div>
 			</div>
-			<div className="tabed-navigation__content">{activeTab}</div>
+			<Divisor />
+			<div className="tabed-navigation__content">
+				{activeTab === 0 && (
+					<div className="tabed-navigation__content-container">
+						{stackContent.map(({ id, img, name }) => (
+							<TechStack key={id} img={img} name={name} />
+						))}
+					</div>
+				)}
+			</div>
 		</div>
 	);
 };

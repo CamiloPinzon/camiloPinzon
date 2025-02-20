@@ -1,0 +1,19 @@
+.tabed-navigation {
+    width: 100%;
+    margin: 0 auto;
+
+    &__tabs {
+        display: flex;
+        gap: 20px;
+    }
+
+    &__content {
+        &-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 10px;
+            align-items: center;
+        }
+    }
+}

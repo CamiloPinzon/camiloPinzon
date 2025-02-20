@@ -1,0 +1,52 @@
+[
+	{
+		"id": 0,
+		"img": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
+		"name": "HTML"
+	},
+	{
+		"id": 1,
+		"img": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
+		"name": "CSS"
+	},
+	{
+		"id": 2,
+		"img": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+		"name": "JavaScript"
+	},
+	{
+		"id": 3,
+		"img": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+		"name": "React"
+	},
+	{
+		"id": 4,
+		"img": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+		"name": "TypeScript"
+	},
+	{
+		"id": 5,
+		"img": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-original.svg",
+		"name": "WordPress"
+	},
+	{
+		"id": 6,
+		"img": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+		"name": "GIT"
+	},
+	{
+		"id": 7,
+		"img": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
+		"name": "GitHub"
+	},
+	{
+		"id": 8,
+		"img": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg",
+		"name": "SASS"
+	},
+	{
+		"id": 9,
+		"img": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
+		"name": "Firebase"
+	}
+]

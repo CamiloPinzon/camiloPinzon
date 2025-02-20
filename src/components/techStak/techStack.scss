@@ -1,0 +1,13 @@
+.tech-stack {
+    width: 130px;
+    margin: 0 auto;
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        text-align: center;
+        font-size: 15px;
+    }
+}

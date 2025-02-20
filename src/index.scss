@@ -7,3 +7,21 @@
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
 }
+
+a {
+    color: #030303;
+    transition: color 0.3s ease, background 0.3s ease;
+
+    &:hover {
+        color: #007bff;
+    }
+
+    &:active {
+        color: #0056b3;
+    }
+
+    &--active {
+        color: #007bff;
+        border-bottom: 1px solid #007bff;
+    }
+}
