@@ -1,0 +1,12 @@
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 25px;
+    align-items: center;
+    padding: 20px;
+
+    &__name {
+        text-align: center;
+    }
+}

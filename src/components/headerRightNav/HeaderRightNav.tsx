@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Button from "../button/Button";
 import Image from "../image/Image";
@@ -18,7 +19,9 @@ const HeaderRightNav = () => {
 			<Button onClick={handleContactClick} type="button" style="primary">
 				Contact
 			</Button>
-			<Image src={ProfilePic} alt="profile picture" kind="small_rounded" />
+			<Link to="/">
+				<Image src={ProfilePic} alt="profile picture" kind="small_rounded" />
+			</Link>
 		</div>
 	);
 };
