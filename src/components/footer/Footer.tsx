@@ -1,10 +1,7 @@
-import { Link } from "react-router-dom";
-
-import Image from "../image/Image";
-
-import linkedIn from "../../assets/linkedIn.svg";
-import gitHub from "../../assets/github.svg";
-import leetCode from "../../assets/leetcode.svg";
+import SocialIcons from "../socialIcons/socialIcons";
+import LegalFooter from "../legalFooter/LegarFooter";
+import MenuFooter from "../menuFooter/MenuFooter";
+import SuscribeForm from "../suscribeForm/SuscribeForm";
 
 import "./footer.scss";
 
@@ -15,21 +12,19 @@ const Footer = () => {
 				<div className="footer__up-left">
 					<h3>CAMILO PINZÓN</h3>
 					<i>Web Developer</i>
-					<div className="footer__up-left--social">
-						<Link
-							to={`https://www.linkedin.com/in/camilo-pinzon/`}
-							target="_blank"
-						>
-							<Image src={linkedIn} alt="LinkedIn" kind="icon" />
-						</Link>
-					</div>
+					<SocialIcons />
 				</div>
 				<div className="footer__up-center">
-					<div>Footer menú</div>
+					<MenuFooter />
+				</div>
+				<div className="footer__up-right">
+					<h3>Suscribe for updates</h3>
+					<i>Stay updated with the latest blogs.</i>
+					<SuscribeForm />
 				</div>
 			</div>
 			<div className="footer__down">
-				<div>Legal Menú</div>
+				<LegalFooter />
 			</div>
 		</div>
 	);

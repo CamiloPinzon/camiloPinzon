@@ -2,7 +2,7 @@ import "./button.scss";
 
 interface ButtonProps {
 	children: React.ReactNode;
-	onClick: React.MouseEventHandler<HTMLButtonElement>;
+	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	type: "button" | "submit" | "reset";
 	style: "primary" | "secondary";
 }

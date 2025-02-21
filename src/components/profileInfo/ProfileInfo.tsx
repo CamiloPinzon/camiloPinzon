@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import Image from "../image/Image";
 import Button from "../button/Button";
+import SocialIcons from "../socialIcons/socialIcons";
 
 import ProfilePic from "../../assets/profile_pic__sm.jpg";
 import emailIcon from "../../assets/email.svg";
@@ -25,6 +26,9 @@ const ProfileInfo = () => {
 				<p>
 					<i>Web Develper</i>
 				</p>
+				<div className="profile-info__content-social">
+					<SocialIcons />
+				</div>
 				<br />
 				<h2>INTRODUCTION</h2>
 				<p>

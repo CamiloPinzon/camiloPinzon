@@ -8,6 +8,18 @@
     text-align: center;
 
     &__content {
+        padding-top: 20px;
+
+        h1 {
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.3rem;
+        }
+
+        &-social {
+            margin-inline: 40px;
+        }
+
         &-contact {
             list-style: none;
 
