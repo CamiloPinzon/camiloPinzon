@@ -5,6 +5,11 @@
     &__tabs {
         display: flex;
         gap: 20px;
+
+        &-tab {
+            font-size: 20px;
+            font-weight: bold;
+        }
     }
 
     &__content {

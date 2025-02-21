@@ -1,0 +1,21 @@
+.footer {
+    background-color: #d3d3d3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+    &__up {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        max-width: 1280px;
+
+        &-left {
+            &--social {
+                display: flex;
+                gap: 10px;
+            }
+        }
+    }
+}
