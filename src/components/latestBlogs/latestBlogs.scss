@@ -1,0 +1,43 @@
+.latest-blogs {
+    h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        padding-inline-start: 50px;
+    }
+
+    ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        padding-top: 50px;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        background-color: rgba($color: #007bff, $alpha: .1);
+        padding: 50px;
+        border-radius: 25px;
+
+        &--image {
+            width: 160px;
+            height: 160px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        &--info {
+            text-align: center;
+
+            &-link {
+                color: #007bff;
+                text-decoration: none;
+                font-weight: bold;
+            }
+        }
+
+    }
+}
