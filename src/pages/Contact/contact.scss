@@ -1,0 +1,27 @@
+.contact {
+    &__hero {
+        background-image: url('../../assets/contactHero.png');
+        background-position: center top;
+        object-fit: cover;
+        background-repeat: no-repeat;
+
+        &-container {
+            h1 {
+                color: white;
+                font-size: 70px;
+                padding-top: 100px;
+            }
+
+            p {
+                padding-block: 100px;
+                max-width: 60%;
+
+                i {
+                    font-size: 20px;
+                    color: white;
+                    text-shadow: 2px 2px 3px #000;
+                }
+            }
+        }
+    }
+}
