@@ -1,7 +1,11 @@
 import "./divisor.scss";
 
-const Divisor = () => {
-	return <div className="divisor"></div>;
+type DivisorT = {
+	theme?: string;
+};
+
+const Divisor = ({ theme = "dark" }: DivisorT) => {
+	return <div className={`divisor ${theme}`}></div>;
 };
 
 export default Divisor;

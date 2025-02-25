@@ -1,0 +1,41 @@
+.github-repos {
+    padding-top: 50px;
+    h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        padding-inline-start: 50px;
+        color: white;
+    }
+
+    ul {
+        list-style: none;
+        margin-block: 50px;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        background-color: #162447;
+        padding: 30px;
+        border-radius: 25px;
+
+        a {
+            text-decoration: none;
+
+            h3 {
+                color: white;
+            }
+        }
+
+        p {
+            color: white;
+
+        }
+
+        &--deployed {
+            color: #E43F5A;
+        }
+    }
+}

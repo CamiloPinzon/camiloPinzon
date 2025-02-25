@@ -4,6 +4,7 @@ import LatestBlogs from "../../components/latestBlogs/LatestBlogs";
 import heroImage from "../../assets/home_hero_desktop.jpg";
 import ProfileInfo from "../../components/profileInfo/ProfileInfo";
 import TabedNavigation from "../../components/tabedNavigation/TabedNavigation";
+import FeaturedRepos from "../../components/featuredRepos/FeaturedRepos";
 
 import "./home.scss";
 
@@ -23,6 +24,11 @@ const Home = () => {
 			</div>
 			<div className="home__blogs container">
 				<LatestBlogs />
+			</div>
+			<div className="home__featured-repos">
+				<div className="container">
+					<FeaturedRepos />
+				</div>
 			</div>
 		</div>
 	);

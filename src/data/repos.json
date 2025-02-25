@@ -1,0 +1,41 @@
+[
+	{
+		"id": 842548986,
+		"name": "Context-Api",
+		"html_url": "https://github.com/CamiloPinzon/Context-API",
+		"description": "This is a simple React application that demonstrates how to implement a theme toggler (light/dark mode) using the Context API. The theme is managed globally and can be toggled from any component within the application."
+	},
+	{
+		"id": 851401014,
+		"name": "login-form-validation",
+		"html_url": "https://github.com/CamiloPinzon/login-form-validation",
+		"description": "Learn to manage form state, handle validation, and give proper feedback to users."
+	},
+	{
+		"id": 873357353,
+		"name": "Facebook-Pixel-Inserter",
+		"html_url": "https://github.com/CamiloPinzon/Facebook-Pixel-Inserter",
+		"description": "Facebook Pixel Inserter is a custom WordPress plugin that allows administrators to easily add their Facebook Pixel ID via an admin settings page. The plugin then automatically inserts the Facebook Pixel tracking code into the website's header, enabling Facebook analytics and ad tracking."
+	},
+	{
+		"id": 865714403,
+		"name": "tita-pokemon-test",
+		"html_url": "https://github.com/CamiloPinzon/tita-pokemon-test",
+		"description": "FrontEnd test",
+		"deployed_url": "https://pokedex-tita.netlify.app/"
+	},
+	{
+		"id": 782248009,
+		"name": "weather-app",
+		"html_url": "https://github.com/CamiloPinzon/weather-app",
+		"description": "This is a simple weather app that allows users to check the current weather conditions for a specific location.",
+		"deployed_url": "https://own-weatherapp.netlify.app/"
+	},
+	{
+		"id": 670821052,
+		"name": "currency_exchanger",
+		"html_url": "https://github.com/CamiloPinzon/currency_exchanger",
+		"description": "JFF currency exchanger",
+		"deployed_url": "https://golden-banoffee-b17102.netlify.app/"
+	}
+]
