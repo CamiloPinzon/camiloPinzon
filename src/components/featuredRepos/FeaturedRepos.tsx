@@ -7,7 +7,7 @@ import "./featuredRepos.scss";
 const GitHubRepos = () => {
 	return (
 		<div className="github-repos">
-			<h2>Featured GitHub Repositories</h2>
+			<h2>GitHub Repositories</h2>
 			<Divisor theme="light" />
 			<ul>
 				{repos.length > 0 ? (
