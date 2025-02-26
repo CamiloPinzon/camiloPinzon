@@ -1,27 +1,29 @@
-.contact {
-    &__hero {
-        background-image: url('../../assets/contactHero.png');
-        background-position: center top;
-        object-fit: cover;
-        background-repeat: no-repeat;
+.contact-main {
+    h2 {
+        font-size: 48px;
+        padding: 20px;
+    }
 
-        &-container {
-            h1 {
-                color: white;
-                font-size: 70px;
-                padding-top: 100px;
-            }
+    &__contact-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 50px 30px;
 
-            p {
-                padding-block: 100px;
-                max-width: 60%;
+        button {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            margin-inline: 30px;
+            padding: 10px;
+            gap: 20px;
+        }
+    }
 
-                i {
-                    font-size: 20px;
-                    color: white;
-                    text-shadow: 2px 2px 3px #000;
-                }
-            }
+    &__contact-form {
+        h3 {
+            font-size: 48px;
+            margin: 50px 20px;
         }
     }
 }

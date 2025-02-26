@@ -33,3 +33,11 @@
         height: auto;
     }
 }
+
+.image__light_icon {
+    img {
+        filter: invert(1);
+        width: 20px;
+        height: auto;
+    }
+}

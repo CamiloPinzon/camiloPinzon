@@ -1,0 +1,32 @@
+.hero {
+    background-position: center top;
+    object-fit: cover;
+    background-repeat: no-repeat;
+
+    &__content {
+        h1 {
+            font-size: 70px;
+            padding-top: 100px;
+        }
+
+        p {
+            padding-block: 100px;
+            max-width: 60%;
+
+            i {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+.hero.light {
+    color: white;
+
+    h1,
+    p,
+    i {
+        text-shadow: 2px 2px 3px #000;
+    }
+
+}

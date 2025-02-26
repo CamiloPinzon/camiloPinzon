@@ -1,20 +1,50 @@
+import Hero from "../../components/hero/Hero";
+import Button from "../../components/button/Button";
+import Image from "../../components/image/Image";
+import ContactForm from "../../components/contactForm/ContactForm";
+
+import emailIcon from "../../assets/email.svg";
+import phoneIcon from "../../assets/phone.svg";
+
 import "./contact.scss";
 
 const Contact = () => {
+	const paragraph = `Feel free to reach out anytime! Whether you need assistance or
+							just want to connect, send me a message, and let's build something
+							great together.`;
+
+	const handleEmailLink = () => {
+		window.location.href = "mailto:pinzonac@gmail.com";
+	};
+
+	const handlePhoneLink = () => {
+		window.location.href = "tel:123-456-7890";
+	};
 	return (
 		<div className="contact">
-			<div className="contact__hero">
-				<div className="contact__hero-container container">
-					<h1>Let's Collaborate.</h1>
-					<p>
-						<i>
-							Feel free to reach out anytime! Whether you need assistance or
-							just want to connect, send me a message, and let's build something
-							great together.
-						</i>
-					</p>
+			<Hero
+				bgImage="./images/contactHero.png"
+				title="Let's Collaborate."
+				paragraph={paragraph}
+				style="light"
+			/>
+			<main className="contact-main container">
+				<h2>Get in touch</h2>
+				<div className="contact-main__contact-links">
+					<Button onClick={handleEmailLink} type="button" style="secondary">
+						<Image src={emailIcon} alt="email icon" kind="light_icon" />
+						pinzonac@gmail.com
+					</Button>
+					<Button onClick={handlePhoneLink} type="button" style="secondary">
+						<Image src={phoneIcon} alt="phone icon" kind="light_icon" />
+						+57 317 664 4185
+					</Button>
 				</div>
-			</div>
+				<div className="contact-main__contact-form">
+					<h3>Drop me a line.</h3>
+					<ContactForm />
+				</div>
+			</main>
 		</div>
 	);
 };
