@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Button from "../button/Button";
+
+import { createContactDocument } from "../../utils/firebase/firebase";
 
 import "./contactForm.scss";
 
@@ -12,33 +14,9 @@ const defaultFormFields = {
 	message: "",
 };
 
-declare global {
-	interface Window {
-		grecaptcha: unknown;
-	}
-}
-
 const ContactForm = () => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { fullName, email, company, phone, message } = formFields;
-
-	useEffect(() => {
-		const script = document.createElement("script");
-		script.src = "https://www.google.com/recaptcha/api.js";
-		script.async = true;
-		script.defer = true;
-		document.body.appendChild(script);
-
-		return () => {
-			document.body.removeChild(script);
-		};
-	}, []);
-
-	const handleSubmit = (token: string) => {
-		console.log("reCAPTCHA Token:", token);
-		const form = document.getElementById("contact-form") as HTMLFormElement;
-		if (form) form.submit();
-	};
 
 	const handleOnChange = (
 		e:
@@ -49,14 +27,19 @@ const ContactForm = () => {
 		setFormFields({ ...formFields, [name]: value });
 	};
 
+	const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		try {
+			const contactRef = await createContactDocument(formFields);
+			console.log("Contact created with ID:", contactRef.id);
+		} catch (error) {
+			console.error("Failed to submit contact:", error);
+		}
+	};
+
 	return (
 		<div className="contact-form">
-			<form
-				className="contact-form__form"
-				id="contact-form"
-				action="/submit"
-				method="POST"
-			>
+			<form className="contact-form__form" onSubmit={handleOnSubmit}>
 				<div className="contact-form__form-row">
 					<input
 						type="text"
@@ -104,7 +87,7 @@ const ContactForm = () => {
 					/>
 				</div>
 				<div className="contact-form__form-row submit-container">
-					<Button type="submit" style="primary" isReacptcha={true}>
+					<Button type="submit" style="primary">
 						Send
 					</Button>
 				</div>

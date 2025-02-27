@@ -2,29 +2,20 @@ import "./button.scss";
 
 export interface ButtonProps {
 	children: React.ReactNode;
-	onClick?: React.MouseEventHandler<HTMLButtonElement>;
+	onClick?: (
+		event: React.MouseEvent<HTMLButtonElement>,
+		token?: string
+	) => void;
 	type: "button" | "submit" | "reset";
 	style: "primary" | "secondary";
-	isReacptcha?: boolean;
 }
 
-const Button = ({
-	children,
-	onClick,
-	type,
-	style,
-	isReacptcha,
-}: ButtonProps) => {
+const Button = ({ children, onClick, type, style }: ButtonProps) => {
 	return (
 		<button
-			className={`button button__${style} ${isReacptcha && "g-recaptcha"}`}
+			className={`button button__${style}`}
 			onClick={onClick}
 			type={type}
-			{...(isReacptcha && {
-				"data-sitekey": import.meta.env.VITE_SITE_KEY,
-				"data-callback": "onSubmit",
-				"data-action": "submit",
-			})}
 		>
 			{children}
 		</button>
