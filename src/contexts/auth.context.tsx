@@ -31,7 +31,7 @@ export const AuthContext = createContext<AuthContextType>({
 	userData: null,
 	setCurrentUser: () => null,
 	isAdmin: false,
-	isLoading: true,
+	isLoading: false,
 	authError: null,
 });
 
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 	const [currentUser, setCurrentUser] = useState<User | null>(null);
 	const [userData, setUserData] = useState<UserData | null>(null);
 	const [isAdmin, setIsAdmin] = useState(false);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const [authError, setAuthError] = useState<string | null>(null);
 
 	useEffect(() => {
