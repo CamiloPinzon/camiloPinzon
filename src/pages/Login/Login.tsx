@@ -43,10 +43,13 @@ const Login = () => {
 			console.log("Login - Attempting Google sign-in");
 			const { user } = await signInWithGooglePopup();
 			if (user) {
+				console.log("Checking if admin");
 				if (await isUserAdmin(user)) {
+					console.log("Login - User is admin, redirecting to admin");
 					setCurrentUser(user);
 					navigate("/admin");
 				} else {
+					console.log("Login - User is not admin, redirecting to home");
 					navigate("/");
 				}
 			}
