@@ -1,4 +1,3 @@
-// src/contexts/auth.context.tsx
 import { createContext, useState, useEffect, ReactNode } from "react";
 import { User } from "firebase/auth";
 import {
@@ -9,6 +8,7 @@ import { createUserProfileDocument } from "../utils/firebase/creation";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../utils/firebase/config";
 
+// Type definitions
 type UserData = {
 	displayName: string;
 	email: string;
@@ -26,40 +26,31 @@ type AuthContextType = {
 	authError: string | null;
 };
 
+// Default context values
 export const AuthContext = createContext<AuthContextType>({
 	currentUser: null,
 	userData: null,
 	setCurrentUser: () => null,
 	isAdmin: false,
-	isLoading: false,
+	isLoading: true, // Changed from false to true to prevent flash of unauthenticated content
 	authError: null,
 });
 
-type AuthProviderProps = {
-	children: ReactNode;
-};
-
-export const AuthProvider = ({ children }: AuthProviderProps) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const [currentUser, setCurrentUser] = useState<User | null>(null);
 	const [userData, setUserData] = useState<UserData | null>(null);
 	const [isAdmin, setIsAdmin] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
-    const [authError, setAuthError] = useState<string | null>(null);
-    
-    useEffect(() => {
-        console.log(`Personal Debbugin - ${currentUser} - isLoading: ${isLoading}`);
-    }, [currentUser, isLoading]);
+	const [isLoading, setIsLoading] = useState(true); // Start with loading true
+	const [authError, setAuthError] = useState<string | null>(null);
 
 	useEffect(() => {
 		let isMounted = true;
-		console.log("AuthProvider - Initializing authentication");
 
+		// Fetch user data from Firestore
 		const fetchUserData = async (user: User) => {
 			if (!isMounted) return;
 
 			try {
-				console.log("AuthProvider - Fetching user data for:", user.email);
-
 				// Create or update user document
 				await createUserProfileDocument(user);
 
@@ -67,34 +58,25 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 				const userRef = doc(db, "users", user.uid);
 				const userSnapshot = await getDoc(userRef);
 
-				if (userSnapshot.exists()) {
-					const userData = userSnapshot.data() as UserData;
-					if (isMounted) {
-						setUserData(userData);
-						setIsAdmin(userData.role === "admin");
-						console.log("AuthProvider - User role:", userData.role);
-					}
-				} else {
-					console.log("AuthProvider - User document does not exist");
+				if (userSnapshot.exists() && isMounted) {
+					const data = userSnapshot.data() as UserData;
+					setUserData(data);
+					setIsAdmin(data.role === "admin");
 				}
 			} catch (error) {
-				console.error("AuthProvider - Error fetching user data:", error);
+				console.error("Error fetching user data:", error);
 				if (isMounted) {
 					setAuthError("Failed to fetch user data");
 				}
 			}
 		};
 
+		// Initialize authentication
 		const initAuth = async () => {
 			try {
-				console.log("AuthProvider - Getting current user");
 				const user = await getCurrentUser();
 
 				if (isMounted) {
-					console.log(
-						"AuthProvider - Current user:",
-						user ? "Logged in" : "Not logged in"
-					);
 					setCurrentUser(user);
 
 					if (user) {
@@ -102,26 +84,21 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 					}
 				}
 			} catch (error) {
-				console.error("AuthProvider - Error checking authentication:", error);
+				console.error("Error checking authentication:", error);
 				if (isMounted) {
 					setAuthError("Authentication check failed");
 				}
 			} finally {
 				if (isMounted) {
-					console.log("AuthProvider - Finishing initialization");
 					setIsLoading(false);
 				}
 			}
 		};
 
+		// Initialize auth and set up auth state listener
 		initAuth();
 
 		const unsubscribe = onAuthStateChangedListener(async (user) => {
-			console.log(
-				"AuthProvider - Auth state changed:",
-				user ? "Logged in" : "Not logged in"
-			);
-
 			if (isMounted) {
 				setCurrentUser(user);
 
@@ -136,6 +113,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 			}
 		});
 
+		// Cleanup function
 		return () => {
 			isMounted = false;
 			unsubscribe();
