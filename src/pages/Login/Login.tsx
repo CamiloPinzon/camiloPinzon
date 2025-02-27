@@ -1,24 +1,24 @@
 // src/pages/Login.tsx
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {signInWithGooglePopup} from "../../utils/firebase/auth";
+import { signInWithGooglePopup } from "../../utils/firebase/auth";
 import { AuthContext } from "../../contexts/auth.context";
 import { FirebaseError } from "firebase/app";
+import { isUserAdmin } from "../../utils/firebase/auth";
 
 const Login = () => {
 	const [error, setError] = useState("");
 	const [isLoggingIn, setIsLoggingIn] = useState(false);
 	const navigate = useNavigate();
-	const { currentUser, isLoading, authError } = useContext(AuthContext);
+	const { currentUser, isLoading, authError, setCurrentUser } =
+		useContext(AuthContext);
 
 	useEffect(() => {
-		// Display any auth context errors
 		if (authError) {
 			setError(authError);
 		}
 	}, [authError]);
 
-	// Use effect to handle redirection
 	useEffect(() => {
 		if (!isLoading && currentUser) {
 			console.log("Login - User is authenticated, redirecting to admin");
@@ -26,7 +26,6 @@ const Login = () => {
 		}
 	}, [currentUser, isLoading, navigate]);
 
-	// Show loading if still checking auth
 	if (isLoading) {
 		return (
 			<div className="flex justify-center items-center h-screen">
@@ -36,22 +35,26 @@ const Login = () => {
 		);
 	}
 
-	// If we're not loading and user is logged in, we should be redirected by the effect
-	// If we're still here, we should show the login form
-
 	const handleGoogleSignIn = async () => {
 		setError("");
 		setIsLoggingIn(true);
 
 		try {
 			console.log("Login - Attempting Google sign-in");
-			await signInWithGooglePopup();
-			// Navigation handled by the useEffect
+			const { user } = await signInWithGooglePopup();
+			if (user) {
+				if (await isUserAdmin(user)) {
+					setCurrentUser(user);
+					navigate("/admin");
+				} else {
+					navigate("/");
+				}
+			}
 		} catch (error) {
-            console.error("Login - Google sign-in error:", error);
-            if (error instanceof FirebaseError) {
-                setError(error.message);
-            } else {
+			console.error("Login - Google sign-in error:", error);
+			if (error instanceof FirebaseError) {
+				setError(error.message);
+			} else {
 				setError(`Failed to sign in: "Unknown error"`);
 			}
 		} finally {
