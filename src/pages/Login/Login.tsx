@@ -8,7 +8,7 @@ import { AuthContext } from "../../contexts/user.context";
 const Login = () => {
 	const [error, setError] = useState("");
 	const navigate = useNavigate();
-	const { currentUser } = useContext(AuthContext);
+	const { currentUser, setCurrentUser } = useContext(AuthContext);
 
 	if (currentUser) {
 		navigate("/admin");
@@ -19,8 +19,11 @@ const Login = () => {
 		setError("");
 
 		try {
-			await signInWithGooglePopup();
-			navigate("/admin");
+			const { user } = await signInWithGooglePopup();
+			if (user) {
+				setCurrentUser(user);
+				navigate("/admin");
+			}
 		} catch (error) {
 			if (error instanceof FirebaseError) {
 				if (error.code === "auth/popup-closed-by-user") {
