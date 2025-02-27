@@ -44,7 +44,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 	const [userData, setUserData] = useState<UserData | null>(null);
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [authError, setAuthError] = useState<string | null>(null);
+    const [authError, setAuthError] = useState<string | null>(null);
+    
+    useEffect(() => {
+        console.log(`Personal Debbugin - ${currentUser} - isLoading: ${isLoading}`);
+    }, [currentUser, isLoading]);
 
 	useEffect(() => {
 		let isMounted = true;
