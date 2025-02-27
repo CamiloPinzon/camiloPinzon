@@ -1,44 +1,54 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { AuthContext } from "../../contexts/auth.context";
+import { UserContext } from "../../contexts/user.context";
 import { signOutUser } from "../../utils/firebase/auth";
 
 const Admin = () => {
-	const { currentUser } = useContext(AuthContext);
+	const { currentUser, isAdmin } = useContext(UserContext);
 	const navigate = useNavigate();
+	const [loading, setLoading] = useState(true);
+
+	// ✅ Wait for `currentUser` before setting `loading` to false
+	useEffect(() => {
+		console.log("👀 Admin - Checking user state:", { currentUser, isAdmin });
+
+		if (currentUser !== null) {
+			setLoading(false);
+		}
+	}, [currentUser]);
+
+	// ✅ Only navigate once `loading` is done
+	useEffect(() => {
+		if (!loading) {
+			if (!currentUser) {
+				console.warn("⛔ No user found, redirecting...");
+				navigate("/login");
+			} else if (!isAdmin) {
+				console.warn("⛔ Not an admin, redirecting...");
+				navigate("/");
+			}
+		}
+	}, [currentUser, isAdmin, navigate, loading]);
 
 	const handleSignOut = async () => {
 		try {
 			await signOutUser();
 			navigate("/login");
 		} catch (error) {
-			console.error("Error signing out:", error);
+			console.error("❌ Error signing out:", error);
 		}
 	};
 
-	return (
-		<div className="max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-			<div className="flex justify-between items-center mb-8">
-				<h1 className="text-2xl font-bold">Admin Dashboard</h1>
-				<div className="flex items-center">
-					<span className="mr-4">{currentUser?.email}</span>
-					<button
-						onClick={handleSignOut}
-						className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700"
-					>
-						Sign Out
-					</button>
-				</div>
-			</div>
+	if (loading) {
+		return <div>Loading...</div>;
+	}
 
-			{/* Here you would add your admin features */}
-			<div className="bg-gray-100 p-4 rounded">
-				<h2 className="text-xl font-semibold mb-4">Admin Controls</h2>
-				<p>
-					You can add your admin functionality here - manage users, view/edit
-					contacts, etc.
-				</p>
+	return (
+		<div>
+			<h1>Admin Dashboard</h1>
+			<div>
+				<span>{currentUser?.email}</span>
+				<button onClick={handleSignOut}>Sign Out</button>
 			</div>
 		</div>
 	);

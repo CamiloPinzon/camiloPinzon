@@ -1,10 +1,12 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.scss'
-import App from './App.tsx'
+import { createRoot } from "react-dom/client";
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+import { UserProvider } from "./contexts/user.context.tsx";
+
+import "./index.scss";
+import App from "./App.tsx";
+
+createRoot(document.getElementById("root")!).render(
+	<UserProvider>
+		<App />
+	</UserProvider>
+);

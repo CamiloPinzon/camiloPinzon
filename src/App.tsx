@@ -10,7 +10,6 @@ import Contact from "./pages/Contact/Contact";
 import Experience from "./pages/Experience/Experience";
 import Login from "./pages/Login/Login";
 import Admin from "./pages/Admin/Admin";
-import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
 
 import "./App.scss";
 
@@ -28,9 +27,7 @@ function App() {
 					<Route path="/contact" element={<Contact />} />
 					<Route path="/experience" element={<Experience />} />
 					<Route path="/login" element={<Login />} />
-					<Route element={<ProtectedRoute />}>
-						<Route path="/admin" element={<Admin />} />
-					</Route>
+					<Route path="/admin" element={<Admin />} />
 					<Route path="/" element={<Navigate to="/login" replace />} />
 				</Routes>
 				<Footer />

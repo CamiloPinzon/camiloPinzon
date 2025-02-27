@@ -1,85 +1,48 @@
-// src/pages/Login.tsx
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/user.context";
 import { signInWithGooglePopup } from "../../utils/firebase/auth";
-import { AuthContext } from "../../contexts/auth.context";
-import { FirebaseError } from "firebase/app";
-import { isUserAdmin } from "../../utils/firebase/auth";
 
 const Login = () => {
-	const [error, setError] = useState("");
 	const [isLoggingIn, setIsLoggingIn] = useState(false);
+	const { setCurrentUser } = useContext(UserContext);
 	const navigate = useNavigate();
-	const { currentUser, isLoading, authError, setCurrentUser } =
-		useContext(AuthContext);
-
-	useEffect(() => {
-		if (authError) {
-			setError(authError);
-		}
-	}, [authError]);
-
-	useEffect(() => {
-		if (!isLoading && currentUser) {
-			console.log("Login - User is authenticated, redirecting to admin");
-			navigate("/admin");
-		}
-	}, [currentUser, isLoading, navigate]);
-
-	if (isLoading) {
-		return (
-			<div className="flex justify-center items-center h-screen">
-				<div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-700 mb-4"></div>
-				<p className="ml-3">Checking authentication...</p>
-			</div>
-		);
-	}
 
 	const handleGoogleSignIn = async () => {
-		setError("");
-		setIsLoggingIn(true);
-
 		try {
-			console.log("Login - Attempting Google sign-in");
-			const { user } = await signInWithGooglePopup();
-			if (user) {
-				console.log("Checking if admin");
-				if (await isUserAdmin(user)) {
-					console.log("Login - User is admin, redirecting to admin");
-					setCurrentUser(user);
-					navigate("/admin");
-				} else {
-					console.log("Login - User is not admin, redirecting to home");
-					navigate("/");
-				}
-			}
+			setIsLoggingIn(true);
+			const userCredential = await signInWithGooglePopup();
+
+			if (!userCredential)
+				throw new Error("No user returned from Google Sign-In");
+
+			const userObject = {
+				id: userCredential.user.uid,
+				email: userCredential.user.email || "",
+				displayName: userCredential.user.displayName || "No Name",
+				createdAt: new Date(),
+			};
+
+			console.log("🚀 Setting current user:", userObject);
+			setCurrentUser(userObject);
+
+			// ✅ Wait for the next render where `currentUser` is updated
+			setTimeout(() => {
+				console.log("🔄 Navigating to /admin...");
+				navigate("/admin");
+			}, 100); // Short delay to allow state update
 		} catch (error) {
-			console.error("Login - Google sign-in error:", error);
-			if (error instanceof FirebaseError) {
-				setError(error.message);
-			} else {
-				setError(`Failed to sign in: "Unknown error"`);
-			}
+			console.error("❌ Login failed:", error);
 		} finally {
 			setIsLoggingIn(false);
 		}
 	};
 
 	return (
-		<div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-			<h1 className="text-2xl font-bold mb-6">Admin Login</h1>
+		<div>
+			<h1>Admin Login</h1>
 
-			{error && (
-				<div className="bg-red-100 text-red-700 p-3 mb-4 rounded">{error}</div>
-			)}
-
-			<button
-				onClick={handleGoogleSignIn}
-				disabled={isLoggingIn}
-				className={`w-full flex justify-center items-center bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-50 mb-4 ${
-					isLoggingIn ? "opacity-50 cursor-not-allowed" : ""
-				}`}
-			>
+			<button onClick={handleGoogleSignIn} aria-label="Sign in with Google">
 				{isLoggingIn ? (
 					<>
 						<div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-700 mr-3"></div>
