@@ -1,6 +1,7 @@
 import { doc, setDoc } from "firebase/firestore";
 
 import { db } from "./config";
+import { User } from "firebase/auth";
 
 export const createContactDocument = async (contactData: {
 	fullName: string;
@@ -26,5 +27,21 @@ export const createContactDocument = async (contactData: {
 	} catch (error) {
 		console.log("Error creating the contact", error);
 		throw error;
+	}
+};
+
+export const createUserProfileDocument = async (userAuth: User) => {
+	const userDocRef = doc(db, "users", userAuth.uid);
+	const createdAt = new Date();
+	try {
+		await setDoc(userDocRef, {
+			uid: userAuth.uid,
+			email: userAuth.email,
+			displayName: userAuth.displayName,
+			photoURL: userAuth.photoURL,
+			createdAt,
+		});
+	} catch (error) {
+		console.log("Error creating the user profile", error);
 	}
 };

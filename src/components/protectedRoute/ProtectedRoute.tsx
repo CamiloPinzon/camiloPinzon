@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
-import { AuthContext } from "../../contexts/user.context";
+import { AuthContext } from "../../contexts/auth.context";
 
 type ProtectedRouteProps = {
 	redirectPath?: string;
