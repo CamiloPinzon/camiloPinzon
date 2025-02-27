@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
 	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -15,15 +15,5 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
-
-const provider = new GoogleAuthProvider();
-
-provider.setCustomParameters({
-	prompt: "select_account",
-});
-
-export const auth = getAuth();
-export const signInWithGooglePopUp = () => signInWithPopup(auth, provider);
-
-export const db = getFirestore();
-
+export const auth = getAuth(app);
+export const db = getFirestore(app);

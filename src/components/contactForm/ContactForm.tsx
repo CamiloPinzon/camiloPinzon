@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Button from "../button/Button";
 
-import { createContactDocument } from "../../utils/firebase/firebase";
+import { createContactDocument } from "../../utils/firebase/creation";
 
 import "./contactForm.scss";
 
