@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FirebaseError } from "firebase/app";
 
 import Button from "../button/Button";
 import Modal from "../modal/Modal";
@@ -15,11 +16,23 @@ const defaultFormFields = {
 	message: "",
 };
 
+const successTexts = {
+	title: "Message Sent",
+	text: "Thank you for your message, we will get back to you as soon as possible.",
+};
+
+const defaultErrorTexts = {
+	title: "Something went wrong",
+	text: "Please try again later.",
+};
+
 const ContactForm = () => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { fullName, email, company, phone, message } = formFields;
 	const [loaderModal, setLoaderModal] = useState<boolean>(false);
-	const [isOpenMessageModal, setIsOpenMessageModal] = useState<boolean>(false);
+	const [isOpenSuccessModal, setIsOpenSuccessModal] = useState<boolean>(false);
+	const [isOpenErrorModal, setIsOpenErrorModal] = useState<boolean>(false);
+	const [errorTexts, setErrorTexts] = useState(defaultErrorTexts);
 
 	const clearFormFields = () => setFormFields(defaultFormFields);
 
@@ -36,13 +49,38 @@ const ContactForm = () => {
 		e.preventDefault();
 		setLoaderModal(true);
 		try {
-			await createContactDocument(formFields).finally(() => {
-				setLoaderModal(false);
-				if (!loaderModal) setIsOpenMessageModal(true);
-				clearFormFields();
+			const timeoutPromise = new Promise((_, reject) => {
+				setTimeout(() => {
+					reject(new Error("Operation timed out after 5 seconds"));
+				}, 5000);
 			});
-		} catch (error) {
-			console.error("Failed to submit contact:", error);
+
+			await Promise.race([createContactDocument(formFields), timeoutPromise]);
+
+			setLoaderModal(false);
+			setIsOpenSuccessModal(true);
+			clearFormFields();
+		} catch (error: unknown) {
+			setLoaderModal(false);
+			if (
+				error instanceof Error &&
+				error.message === "Operation timed out after 5 seconds"
+			) {
+				console.error("The operation timed out");
+				setErrorTexts({ ...defaultErrorTexts, text: "Operation timed out" });
+				setIsOpenErrorModal(true);
+			} else if (error instanceof FirebaseError) {
+				setErrorTexts({ ...defaultErrorTexts, text: error.message });
+				setIsOpenErrorModal(true);
+			} else {
+				setErrorTexts({
+					...defaultErrorTexts,
+					text: "An unexpected error occurred",
+				});
+				setIsOpenErrorModal(true);
+			}
+		} finally {
+			clearFormFields();
 		}
 	};
 
@@ -54,11 +92,18 @@ const ContactForm = () => {
 				type="loader"
 			/>
 			<Modal
-				isOpen={isOpenMessageModal}
-				onClose={() => setIsOpenMessageModal(false)}
+				isOpen={isOpenSuccessModal}
+				onClose={() => setIsOpenSuccessModal(false)}
 				type="success"
-				title="Message Sent"
-				children="Thank you for your message, we will get back to you as soon as possible."
+				title={successTexts.title}
+				children={successTexts.text}
+			/>
+			<Modal
+				isOpen={isOpenErrorModal}
+				onClose={() => setIsOpenErrorModal(false)}
+				type="error"
+				title={errorTexts.title}
+				children={errorTexts.text}
 			/>
 			<form className="contact-form__form" onSubmit={handleOnSubmit}>
 				<div className="contact-form__form-row">
