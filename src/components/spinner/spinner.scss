@@ -1,0 +1,94 @@
+$spinnerSize: 80px;
+$dotSize: 7.2px;
+$dotOffset: calc($dotSize / 2);
+$animationDuration: 1.2s;
+$animationTiming: cubic-bezier(0.5, 0, 0.5, 1);
+
+.spinner {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    width: $spinnerSize;
+    height: $spinnerSize;
+
+    div {
+        animation: spinner $animationDuration $animationTiming infinite;
+        transform-origin: calc($spinnerSize / 2) calc($spinnerSize / 2);
+
+        &:after {
+            content: " ";
+            display: block;
+            position: absolute;
+            width: $dotSize;
+            height: $dotSize;
+            border-radius: 50%;
+            background: currentColor;
+            margin: calc(-1 * $dotOffset) calc(-1 * $dotOffset);
+            color: #1A1A2E;
+        }
+
+        @for $i from 1 through 8 {
+            &:nth-child(#{$i}) {
+                animation-delay: -($i * 0.036s);
+
+                &:after {
+                    @if $i ==1 {
+                        top: 62.62742px;
+                        left: 62.62742px;
+                    }
+
+                    @else if $i ==2 {
+                        top: 67.71281px;
+                        left: 56px;
+                    }
+
+                    @else if $i ==3 {
+                        top: 70.90963px;
+                        left: 48.28221px;
+                    }
+
+                    @else if $i ==4 {
+                        top: 72px;
+                        left: 40px;
+                    }
+
+                    @else if $i ==5 {
+                        top: 70.90963px;
+                        left: 31.71779px;
+                    }
+
+                    @else if $i ==6 {
+                        top: 67.71281px;
+                        left: 24px;
+                    }
+
+                    @else if $i ==7 {
+                        top: 62.62742px;
+                        left: 17.37258px;
+                    }
+
+                    @else if $i ==8 {
+                        top: 56px;
+                        left: 12.28719px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    margin-block: 10px;
+    text-align: center;
+    color: #1A1A2E;
+}

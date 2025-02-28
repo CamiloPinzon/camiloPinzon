@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Button from "../button/Button";
+import Modal from "../modal/Modal";
 
 import { createContactDocument } from "../../utils/firebase/creation";
 
@@ -17,6 +18,10 @@ const defaultFormFields = {
 const ContactForm = () => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { fullName, email, company, phone, message } = formFields;
+	const [loaderModal, setLoaderModal] = useState<boolean>(false);
+	const [isOpenMessageModal, setIsOpenMessageModal] = useState<boolean>(false);
+
+	const clearFormFields = () => setFormFields(defaultFormFields);
 
 	const handleOnChange = (
 		e:
@@ -29,9 +34,13 @@ const ContactForm = () => {
 
 	const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		setLoaderModal(true);
 		try {
-			const contactRef = await createContactDocument(formFields);
-			console.log("Contact created with ID:", contactRef.id);
+			await createContactDocument(formFields).finally(() => {
+				setLoaderModal(false);
+				if (!loaderModal) setIsOpenMessageModal(true);
+				clearFormFields();
+			});
 		} catch (error) {
 			console.error("Failed to submit contact:", error);
 		}
@@ -39,6 +48,18 @@ const ContactForm = () => {
 
 	return (
 		<div className="contact-form">
+			<Modal
+				isOpen={loaderModal}
+				onClose={() => setLoaderModal(false)}
+				type="loader"
+			/>
+			<Modal
+				isOpen={isOpenMessageModal}
+				onClose={() => setIsOpenMessageModal(false)}
+				type="success"
+				title="Message Sent"
+				children="Thank you for your message, we will get back to you as soon as possible."
+			/>
 			<form className="contact-form__form" onSubmit={handleOnSubmit}>
 				<div className="contact-form__form-row">
 					<input
