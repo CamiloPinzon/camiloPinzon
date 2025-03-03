@@ -110,8 +110,6 @@ const ContactForm = () => {
 				onSubmit={handleOnSubmit}
 				data-netlify="true"
 				data-netlify-recaptcha="true"
-				netlify-honeypot="bot-field"
-				netlify
 			>
 				<div className="contact-form__form-row">
 					<input
