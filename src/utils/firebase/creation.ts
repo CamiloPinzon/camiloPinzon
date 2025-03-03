@@ -45,3 +45,17 @@ export const createUserProfileDocument = async (userAuth: User) => {
 		console.log("Error creating the user profile", error);
 	}
 };
+
+export const createUserNewsletterDocument = async (userAuth: User) => {
+	const userDocRef = doc(db, "newsletter", userAuth.uid);
+	const createdAt = new Date();
+	try {
+		await setDoc(userDocRef, {
+			uid: userAuth.uid,
+			email: userAuth.email,
+			createdAt,
+		});
+	} catch (error) {
+		console.log("Error creating the user profile", error);
+	}
+};

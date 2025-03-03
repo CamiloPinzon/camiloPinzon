@@ -105,7 +105,14 @@ const ContactForm = () => {
 				title={errorTexts.title}
 				children={errorTexts.text}
 			/>
-			<form className="contact-form__form" onSubmit={handleOnSubmit}>
+			<form
+				className="contact-form__form"
+				onSubmit={handleOnSubmit}
+				data-netlify="true"
+				data-netlify-recaptcha="true"
+				netlify-honeypot="bot-field"
+				netlify
+			>
 				<div className="contact-form__form-row">
 					<input
 						type="text"
@@ -152,6 +159,7 @@ const ContactForm = () => {
 						required
 					/>
 				</div>
+				<div data-netlify-recaptcha="true"></div>
 				<div className="contact-form__form-row submit-container">
 					<Button type="submit" style="primary">
 						Send

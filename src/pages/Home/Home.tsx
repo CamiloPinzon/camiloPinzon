@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Image from "../../components/image/Image";
 import LatestBlogs from "../../components/latestBlogs/LatestBlogs";
 
@@ -5,12 +7,21 @@ import heroImage from "../../assets/home_hero_desktop.jpg";
 import ProfileInfo from "../../components/profileInfo/ProfileInfo";
 import TabedNavigation from "../../components/tabedNavigation/TabedNavigation";
 import FeaturedRepos from "../../components/featuredRepos/FeaturedRepos";
+import Modal from "../../components/modal/Modal";
 
 import "./home.scss";
 
 const Home = () => {
+	const [isOpenMessageModal, setIsOpenMessageModal] = useState(true);
 	return (
 		<div className="home">
+			<Modal
+				isOpen={isOpenMessageModal}
+				onClose={() => setIsOpenMessageModal(false)}
+				type="default"
+				title="Under construction"
+				children="This site is under construction."
+			/>
 			<div className="home__hero">
 				<Image src={heroImage} alt="hero image" kind="full_hero" />
 			</div>

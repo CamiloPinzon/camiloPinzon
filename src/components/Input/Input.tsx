@@ -6,7 +6,7 @@ interface InputProps {
 	type: "text" | "email" | "password" | "number";
 	required: boolean;
 	value: string;
-	style: "light" | "darl";
+	style: "light" | "dark" | "honeypot";
 	placeholder?: string;
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
