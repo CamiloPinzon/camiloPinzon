@@ -17,6 +17,11 @@ const LegalFooter = () => {
 					<Link to="/">Cookies policy</Link>
 				</span>
 			</p>
+			<p className="recaptcha-terms">
+				This site is protected by reCAPTCHA v3.{" "}
+				<a href="https://policies.google.com/privacy">Privacy Policy</a> and{" "}
+				<a href="https://policies.google.com/terms">Terms of Service</a> apply.
+			</p>
 		</div>
 	);
 };
