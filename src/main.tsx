@@ -8,7 +8,7 @@ import { RecaptchaProvider } from "./contexts/recaptcha.context.tsx";
 
 createRoot(document.getElementById("root")!).render(
 	<UserProvider>
-		<RecaptchaProvider siteKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}>
+		<RecaptchaProvider siteKey={import.meta.env.VITE_RECAPTCHA_KEY}>
 			<App />
 		</RecaptchaProvider>
 	</UserProvider>
