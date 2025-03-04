@@ -4,9 +4,12 @@ import { UserProvider } from "./contexts/user.context.tsx";
 
 import "./index.scss";
 import App from "./App.tsx";
+import { RecaptchaProvider } from "./contexts/recaptcha.context.tsx";
 
 createRoot(document.getElementById("root")!).render(
 	<UserProvider>
-		<App />
+		<RecaptchaProvider siteKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}>
+			<App />
+		</RecaptchaProvider>
 	</UserProvider>
 );

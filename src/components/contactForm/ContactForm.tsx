@@ -3,6 +3,7 @@ import { FirebaseError } from "firebase/app";
 
 import Button from "../button/Button";
 import Modal from "../modal/Modal";
+import { useRecaptcha } from "../../hooks/useRecaptcha";
 
 import { createContactDocument } from "../../utils/firebase/creation";
 
@@ -33,6 +34,7 @@ const ContactForm = () => {
 	const [isOpenSuccessModal, setIsOpenSuccessModal] = useState<boolean>(false);
 	const [isOpenErrorModal, setIsOpenErrorModal] = useState<boolean>(false);
 	const [errorTexts, setErrorTexts] = useState(defaultErrorTexts);
+	const { executeRecaptcha, loading } = useRecaptcha();
 
 	const clearFormFields = () => setFormFields(defaultFormFields);
 
@@ -48,7 +50,24 @@ const ContactForm = () => {
 	const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setLoaderModal(true);
+
+		if (loading) {
+			setErrorTexts({ ...defaultErrorTexts, text: "reCAPTCHA not yet loaded" });
+			setIsOpenErrorModal(true);
+			return;
+		}
 		try {
+			const token = await executeRecaptcha("submit_form");
+
+			if (!token) {
+				setErrorTexts({
+					...defaultErrorTexts,
+					text: "Failed to get reCAPTCHA token",
+				});
+				setIsOpenErrorModal(true);
+				return;
+			}
+
 			const timeoutPromise = new Promise((_, reject) => {
 				setTimeout(() => {
 					reject(new Error("Operation timed out after 5 seconds"));
@@ -105,12 +124,7 @@ const ContactForm = () => {
 				title={errorTexts.title}
 				children={errorTexts.text}
 			/>
-			<form
-				className="contact-form__form"
-				onSubmit={handleOnSubmit}
-				data-netlify="true"
-				data-netlify-recaptcha="true"
-			>
+			<form className="contact-form__form" onSubmit={handleOnSubmit}>
 				<div className="contact-form__form-row">
 					<input
 						type="text"
@@ -163,6 +177,12 @@ const ContactForm = () => {
 						Send
 					</Button>
 				</div>
+				<p className="recaptcha-terms">
+					This site is protected by reCAPTCHA v3.{" "}
+					<a href="https://policies.google.com/privacy">Privacy Policy</a> and{" "}
+					<a href="https://policies.google.com/terms">Terms of Service</a>{" "}
+					apply.
+				</p>
 			</form>
 		</div>
 	);
