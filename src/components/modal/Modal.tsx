@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import Spinner from "../spinner/Spinner";
 import "./modal.scss";
 
@@ -19,10 +19,6 @@ const Modal: React.FC<ModalProps> = ({
 	children,
 	type = "default",
 }) => {
-	useEffect(() => {
-		console.log(`🚀 Modal - isOpen: ${isOpen}`);
-	}, [isOpen]);
-
 	if (!isOpen) return null;
 	const showCloseButton = type !== "loader";
 	const showTitle = type !== "message";

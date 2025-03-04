@@ -25,7 +25,7 @@ export const createContactDocument = async (contactData: {
 
 		return contactDocRef;
 	} catch (error) {
-		console.log("Error creating the contact", error);
+		console.error("Error creating the contact", error);
 		throw error;
 	}
 };
@@ -42,7 +42,7 @@ export const createUserProfileDocument = async (userAuth: User) => {
 			createdAt,
 		});
 	} catch (error) {
-		console.log("Error creating the user profile", error);
+		console.error("Error creating the user profile", error);
 	}
 };
 
@@ -56,6 +56,6 @@ export const createUserNewsletterDocument = async (userAuth: User) => {
 			createdAt,
 		});
 	} catch (error) {
-		console.log("Error creating the user profile", error);
+		console.error("Error creating the user profile", error);
 	}
 };

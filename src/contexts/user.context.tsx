@@ -36,16 +36,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 	const [currentUser, setCurrentUser] = useState<User | null>(null);
 	const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
-	//debug each time current user change
-	useEffect(() => {
-		console.log("User Context - Current User:", currentUser);
-	}, [currentUser]);
-
 	useEffect(() => {
 		const unsubscribe = onAuthStateChangedListener(
 			(user: FirebaseUser | null) => {
-				console.log("🔥 Firebase Auth State Changed:", user);
-
 				if (user) {
 					const formattedUser: User = {
 						id: user.uid,
@@ -55,8 +48,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 					};
 
 					setCurrentUser(formattedUser);
-					console.log("✅ User context updated:", formattedUser);
-
 					setIsAdmin(user.email === "pinzonac@gmail.com");
 				} else {
 					setCurrentUser(null);

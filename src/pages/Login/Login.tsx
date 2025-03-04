@@ -23,14 +23,10 @@ const Login = () => {
 				createdAt: new Date(),
 			};
 
-			console.log("🚀 Setting current user:", userObject);
 			setCurrentUser(userObject);
-
-			// ✅ Wait for the next render where `currentUser` is updated
 			setTimeout(() => {
-				console.log("🔄 Navigating to /admin...");
 				navigate("/admin");
-			}, 100); // Short delay to allow state update
+			}, 100);
 		} catch (error) {
 			console.error("❌ Login failed:", error);
 		} finally {

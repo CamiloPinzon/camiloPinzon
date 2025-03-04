@@ -53,7 +53,6 @@ export function RecaptchaProvider({
 					window.grecaptcha.ready(() => {
 						setLoading(false);
 						setInitialized(true);
-						console.log("reCAPTCHA initialized successfully");
 					});
 				} else {
 					console.error("grecaptcha not available after script load");
@@ -78,7 +77,6 @@ export function RecaptchaProvider({
 				window.grecaptcha.ready(() => {
 					setLoading(false);
 					setInitialized(true);
-					console.log("reCAPTCHA initialized successfully (existing script)");
 				});
 			} else {
 				// Set a timeout to check again if window.grecaptcha is available
@@ -87,7 +85,6 @@ export function RecaptchaProvider({
 						window.grecaptcha.ready(() => {
 							setLoading(false);
 							setInitialized(true);
-							console.log("reCAPTCHA initialized successfully (delayed)");
 						});
 						clearInterval(checkRecaptcha);
 					}

@@ -8,16 +8,12 @@ const Admin = () => {
 	const navigate = useNavigate();
 	const [loading, setLoading] = useState(true);
 
-	// ✅ Wait for `currentUser` before setting `loading` to false
 	useEffect(() => {
-		console.log("👀 Admin - Checking user state:", { currentUser, isAdmin });
-
 		if (currentUser !== null) {
 			setLoading(false);
 		}
 	}, [currentUser]);
-
-	// ✅ Only navigate once `loading` is done
+	
 	useEffect(() => {
 		if (!loading) {
 			if (!currentUser) {
