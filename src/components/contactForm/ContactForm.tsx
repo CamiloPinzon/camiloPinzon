@@ -58,7 +58,7 @@ const ContactForm = () => {
 		}
 		try {
 			const token = await executeRecaptcha("submit_form");
-			console.log(token);
+			console.log(`token: ${token}`);
 
 			if (!token) {
 				setErrorTexts({
