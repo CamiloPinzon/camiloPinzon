@@ -48,8 +48,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 						createdAt: new Date(),
 					};
 
-					setCurrentUser(formattedUser);
-					isUserAdmin(user).then((isAdmin) => setIsAdmin(isAdmin));
+					isUserAdmin(user).then((isAdmin) => {
+						setIsAdmin(isAdmin);
+						setCurrentUser(formattedUser);
+					});
 				} else {
 					setCurrentUser(null);
 					setIsAdmin(false);
