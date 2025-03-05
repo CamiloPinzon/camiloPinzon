@@ -1,0 +1,142 @@
+{
+	"experienceContent": [
+		{
+			"id": 0,
+			"company": "Netbangers",
+			"position": "Web Developer",
+			"dateStart": "2010",
+			"dateEnd": "2012",
+			"description": "<p>Worked for multiple customers, including Paletas Drácula, Galletas Festival, and Tosh, to create promotional websites and marketing banners using HTML, CSS, JavaScript, PHP, MySQL, and ActionScript</p>",
+			"technologies": [
+				"HTML",
+				"CSS",
+				"JavaScript",
+				"PHP",
+				"MySQL",
+				"ActionScript"
+			],
+			"link": "https://www.netbangers.com/"
+		},
+		{
+			"id": 1,
+			"company": "TBWA COLOMBIA",
+			"position": "Web developer / Lead web developer.",
+			"dateStart": "2012",
+			"dateEnd": "2017",
+			"description": "<p>I thrived as a full-stack developer, building diverse websites that showcased my versatility. Some highlights include:</p><ul><li>Cotton USA Colombia: Developed a user-friendly site using HTML5, jQuery, and Bootstrap.</li><li>Chocolates Jumbo Seasonal Sites: Implemented innovative features to capture user social media information (Facebook, Instagram, Twitter) and integrate it seamlessly into the website and live concert experiences. These sites leveraged HTML5, jQuery, PHP, MySQL databases, and SASS for styling.</li><li>Chocolates Jet «Álbum Planeta Sorprendente»: Led a remote team in Argentina to develop a captivating user experience, replicating a traditional sticker album experience in a digital format. This project involved managing communication, progress updates, and project reviews for a successful cross-border collaboration.</li></ul><p>Additionally, I had the opportunity to lead projects for a variety of clients, including Chocolates Jet, Chocolates Jumbo, Jumbo Cencosud, Grupo Argos and SURA.</p>",
+			"technologies": [
+				"HTML",
+				"CSS",
+				"JavaScript",
+				"PHP",
+				"MySQL",
+				"JQuery",
+				"Bootstrap"
+			],
+			"link": "https://denicolastbwa.co/"
+		},
+		{
+			"id": 2,
+			"company": "Globant",
+			"position": "Web UI Developer",
+			"dateStart": "2017",
+			"dateEnd": "2020",
+			"description": "<p>This role provided a fantastic opportunity to expand my development skillset and embrace continuous learning. I tackled diverse projects, including Avianca My Crew, an Angular application where I meticulously crafted component views to match the original design. For Cineplanet's website, I optimized and refactored React components, while at Tribune, I implemented changes to existing functions and migrated HTML5/JS components to React.js.</p>",
+			"technologies": ["HTML", "CSS", "JavaScript", "Angular", "React", "SASS"],
+			"link": "https://www.globant.com/es"
+		},
+		{
+			"id": 3,
+			"company": "BairesDev",
+			"position": "Web UI Developer",
+			"dateStart": "2020",
+			"dateEnd": "2022",
+			"description": "<p>For Fabric Inc. and Via Productions, I modernized legacy codebases by transforming vanilla JavaScript functions into reusable React components with TypeScript. I also provided ongoing maintenance for these systems.</p>",
+			"technologies": [
+				"HTML",
+				"CSS",
+				"JavaScript",
+				"React",
+				"SASS",
+				"Styled Components",
+				"TypeScript"
+			],
+			"link": "https://www.bairesdev.com/"
+		},
+		{
+			"id": 4,
+			"company": "Mill 5",
+			"position": "Software Engineer.",
+			"dateStart": "2022",
+			"dateEnd": "2022",
+			"description": "<p>Here I worked for customer Alyce, I played a key role in developing and maintaining their React components. This involved creating new functionalities using TypeScript, refactoring existing JavaScript components to TypeScript, and actively participating in sprint planning, task grooming, and technical decision-making.</p>",
+			"technologies": [
+				"HTML",
+				"CSS",
+				"JavaScript",
+				"React",
+				"SASS",
+				"Styled Components",
+				"TypeScript",
+				"Jenkins"
+			],
+			"link": "https://www.mill5.com/"
+		},
+		{
+			"id": 5,
+			"company": "Huge",
+			"position": "Semi-senior Software Engineer.",
+			"dateStart": "2022",
+			"dateEnd": "2023",
+			"description": "<p>On “Huge” I focused on building and customizing UI components for Google Pay and Google Wallet. I also managed content through their proprietary CMS.</p>",
+			"technologies": [
+				"HTML",
+				"CSS",
+				"JavaScript",
+				"React",
+				"SASS",
+				"TypeScript"
+			],
+			"link": "https://www.hugeinc.com/"
+		},
+		{
+			"id": 6,
+			"company": "Freelancer",
+			"position": "Web Developer",
+			"dateStart": "2024",
+			"dateEnd": "Present",
+			"description": "<p>During this period, I have been dedicated to building custom widgets for various web projects, as well as child themes and modifications to WooCommerce components to create solutions tailored to each project and avoid the overuse of third-party plugins, preventing poor site performance and security vulnerabilities.</p>",
+			"technologies": [
+				"HTML",
+				"CSS",
+				"JavaScript",
+				"React",
+				"SASS",
+				"TypeScript",
+				"WordPress",
+				"PHP",
+				"WooCommerce"
+			]
+		},
+		{
+			"id": 7,
+			"company": "Tita Media",
+			"position": "Web Developer",
+			"dateStart": "2024",
+			"dateEnd": "2024",
+			"description": "<p>During this period, I have been working updating and developing new functionalities on Vtex and wordpress e-commerce sites.</p>",
+			"technologies": [
+				"HTML",
+				"CSS",
+				"JavaScript",
+				"React",
+				"SASS",
+				"TypeScript",
+				"WordPress",
+				"PHP",
+				"Vtex"
+			],
+			"link": "https://titamedia.com/"
+		}
+	]
+}
