@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 import { signInWithGooglePopup } from "../../utils/firebase/auth";
+import { createUserProfileDocument } from "../../utils/firebase/creation";
 
 const Login = () => {
 	const [isLoggingIn, setIsLoggingIn] = useState(false);
@@ -15,6 +16,8 @@ const Login = () => {
 
 			if (!userCredential)
 				throw new Error("No user returned from Google Sign-In");
+
+			createUserProfileDocument(userCredential.user);
 
 			const userObject = {
 				id: userCredential.user.uid,
