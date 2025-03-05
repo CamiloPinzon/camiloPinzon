@@ -43,17 +43,13 @@ export const getCurrentUser = (): Promise<User | null> => {
 	});
 };
 
-// Define admin emails
-const ADMIN_EMAILS = [
-	"pinzonac@gmail.com",
-];
-
 // Check if user is admin
 export const isUserAdmin = async (user: User): Promise<boolean> => {
+	const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
 	if (!user || !user.email) return false;
 
 	// Quick check against admin emails list
-	if (ADMIN_EMAILS.includes(user.email)) {
+	if (adminEmail.includes(user.email)) {
 		return true;
 	}
 

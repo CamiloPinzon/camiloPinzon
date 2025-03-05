@@ -8,6 +8,7 @@ import {
 } from "react";
 import { onAuthStateChangedListener } from "../utils/firebase/auth";
 import { User as FirebaseUser } from "firebase/auth";
+import { isUserAdmin } from "../utils/firebase/auth";
 
 export type User = {
 	id: string;
@@ -48,7 +49,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 					};
 
 					setCurrentUser(formattedUser);
-					setIsAdmin(user.email === "pinzonac@gmail.com");
+					isUserAdmin(user).then((isAdmin) => setIsAdmin(isAdmin));
 				} else {
 					setCurrentUser(null);
 					setIsAdmin(false);
