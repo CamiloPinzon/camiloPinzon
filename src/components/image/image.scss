@@ -19,6 +19,20 @@
     }
 }
 
+.image__medium_square {
+    img {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+.image__medium {
+    img {
+        width: 250px;
+        height: auto;
+    }
+}
+
 .image__full_hero {
     img {
         width: 100%;
