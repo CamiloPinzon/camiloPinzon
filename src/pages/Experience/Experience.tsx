@@ -28,7 +28,7 @@ const Experience = () => {
 				/>
 			</div>
 			<main className="experience-list container">
-				{experienceContent.map((item: ExperienceDataI) => {
+				{experienceContent.reverse().map((item: ExperienceDataI) => {
 					const ExperienceContent = () => (
 						<div className="experience-item-content">
 							<div className="experience-item-content__left">
@@ -39,7 +39,7 @@ const Experience = () => {
 							<div className="experience-item-content__right">
 								<h2>{item.company}</h2>
 								<p>{item.position}</p>
-								<p>{item.description}</p>
+								<p dangerouslySetInnerHTML={{ __html: item.description }}></p>
 								<div className="technologies">
 									{item.technologies.map((tech, index) => (
 										<span key={index} className="tech-tag">
@@ -54,7 +54,11 @@ const Experience = () => {
 					return (
 						<article key={item.id} className="experience-item">
 							{item.link ? (
-								<Link to={item.link}>
+								<Link
+									to={item.link}
+									target="_blank"
+									className="experience-item__link"
+								>
 									<ExperienceContent />
 								</Link>
 							) : (

@@ -1,0 +1,42 @@
+.experience-item__link {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.experience-list {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.experience-item-content {
+    display: flex;
+    gap: 20px;
+    text-decoration: none;
+
+    &__left {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__right {
+        flex: 3;
+
+        .technologies {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+
+            .tech-tag {
+                background-color: #E43F5A;
+                padding: 3px 10px;
+                border-radius: 25px;
+                color: white;
+            }
+        }
+    }
+}

@@ -1,32 +1,131 @@
 .hero {
-    background-position: center top;
-    object-fit: cover;
-    background-repeat: no-repeat;
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+
+    &__image {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
 
     &__content {
+        position: relative;
+        z-index: 2;
+        padding: 2rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 600px;
+
         h1 {
-            font-size: 70px;
-            padding-top: 100px;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+
+            @media (max-width: 768px) {
+                font-size: 2rem;
+            }
+
+            @media (max-width: 480px) {
+                font-size: 1.5rem;
+            }
         }
 
         p {
-            padding-block: 100px;
-            max-width: 60%;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+
 
             i {
-                font-size: 20px;
+                font-size: 1.3rem;
+
+                @media (max-width: 768px) {
+                    font-size: 1rem;
+                }
+
             }
+        }
+
+        button {
+            margin-top: 1rem;
+        }
+    }
+
+    // Style variations
+    &.light {
+        color: white;
+
+        h1,
+        p,
+        i {
+            text-shadow: 2px 2px 3px #000;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+    }
+
+    &.dark {
+        color: #fff;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+    }
+
+    &.light-action {
+        color: #000;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, .8) 0%, rgba(255, 255, 255, .4) 100%);
+            z-index: 1;
+        }
+    }
+
+    &.dark-action {
+        color: #fff;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.1) 100%);
+            z-index: 1;
         }
     }
 }
 
-.hero.light {
-    color: white;
-
-    h1,
-    p,
-    i {
-        text-shadow: 2px 2px 3px #000;
-    }
-
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
