@@ -60,10 +60,10 @@ const MainMenu = () => {
 				<span className="main-menu__dropdown-title">Download CV</span>
 				{isOpen && (
 					<div className="main-menu__dropdown-menu">
-						<a className="main-menu__link" href="/cv-english.pdf" download>
+						<a className="main-menu__link" href="./public/downloads/CV_2025_oxford_en.pdf" download>
 							English
 						</a>
-						<a className="main-menu__link" href="/cv-spanish.pdf" download>
+						<a className="main-menu__link" href="./public/downloads/CV_2025_oxford_es.pdf" download>
 							Español
 						</a>
 					</div>
