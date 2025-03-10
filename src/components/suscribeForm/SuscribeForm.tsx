@@ -48,6 +48,7 @@ const SuscribeForm = () => {
 		if (loading) {
 			setErrorTexts({ ...defaultErrorTexts, text: "reCAPTCHA not yet loaded" });
 			setIsOpenErrorModal(true);
+			setLoaderModal(false);
 			return;
 		}
 
@@ -60,6 +61,7 @@ const SuscribeForm = () => {
 					text: "Failed to get reCAPTCHA token",
 				});
 				setIsOpenErrorModal(true);
+				setLoaderModal(false);
 				return;
 			}
 
@@ -69,14 +71,22 @@ const SuscribeForm = () => {
 				}, 5000);
 			});
 
-			await Promise.race([
+			type NewsletterResponse = { success: boolean; message: string };
+
+			const result = (await Promise.race([
 				createUserNewsletterDocument({ email }),
 				timeoutPromise,
-			]);
+			])) as NewsletterResponse;
 
 			setLoaderModal(false);
-			setIsOpenSuccessModal(true);
-			clearFormFields();
+
+			if (result.success) {
+				setIsOpenSuccessModal(true);
+				clearFormFields();
+			} else {
+				setErrorTexts({ ...defaultErrorTexts, text: result.message });
+				setIsOpenErrorModal(true);
+			}
 		} catch (error: unknown) {
 			setLoaderModal(false);
 			if (
@@ -95,11 +105,11 @@ const SuscribeForm = () => {
 					text: "An unexpected error occurred",
 				});
 				setIsOpenErrorModal(true);
+				console.error("Newsletter signup error:", error);
 			}
-		} finally {
-			clearFormFields();
 		}
 	};
+
 	return (
 		<>
 			<Modal
