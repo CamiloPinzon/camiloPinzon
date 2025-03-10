@@ -78,6 +78,19 @@ export const createUserNewsletterDocument = async (userAuth: {
 			createdAt,
 		});
 
+		try {
+			const response = await fetch("/.netlify/functions/welcome-email", {
+				method: "POST",
+				body: JSON.stringify({ email: userAuth.email }),
+				headers: { "Content-Type": "application/json" },
+			});
+
+			const emailResult = await response.json();
+			console.log("Welcome email result:", emailResult);
+		} catch (emailError) {
+			console.error("Error with welcome email:", emailError);
+		}
+
 		return {
 			success: true,
 			message: "User subscribed to newsletter successfully",
