@@ -107,6 +107,8 @@ const useResponsive = (
 		breakpoints.md,
 		breakpoints.lg,
 		breakpoints.xl,
+		breakpoints.xxl,
+		responsive
 	]);
 	return responsive;
 };

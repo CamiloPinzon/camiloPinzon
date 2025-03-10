@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import useResponsive from "../../hooks/useResponsive";
+
 import Image from "../../components/image/Image";
 import LatestBlogs from "../../components/latestBlogs/LatestBlogs";
 
@@ -13,6 +15,8 @@ import "./home.scss";
 
 const Home = () => {
 	const [isOpenMessageModal, setIsOpenMessageModal] = useState(true);
+	const { current } = useResponsive();
+	const isMobile = current === "xs" || current === "sm";
 	return (
 		<div className="home">
 			<Modal
@@ -25,7 +29,11 @@ const Home = () => {
 			<div className="home__hero">
 				<Image src={heroImage} alt="hero image" kind="full_hero" />
 			</div>
-			<div className="home__profile container">
+			<div
+				className={`home__profile ${
+					isMobile && "home__profile--mobile"
+				} container`}
+			>
 				<aside className="home__profile-info">
 					<ProfileInfo />
 				</aside>

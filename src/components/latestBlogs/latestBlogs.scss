@@ -10,6 +10,8 @@
         display: flex;
         gap: 20px;
         padding-top: 50px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     &__item {
@@ -21,6 +23,7 @@
         background-color: rgba($color: #007bff, $alpha: .1);
         padding: 50px;
         border-radius: 25px;
+        max-width: 350px;
 
         &--image {
             width: 160px;
