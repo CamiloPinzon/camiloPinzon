@@ -1,14 +1,16 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import { IsMobileContext } from "../../contexts/isMobile.context";
+import useResponsive from "../../hooks/useResponsive";
 
 import "./mainMenu.scss";
 
 const MainMenu = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [cvDropdownOpen, setCvDropdownOpen] = useState(false);
-	const { isMobile } = useContext(IsMobileContext);
+	const { current } = useResponsive();
+
+	const isMobile = current === "xs" || current === "sm";
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
