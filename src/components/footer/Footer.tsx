@@ -1,3 +1,5 @@
+import useResponsive from "../../hooks/useResponsive";
+
 import SocialIcons from "../socialIcons/socialIcons";
 import LegalFooter from "../legalFooter/LegarFooter";
 import MenuFooter from "../menuFooter/MenuFooter";
@@ -6,9 +8,11 @@ import SuscribeForm from "../suscribeForm/SuscribeForm";
 import "./footer.scss";
 
 const Footer = () => {
+	const { current } = useResponsive();
+	const isMobile = current === "xs" || current === "sm" || current === "md";
 	return (
 		<div className="footer">
-			<div className="footer__up">
+			<div className={`footer__up ${isMobile && "footer__up-mobile"}`}>
 				<div className="footer__up-left">
 					<h3>CAMILO PINZÓN</h3>
 					<i>Web Developer</i>
