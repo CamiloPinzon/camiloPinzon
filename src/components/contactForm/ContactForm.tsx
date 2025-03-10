@@ -18,8 +18,8 @@ const defaultFormFields = {
 };
 
 const successTexts = {
-	title: "Message Sent",
-	text: "Thank you for your message, we will get back to you as soon as possible.",
+	title: "Got It! 👍",
+	text: "Thanks for your message! We’ll be in touch shortly.",
 };
 
 const defaultErrorTexts = {

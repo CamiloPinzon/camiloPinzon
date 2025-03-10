@@ -46,12 +46,15 @@ export const createUserProfileDocument = async (userAuth: User) => {
 	}
 };
 
-export const createUserNewsletterDocument = async (userAuth: User) => {
-	const userDocRef = doc(db, "newsletter", userAuth.uid);
+export const createUserNewsletterDocument = async (userAuth: {
+	email: string;
+}) => {
+	const uid = Math.random().toString(36).substring(2, 9);
 	const createdAt = new Date();
+	const userDocRef = doc(db, "newsletter", uid);
 	try {
 		await setDoc(userDocRef, {
-			uid: userAuth.uid,
+			uid: uid,
 			email: userAuth.email,
 			createdAt,
 		});
