@@ -96,8 +96,6 @@ const useResponsive = (
 
 		window.addEventListener("resize", handleResize);
 
-		console.log(`Current: ${responsive.current}`);
-
 		return () => {
 			window.removeEventListener("resize", handleResize);
 		};
