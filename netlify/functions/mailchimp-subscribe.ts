@@ -56,6 +56,11 @@ const handler: Handler = async (event) => {
 				user: process.env.EMAIL_USER,
 				pass: process.env.EMAIL_PASSWORD,
 			},
+			tls: {
+				rejectUnauthorized: true,
+			},
+			pool: true,
+			maxConnections: 5,
 		});
 
 		const firstName = payload.firstName || "there";
@@ -111,7 +116,9 @@ const handler: Handler = async (event) => {
             <li>Tips and insights from our experts</li>
           </ul>
           
-          <p>If you have any questions, feel free to reply to this email or contact us at ${process.env.EMAIL_FROM}.</p>
+          <p>If you have any questions, feel free to reply to this email or contact us at ${
+						process.env.EMAIL_FROM
+					}.</p>
           
           <p>Best regards,<br>Camilo Pinz&oacute;n</p>
           
@@ -127,10 +134,13 @@ const handler: Handler = async (event) => {
 		// Send the email
 		try {
 			await transporter.sendMail({
-				from: `"Your Name" <${process.env.EMAIL_FROM}>`,
+				from: `"Camilo Pinz&oacute;n" <${process.env.EMAIL_FROM}>`,
 				to: email,
 				subject: "Welcome to Our Newsletter!",
 				html: htmlEmail,
+				headers: {
+					Precedence: "bulk",
+				},
 			});
 
 			console.log("Welcome email sent successfully");
