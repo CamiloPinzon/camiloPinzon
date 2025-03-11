@@ -57,12 +57,10 @@ export const createUserNewsletterDocument = async (userAuth: {
 	email: string;
 }): Promise<{ success: boolean; message: string }> => {
 	try {
-		// Check if the email already exists in the newsletter collection
 		const newsletterRef = collection(db, "newsletter");
 		const q = query(newsletterRef, where("email", "==", userAuth.email));
 		const querySnapshot = await getDocs(q);
 
-		// If the email already exists, return early with an error message
 		if (!querySnapshot.empty) {
 			return {
 				success: false,
@@ -70,7 +68,6 @@ export const createUserNewsletterDocument = async (userAuth: {
 			};
 		}
 
-		// If email doesn't exist, create a new document
 		const uid = Math.random().toString(36).substring(2, 9);
 		const createdAt = new Date();
 		const userDocRef = doc(db, "newsletter", uid);
@@ -80,29 +77,6 @@ export const createUserNewsletterDocument = async (userAuth: {
 			email: userAuth.email,
 			createdAt,
 		});
-
-		// Trigger welcome email via Netlify Function
-		try {
-			const response = await fetch("/.netlify/functions/welcome-email", {
-				method: "POST",
-				body: JSON.stringify({ email: userAuth.email }),
-				headers: { "Content-Type": "application/json" },
-			});
-
-			// Check if response is OK before trying to parse JSON
-			if (response.ok) {
-				const emailResult = await response.json();
-				console.log("Welcome email result:", emailResult);
-			} else {
-				// Log the actual response text for debugging
-				const errorText = await response.text();
-				console.error("Email function error:", response.status, errorText);
-			}
-		} catch (emailError) {
-			console.error("Error with welcome email:", emailError);
-			// Still continue with successful signup response
-		}
-
 		return {
 			success: true,
 			message: "Successfully subscribed to the newsletter!",
