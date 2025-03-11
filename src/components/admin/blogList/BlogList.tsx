@@ -18,8 +18,6 @@ import { BlogPost } from "../types/blogPostType";
 
 const BlogList: React.FC = () => {
 	const {
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		loading: hookLoading,
 		error: hookError,
 		deleteBlogPost,
 		togglePublishStatus,
