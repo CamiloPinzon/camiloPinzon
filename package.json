@@ -13,9 +13,11 @@
 		"@mailchimp/mailchimp_marketing": "^3.0.80",
 		"@netlify/functions": "^3.0.1",
 		"firebase": "^11.3.1",
+		"node-fetch": "^3.3.2",
 		"nodemailer": "^6.10.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
+		"react-quill-new": "^3.3.3",
 		"react-router-dom": "^7.2.0",
 		"sass": "^1.85.0"
 	},

@@ -10,6 +10,8 @@ import Contact from "./pages/Contact/Contact";
 import Experience from "./pages/Experience/Experience";
 import Login from "./pages/Login/Login";
 import Admin from "./pages/Admin/Admin";
+import BlogList from "./components/admin/blogList/BlogList";
+import BlogForm from "./components/admin/blogForm/BlogForm";
 
 import "./App.scss";
 
@@ -27,7 +29,11 @@ function App() {
 					<Route path="/contact" element={<Contact />} />
 					<Route path="/experience" element={<Experience />} />
 					<Route path="/login" element={<Login />} />
-					<Route path="/admin" element={<Admin />} />
+					<Route path="/admin" element={<Admin />}>
+						<Route path="/admin/blogs" element={<BlogList />} />
+						<Route path="/admin/blogs/new" element={<BlogForm />} />
+						<Route path="/admin/blogs/edit/:id" element={<BlogForm />} />
+					</Route>
 					<Route path="/" element={<Navigate to="/login" replace />} />
 				</Routes>
 				<Footer />
