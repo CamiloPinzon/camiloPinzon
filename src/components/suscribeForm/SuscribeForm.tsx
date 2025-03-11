@@ -71,19 +71,20 @@ const SuscribeForm = () => {
 				}, 5000);
 			});
 
-			type NewsletterResponse = { success: boolean; message: string };
-
+			// Wait for the result of the createUserNewsletterDocument function
 			const result = (await Promise.race([
 				createUserNewsletterDocument({ email }),
 				timeoutPromise,
-			])) as NewsletterResponse;
+			])) as { success: boolean; message: string };
 
 			setLoaderModal(false);
 
+			// Check if subscription was successful
 			if (result.success) {
 				setIsOpenSuccessModal(true);
 				clearFormFields();
 			} else {
+				// Handle application-level error (like duplicate email)
 				setErrorTexts({ ...defaultErrorTexts, text: result.message });
 				setIsOpenErrorModal(true);
 			}
