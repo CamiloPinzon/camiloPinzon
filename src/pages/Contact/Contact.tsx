@@ -3,18 +3,23 @@ import Button from "../../components/button/Button";
 import Image from "../../components/image/Image";
 import ContactForm from "../../components/contactForm/ContactForm";
 
+import useResponsive from "../../hooks/useResponsive";
+
 import emailIcon from "../../assets/email.svg";
 import phoneIcon from "../../assets/phone.svg";
 
 import "./contact.scss";
 
 const Contact = () => {
+	const { current, isXs } = useResponsive();
+	const isMobile = current === "xs" || current === "sm";
+
 	const paragraph = `Feel free to reach out anytime! Whether you need assistance or
 							just want to connect, send me a message, and let's build something
 							great together.`;
 
 	const handleEmailLink = () => {
-		window.location.href = "mailto:pinzonac@gmail.com";
+		window.location.href = "mailto:camilopinzondeveloper@gmail.com";
 	};
 
 	const handlePhoneLink = () => {
@@ -30,10 +35,10 @@ const Contact = () => {
 			/>
 			<main className="contact-main container">
 				<h2>Get in touch</h2>
-				<div className="contact-main__contact-links">
+				<div className={`contact-main__contact-links ${isMobile && "column"}`}>
 					<Button onClick={handleEmailLink} type="button" style="secondary">
 						<Image src={emailIcon} alt="email icon" kind="light_icon" />
-						pinzonac@gmail.com
+						{isXs ? "Send me an email" : "camilopinzondeveloper@gmail.com"}
 					</Button>
 					<Button onClick={handlePhoneLink} type="button" style="secondary">
 						<Image src={phoneIcon} alt="phone icon" kind="light_icon" />

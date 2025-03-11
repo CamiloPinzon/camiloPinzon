@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FirebaseError } from "firebase/app";
 
+import useResponsive from "../../hooks/useResponsive";
+
 import Button from "../button/Button";
 import Modal from "../modal/Modal";
 import { useRecaptcha } from "../../hooks/useRecaptcha";
@@ -28,6 +30,8 @@ const defaultErrorTexts = {
 };
 
 const ContactForm = () => {
+	const { current } = useResponsive();
+	const isMobile = current === "xs" || current === "sm";
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { fullName, email, company, phone, message } = formFields;
 	const [loaderModal, setLoaderModal] = useState<boolean>(false);
@@ -125,7 +129,7 @@ const ContactForm = () => {
 				children={errorTexts.text}
 			/>
 			<form className="contact-form__form" onSubmit={handleOnSubmit}>
-				<div className="contact-form__form-row">
+				<div className={`contact-form__form-row ${isMobile && "column"}`}>
 					<input
 						type="text"
 						name="fullName"
@@ -143,7 +147,7 @@ const ContactForm = () => {
 						required
 					/>
 				</div>
-				<div className="contact-form__form-row">
+				<div className={`contact-form__form-row ${isMobile && "column"}`}>
 					<input
 						type="text"
 						name="company"
@@ -160,7 +164,7 @@ const ContactForm = () => {
 						required
 					/>
 				</div>
-				<div className="contact-form__form-row">
+				<div className={`contact-form__form-row ${isMobile && "column"}`}>
 					<textarea
 						name="message"
 						id="messageField"
