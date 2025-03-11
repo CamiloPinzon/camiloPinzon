@@ -5,8 +5,8 @@
 
 # This ensures that function requests are properly routed
 [[redirects]]
-  from = "/.netlify/functions/*"
-  to = "/.netlify/functions/:splat"
+  from = "/netlify/functions/*"
+  to = "/netlify/functions/:splat"
   status = 200
 
 # This makes sure your SPA routes work correctly
