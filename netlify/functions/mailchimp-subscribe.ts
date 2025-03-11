@@ -8,10 +8,7 @@ mailchimp.setConfig({
 });
 
 const handler: Handler = async (event) => {
-	console.log("Mailchimp subscribe function invoked");
-
 	if (event.httpMethod !== "POST") {
-		console.log("Method not allowed:", event.httpMethod);
 		return {
 			statusCode: 405,
 			body: JSON.stringify({ message: "Method not allowed" }),
@@ -22,10 +19,7 @@ const handler: Handler = async (event) => {
 		const payload = event.body ? JSON.parse(event.body) : {};
 		const email = payload.email;
 
-		console.log("Received subscription request for:", email);
-
 		if (!email) {
-			console.log("Email is required but was not provided");
 			return {
 				statusCode: 400,
 				body: JSON.stringify({ message: "Email is required" }),
@@ -45,9 +39,6 @@ const handler: Handler = async (event) => {
 			}
 		);
 
-		console.log("Successfully subscribed to Mailchimp:", response.id);
-
-		// Now send a welcome email
 		const transporter = nodemailer.createTransport({
 			host: process.env.EMAIL_HOST,
 			port: parseInt(process.env.EMAIL_PORT || "587"),
@@ -64,8 +55,7 @@ const handler: Handler = async (event) => {
 		});
 
 		const firstName = payload.firstName || "there";
-
-		// Create an HTML email template
+		
 		const htmlEmail = `
       <!DOCTYPE html>
       <html>
@@ -141,11 +131,9 @@ const handler: Handler = async (event) => {
 				headers: {
 					Precedence: "bulk",
 				},
+				text: "You're receiving this email because you signed up for our newsletter.",
 			});
-
-			console.log("Welcome email sent successfully");
 		} catch (emailError) {
-			// Log email error but don't fail the subscription process
 			console.error("Error sending welcome email:", emailError);
 		}
 
