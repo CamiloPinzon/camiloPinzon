@@ -71,23 +71,44 @@ const SuscribeForm = () => {
 				}, 5000);
 			});
 
-			// Wait for the result of the createUserNewsletterDocument function
-			const result = (await Promise.race([
+			const firestoreResult = (await Promise.race([
 				createUserNewsletterDocument({ email }),
 				timeoutPromise,
 			])) as { success: boolean; message: string };
 
-			setLoaderModal(false);
-
-			// Check if subscription was successful
-			if (result.success) {
-				setIsOpenSuccessModal(true);
-				clearFormFields();
-			} else {
-				// Handle application-level error (like duplicate email)
-				setErrorTexts({ ...defaultErrorTexts, text: result.message });
+			if (!firestoreResult.success) {
+				setLoaderModal(false);
+				setErrorTexts({ ...defaultErrorTexts, text: firestoreResult.message });
 				setIsOpenErrorModal(true);
+				return;
 			}
+
+			try {
+				const mailchimpResult = await fetch(
+					"/.netlify/functions/mailchimp-subscribe",
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({
+							email,
+						}),
+					}
+				);
+				// We don't need to check Mailchimp result here - we'll consider
+				// the operation successful if Firebase succeeded. Mailchimp is treated
+				// as a "nice to have" secondary operation.
+				console.log(
+					"Mailchimp subscription attempt:",
+					await mailchimpResult.json()
+				);
+			} catch (mailchimpError) {
+				console.error("Mailchimp subscription error:", mailchimpError);
+			}
+			setLoaderModal(false);
+			setIsOpenSuccessModal(true);
+			clearFormFields();
 		} catch (error: unknown) {
 			setLoaderModal(false);
 			if (
