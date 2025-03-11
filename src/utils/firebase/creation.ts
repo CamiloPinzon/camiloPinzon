@@ -83,7 +83,7 @@ export const createUserNewsletterDocument = async (userAuth: {
 
 		// Trigger welcome email via Netlify Function
 		try {
-			const response = await fetch("/.netlify/functions/welcome-email", {
+			const response = await fetch("/netlify/functions/welcome-email", {
 				method: "POST",
 				body: JSON.stringify({ email: userAuth.email }),
 				headers: { "Content-Type": "application/json" },
