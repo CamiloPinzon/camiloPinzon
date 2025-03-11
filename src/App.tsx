@@ -21,7 +21,7 @@ function App() {
 			<BrowserRouter>
 				<Header />
 				<Routes>
-					<Route path="/" index element={<Home />} />
+					<Route path="/" element={<Home />} />
 					<Route path="/services" element={<Services />} />
 					<Route path="/blogs" element={<Blogs />}>
 						<Route path=":id" element={<Blog />} />
@@ -30,11 +30,13 @@ function App() {
 					<Route path="/experience" element={<Experience />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/admin" element={<Admin />}>
-						<Route path="/admin/blogs" element={<BlogList />} />
-						<Route path="/admin/blogs/new" element={<BlogForm />} />
-						<Route path="/admin/blogs/edit/:id" element={<BlogForm />} />
+						{/* Use relative paths for nested routes */}
+						<Route path="blogs" element={<BlogList />} />
+						<Route path="blogs/new" element={<BlogForm />} />
+						<Route path="blogs/edit/:id" element={<BlogForm />} />
 					</Route>
-					<Route path="/" element={<Navigate to="/login" replace />} />
+					{/* This would conflict with the "/" route above */}
+					<Route path="*" element={<Navigate to="/login" replace />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>

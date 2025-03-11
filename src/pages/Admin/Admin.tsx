@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet, Link } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 import { signOutUser } from "../../utils/firebase/auth";
 
@@ -13,7 +13,7 @@ const Admin = () => {
 			setLoading(false);
 		}
 	}, [currentUser]);
-	
+
 	useEffect(() => {
 		if (!loading) {
 			if (!currentUser) {
@@ -40,11 +40,34 @@ const Admin = () => {
 	}
 
 	return (
-		<div>
-			<h1>Admin Dashboard</h1>
-			<div>
-				<span>{currentUser?.email}</span>
-				<button onClick={handleSignOut}>Sign Out</button>
+		<div className="admin-dashboard">
+			<div className="admin-header">
+				<h1>Admin Dashboard</h1>
+				<div className="user-controls">
+					<span>{currentUser?.email}</span>
+					<button onClick={handleSignOut}>Sign Out</button>
+				</div>
+			</div>
+
+			<div className="admin-navigation">
+				<nav>
+					<ul>
+						<li>
+							<Link to="/admin">Dashboard Home</Link>
+						</li>
+						<li>
+							<Link to="/admin/blogs">Manage Blogs</Link>
+						</li>
+						<li>
+							<Link to="/admin/blogs/new">Create New Blog</Link>
+						</li>
+					</ul>
+				</nav>
+			</div>
+
+			<div className="admin-content">
+				{/* This is where nested routes will render */}
+				<Outlet />
 			</div>
 		</div>
 	);
