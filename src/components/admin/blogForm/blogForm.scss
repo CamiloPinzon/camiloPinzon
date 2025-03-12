@@ -1,0 +1,188 @@
+// Variables
+$primary-color: #1e88e5;
+$error-color: #f44336;
+$border-color: #e0e0e0;
+$hover-color: darken($primary-color, 10%);
+$text-color: #333;
+$bg-color: #fff;
+$light-bg: #f5f5f5;
+$border-radius: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+
+// Blog form block
+.blog-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: $spacing-lg;
+    background-color: $bg-color;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    // Title element
+    &__title {
+        font-size: 28px;
+        margin-bottom: $spacing-lg;
+        color: $text-color;
+        text-align: center;
+    }
+
+    // Error element
+    &__error {
+        padding: $spacing-md;
+        margin-bottom: $spacing-lg;
+        background-color: lighten($error-color, 38%);
+        border: 1px solid $error-color;
+        color: $error-color;
+        border-radius: $border-radius;
+        font-size: 14px;
+    }
+
+    // Form element
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-lg;
+    }
+
+    // Group element
+    &__group {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-sm;
+    }
+
+    // Label element
+    &__label {
+        font-weight: 600;
+        font-size: 16px;
+        color: $text-color;
+    }
+
+    // Input element
+    &__input {
+        padding: $spacing-md;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        font-size: 16px;
+        transition: border-color 0.3s;
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+        }
+
+        &::placeholder {
+            color: lighten($text-color, 40%);
+        }
+    }
+
+    // Textarea element
+    &__textarea {
+        padding: $spacing-md;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        font-size: 16px;
+        min-height: 100px;
+        resize: vertical;
+        transition: border-color 0.3s;
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+        }
+    }
+
+    // File input element
+    &__file-input {
+        padding: $spacing-sm;
+
+        &::-webkit-file-upload-button {
+            background-color: $light-bg;
+            border: 1px solid $border-color;
+            padding: $spacing-sm $spacing-md;
+            border-radius: $border-radius;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: darken($light-bg, 5%);
+            }
+        }
+    }
+
+    // Image preview element
+    &__image-preview {
+        margin-top: $spacing-md;
+        padding: $spacing-sm;
+        border: 1px dashed $border-color;
+        border-radius: $border-radius;
+        text-align: center;
+    }
+
+    // Preview image element
+    &__preview-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: $border-radius;
+    }
+
+    // Rich editor container element
+    &__rich-editor-container {
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        overflow: hidden;
+
+        // Style the RichTextEditor from the outside
+        // Since we can't apply className to it directly
+        :global(.rich-text-editor) {
+            min-height: 300px;
+        }
+    }
+
+    // Actions element
+    &__actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: $spacing-md;
+        margin-top: $spacing-lg;
+    }
+
+    // Button element
+    &__button {
+        padding: $spacing-md $spacing-lg;
+        border-radius: $border-radius;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: none;
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        // Cancel button modifier
+        &--cancel {
+            background-color: $light-bg;
+            color: $text-color;
+            border: 1px solid $border-color;
+
+            &:hover:not(:disabled) {
+                background-color: darken($light-bg, 5%);
+            }
+        }
+
+        // Submit button modifier
+        &--submit {
+            background-color: $primary-color;
+            color: white;
+
+            &:hover:not(:disabled) {
+                background-color: $hover-color;
+            }
+        }
+    }
+}

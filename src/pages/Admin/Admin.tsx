@@ -1,7 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, Outlet, Link } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 import { signOutUser } from "../../utils/firebase/auth";
+
+import AdminMenu from "../../components/admin/adminMenu/AdminMenu";
+import Button from "../../components/button/Button";
+
+import "./admin.scss";
 
 const Admin = () => {
 	const { currentUser, isAdmin } = useContext(UserContext);
@@ -41,32 +46,17 @@ const Admin = () => {
 
 	return (
 		<div className="admin-dashboard">
-			<div className="admin-header">
-				<h1>Admin Dashboard</h1>
+			<div className="admin-header container">
+				<AdminMenu />
 				<div className="user-controls">
-					<span>{currentUser?.email}</span>
-					<button onClick={handleSignOut}>Sign Out</button>
+					<Button onClick={handleSignOut} type="button" style="secondary">
+						Sign Out
+					</Button>
 				</div>
 			</div>
 
-			<div className="admin-navigation">
-				<nav>
-					<ul>
-						<li>
-							<Link to="/admin">Dashboard Home</Link>
-						</li>
-						<li>
-							<Link to="/admin/blogs">Manage Blogs</Link>
-						</li>
-						<li>
-							<Link to="/admin/blogs/new">Create New Blog</Link>
-						</li>
-					</ul>
-				</nav>
-			</div>
-
 			<div className="admin-content">
-				{/* This is where nested routes will render */}
+				<h1>Admin Dashboard</h1>
 				<Outlet />
 			</div>
 		</div>

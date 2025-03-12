@@ -7,6 +7,8 @@ import { useBlogManagement } from "../../../hooks/useBlogManagement";
 import RichTextEditor from "../richTextEditor/RichTextEditor";
 import { BlogPost } from "../types/blogPostType";
 
+import './blogForm.scss';
+
 interface FormData {
 	title: string;
 	slug: string;
@@ -173,16 +175,21 @@ const BlogForm: React.FC = () => {
 	};
 
 	return (
-		<div className="blog-form-container">
-			<h1>{isEditMode ? "Edit Blog Post" : "Create New Blog Post"}</h1>
+		<div className="blog-form">
+			<h1 className="blog-form__title">
+				{isEditMode ? "Edit Blog Post" : "Create New Blog Post"}
+			</h1>
 
-			{formError && <div className="error-message">{formError}</div>}
-			{error && <div className="error-message">{error}</div>}
+			{formError && <div className="blog-form__error">{formError}</div>}
+			{error && <div className="blog-form__error">{error}</div>}
 
-			<form onSubmit={handleSubmit}>
-				<div className="form-group">
-					<label htmlFor="title">Title</label>
+			<form className="blog-form__form" onSubmit={handleSubmit}>
+				<div className="blog-form__group">
+					<label className="blog-form__label" htmlFor="title">
+						Title
+					</label>
 					<input
+						className="blog-form__input"
 						type="text"
 						id="title"
 						name="title"
@@ -192,9 +199,12 @@ const BlogForm: React.FC = () => {
 					/>
 				</div>
 
-				<div className="form-group">
-					<label htmlFor="slug">Slug</label>
+				<div className="blog-form__group">
+					<label className="blog-form__label" htmlFor="slug">
+						Slug
+					</label>
 					<input
+						className="blog-form__input"
 						type="text"
 						id="slug"
 						name="slug"
@@ -204,9 +214,12 @@ const BlogForm: React.FC = () => {
 					/>
 				</div>
 
-				<div className="form-group">
-					<label htmlFor="summary">Summary</label>
+				<div className="blog-form__group">
+					<label className="blog-form__label" htmlFor="summary">
+						Summary
+					</label>
 					<textarea
+						className="blog-form__textarea"
 						id="summary"
 						name="summary"
 						value={formData.summary}
@@ -215,17 +228,21 @@ const BlogForm: React.FC = () => {
 					/>
 				</div>
 
-				<div className="form-group">
-					<label htmlFor="coverImage">Cover Image</label>
+				<div className="blog-form__group">
+					<label className="blog-form__label" htmlFor="coverImage">
+						Cover Image
+					</label>
 					<input
+						className="blog-form__file-input"
 						type="file"
 						id="coverImage"
 						accept="image/*"
 						onChange={handleCoverImageChange}
 					/>
 					{coverImagePreview && (
-						<div className="image-preview">
+						<div className="blog-form__image-preview">
 							<img
+								className="blog-form__preview-img"
 								src={coverImagePreview}
 								alt="Cover preview"
 								style={{ maxWidth: "300px" }}
@@ -234,17 +251,24 @@ const BlogForm: React.FC = () => {
 					)}
 				</div>
 
-				<div className="form-group">
-					<label htmlFor="content">Content</label>
-					<RichTextEditor
-						value={formData.content}
-						onChange={handleContentChange}
-					/>
+				<div className="blog-form__group">
+					<label className="blog-form__label" htmlFor="content">
+						Content
+					</label>
+					<div className="blog-form__rich-editor-container">
+						<RichTextEditor
+							value={formData.content}
+							onChange={handleContentChange}
+						/>
+					</div>
 				</div>
 
-				<div className="form-group">
-					<label htmlFor="tags">Tags (comma separated)</label>
+				<div className="blog-form__group">
+					<label className="blog-form__label" htmlFor="tags">
+						Tags (comma separated)
+					</label>
 					<input
+						className="blog-form__input"
 						type="text"
 						id="tags"
 						name="tags"
@@ -254,15 +278,20 @@ const BlogForm: React.FC = () => {
 					/>
 				</div>
 
-				<div className="form-actions">
+				<div className="blog-form__actions">
 					<button
+						className="blog-form__button blog-form__button--cancel"
 						type="button"
 						onClick={() => navigate("/admin/blogs")}
 						disabled={submitLoading}
 					>
 						Cancel
 					</button>
-					<button type="submit" disabled={submitLoading || loading}>
+					<button
+						className="blog-form__button blog-form__button--submit"
+						type="submit"
+						disabled={submitLoading || loading}
+					>
 						{submitLoading
 							? "Saving..."
 							: isEditMode

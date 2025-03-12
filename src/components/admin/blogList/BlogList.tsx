@@ -16,6 +16,8 @@ import { db } from "../../../utils/firebase/config";
 import { useBlogManagement } from "../../../hooks/useBlogManagement";
 import { BlogPost } from "../types/blogPostType";
 
+import "./blogList.scss";
+
 const BlogList: React.FC = () => {
 	const {
 		error: hookError,
@@ -195,29 +197,35 @@ const BlogList: React.FC = () => {
 	};
 
 	return (
-		<div className="blog-list-container">
-			<div className="blog-list-header">
-				<h1>Blog Management</h1>
-				<Link to="/admin/blogs/new" className="create-blog-button">
+		<div className="blog-list">
+			<div className="blog-list__header">
+				<h1 className="blog-list__title">Blog Management</h1>
+				<Link to="/admin/blogs/new" className="blog-list__create-button">
 					Create New Blog
 				</Link>
 			</div>
 
-			<div className="blog-filter">
+			<div className="blog-list__filters">
 				<button
-					className={filter === "all" ? "active" : ""}
+					className={`blog-list__filter-button ${
+						filter === "all" ? "blog-list__filter-button--active" : ""
+					}`}
 					onClick={() => setFilter("all")}
 				>
 					All
 				</button>
 				<button
-					className={filter === "published" ? "active" : ""}
+					className={`blog-list__filter-button ${
+						filter === "published" ? "blog-list__filter-button--active" : ""
+					}`}
 					onClick={() => setFilter("published")}
 				>
 					Published
 				</button>
 				<button
-					className={filter === "draft" ? "active" : ""}
+					className={`blog-list__filter-button ${
+						filter === "draft" ? "blog-list__filter-button--active" : ""
+					}`}
 					onClick={() => setFilter("draft")}
 				>
 					Drafts
@@ -225,55 +233,61 @@ const BlogList: React.FC = () => {
 			</div>
 
 			{(error || hookError) && (
-				<div className="error-message">{error || hookError}</div>
+				<div className="blog-list__error">{error || hookError}</div>
 			)}
 
 			{loading && blogs.length === 0 ? (
-				<div className="loading">Loading blogs...</div>
+				<div className="blog-list__loading">Loading blogs...</div>
 			) : blogs.length === 0 ? (
-				<div className="no-blogs">No blog posts found</div>
+				<div className="blog-list__empty">No blog posts found</div>
 			) : (
 				<>
-					<div className="blog-table-container">
-						<table className="blog-table">
-							<thead>
-								<tr>
-									<th>Title</th>
-									<th>Status</th>
-									<th>Last Updated</th>
-									<th>Created Date</th>
-									<th>Actions</th>
+					<div className="blog-list__table-container">
+						<table className="blog-list__table">
+							<thead className="blog-list__table-head">
+								<tr className="blog-list__table-row">
+									<th className="blog-list__table-header">Title</th>
+									<th className="blog-list__table-header">Status</th>
+									<th className="blog-list__table-header">Last Updated</th>
+									<th className="blog-list__table-header">Created Date</th>
+									<th className="blog-list__table-header">Actions</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody className="blog-list__table-body">
 								{blogs.map((blog) => (
-									<tr key={blog.id}>
-										<td>
-											<div className="blog-title">
+									<tr key={blog.id} className="blog-list__table-row">
+										<td className="blog-list__table-cell">
+											<div className="blog-list__blog-title">
 												{blog.title}
 												{blog.coverImage && (
-													<span className="has-image-indicator">📷</span>
+													<span className="blog-list__image-indicator">📷</span>
 												)}
 											</div>
 										</td>
-										<td>
-											<span className={`status-badge ${blog.publishedStatus}`}>
+										<td className="blog-list__table-cell">
+											<span
+												className={`blog-list__status-badge blog-list__status-badge--${blog.publishedStatus}`}
+											>
 												{blog.publishedStatus}
 											</span>
 										</td>
-										<td>{formatDate(blog.updatedAt)}</td>
-										<td>{formatDate(blog.createdAt)}</td>
-										<td>
-											<div className="blog-actions">
+										<td className="blog-list__table-cell">
+											{formatDate(blog.updatedAt)}
+										</td>
+										<td className="blog-list__table-cell">
+											{formatDate(blog.createdAt)}
+										</td>
+										<td className="blog-list__table-cell">
+											<div className="blog-list__actions">
 												<Link
 													to={`/admin/blogs/edit/${blog.id}`}
-													className="edit-button"
+													className="blog-list__action-button blog-list__action-button--edit"
 												>
 													Edit
 												</Link>
 
 												<button
-													className={`publish-button ${
+													className={`blog-list__action-button blog-list__action-button--${
 														blog.publishedStatus === "published"
 															? "unpublish"
 															: "publish"
@@ -291,7 +305,7 @@ const BlogList: React.FC = () => {
 												</button>
 
 												<button
-													className="delete-button"
+													className="blog-list__action-button blog-list__action-button--delete"
 													onClick={() => handleDeleteBlog(blog.id)}
 													disabled={actionLoading === blog.id}
 												>
@@ -303,7 +317,7 @@ const BlogList: React.FC = () => {
 														href={`/blog/${blog.slug}`}
 														target="_blank"
 														rel="noopener noreferrer"
-														className="view-button"
+														className="blog-list__action-button blog-list__action-button--view"
 													>
 														View
 													</a>
@@ -317,10 +331,10 @@ const BlogList: React.FC = () => {
 					</div>
 
 					{/* Pagination controls */}
-					<div className="pagination-controls">
+					<div className="blog-list__pagination">
 						{!isFirstPage && (
 							<button
-								className="pagination-button"
+								className="blog-list__pagination-button blog-list__pagination-button--first"
 								onClick={handleBackToFirst}
 								disabled={loading}
 							>
@@ -330,7 +344,7 @@ const BlogList: React.FC = () => {
 
 						{hasMore && (
 							<button
-								className="pagination-button load-more"
+								className="blog-list__pagination-button blog-list__pagination-button--more"
 								onClick={handleLoadMore}
 								disabled={loading}
 							>

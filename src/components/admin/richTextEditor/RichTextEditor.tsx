@@ -92,19 +92,23 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
 	};
 
 	return (
-		<div className="rich-text-editor">
+		<div className="rich-editor">
 			{uploading && (
-				<div className="uploading-indicator">Uploading image...</div>
+				<div className="rich-editor__uploading-indicator">
+					Uploading image...
+				</div>
 			)}
-			<ReactQuill
-				ref={quillRef}
-				theme="snow"
-				value={value}
-				onChange={onChange}
-				modules={modules}
-				formats={formats}
-				placeholder="Write your blog content here..."
-			/>
+			<div className="rich-editor__container">
+				<ReactQuill
+					ref={quillRef}
+					theme="snow"
+					value={value}
+					onChange={onChange}
+					modules={modules}
+					formats={formats}
+					placeholder="Write your blog content here..."
+				/>
+			</div>
 		</div>
 	);
 };

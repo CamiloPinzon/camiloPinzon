@@ -1,0 +1,184 @@
+// Variables
+$primary-color: #1e88e5;
+$border-color: #e0e0e0;
+$text-color: #333;
+$light-text: #757575;
+$bg-color: #fff;
+$light-bg: #f5f5f5;
+$border-radius: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+
+// Rich editor block
+.rich-editor {
+    position: relative;
+    margin-bottom: $spacing-lg;
+
+    // Uploading indicator element
+    &__uploading-indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba($primary-color, 0.1);
+        color: $primary-color;
+        padding: $spacing-sm;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        z-index: 10;
+        border-radius: $border-radius $border-radius 0 0;
+    }
+
+    // Container element - wraps ReactQuill
+    &__container {
+        border-radius: $border-radius;
+        overflow: hidden;
+
+        // Global styling for the ReactQuill component
+        :global {
+            .quill {
+                .ql-toolbar {
+                    border-color: $border-color;
+                    border-top-left-radius: $border-radius;
+                    border-top-right-radius: $border-radius;
+                    background-color: $light-bg;
+
+                    .ql-formats {
+                        margin-right: $spacing-md;
+
+                        button {
+                            &:hover {
+                                color: $primary-color;
+                            }
+
+                            &.ql-active {
+                                color: $primary-color;
+                            }
+                        }
+
+                        .ql-picker {
+                            &.ql-expanded .ql-picker-label {
+                                color: $primary-color;
+                            }
+
+                            .ql-picker-options {
+                                border-color: $border-color;
+                                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                            }
+                        }
+                    }
+                }
+
+                .ql-container {
+                    font-family: inherit;
+                    font-size: 16px;
+                    border-color: $border-color;
+                    border-bottom-left-radius: $border-radius;
+                    border-bottom-right-radius: $border-radius;
+
+                    .ql-editor {
+                        min-height: 300px;
+                        line-height: 1.6;
+                        color: $text-color;
+
+                        &.ql-blank::before {
+                            color: $light-text;
+                            font-style: italic;
+                            left: $spacing-md;
+                            right: $spacing-md;
+                        }
+
+                        p,
+                        h1,
+                        h2,
+                        h3,
+                        h4,
+                        h5,
+                        h6,
+                        ul,
+                        ol,
+                        blockquote {
+                            margin-bottom: $spacing-md;
+                        }
+
+                        h1,
+                        h2,
+                        h3,
+                        h4,
+                        h5,
+                        h6 {
+                            font-weight: 600;
+                            line-height: 1.3;
+                        }
+
+                        h1 {
+                            font-size: 28px;
+                        }
+
+                        h2 {
+                            font-size: 24px;
+                        }
+
+                        h3 {
+                            font-size: 20px;
+                        }
+
+                        a {
+                            color: $primary-color;
+                            text-decoration: underline;
+                        }
+
+                        blockquote {
+                            border-left: 4px solid $primary-color;
+                            padding-left: $spacing-md;
+                            color: $light-text;
+                        }
+
+                        code {
+                            background-color: $light-bg;
+                            padding: 2px 4px;
+                            border-radius: 3px;
+                        }
+
+                        pre {
+                            background-color: $light-bg;
+                            border-radius: $border-radius;
+                            padding: $spacing-md;
+                            overflow-x: auto;
+                        }
+
+                        img {
+                            max-width: 100%;
+                            height: auto;
+                            border-radius: $border-radius;
+                        }
+
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+
+                            th,
+                            td {
+                                border: 1px solid $border-color;
+                                padding: $spacing-sm;
+                            }
+
+                            th {
+                                background-color: $light-bg;
+                                font-weight: 600;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // When the uploading indicator is present, adjust toolbar position
+    &__uploading-indicator+&__container :global(.quill .ql-toolbar) {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+}
