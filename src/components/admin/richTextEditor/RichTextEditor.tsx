@@ -38,7 +38,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
 							};
 
 							// For demo purposes - in real app replace with actual URL from your upload
-							const dummyUrl = "https://via.placeholder.com/300";
+							const dummyUrl = "https://placehold.co/300";
 
 							// Insert image
 							quill.insertEmbed(range.index, "image", dummyUrl);
