@@ -1,4 +1,5 @@
 import { useSEO } from "../../hooks/useSEO";
+import UserBlogList from "../../components/userBlogList/UserBlogList";
 
 const Blogs = () => {
 	useSEO({
@@ -9,6 +10,7 @@ const Blogs = () => {
 	return (
 		<div>
 			<h1>Blogs Page</h1>
+			<UserBlogList />
 		</div>
 	);
 };
