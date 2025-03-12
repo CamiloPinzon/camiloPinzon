@@ -24,7 +24,7 @@ const ProfileInfo = () => {
 			<div className="profile-info__content">
 				<h1>Camilo Pinzón</h1>
 				<p>
-					<i>Web Develper</i>
+					<i>Web Developer</i>
 				</p>
 				<div className="profile-info__content-social">
 					<SocialIcons />

@@ -43,60 +43,27 @@ const BlogList: React.FC = () => {
 		setError(null);
 
 		try {
-			let q;
 			const blogsRef = collection(db, "blogs");
+			const queryConstraints = [];
 
-			// Build query based on filter
-			if (filter === "published") {
-				q = query(
-					blogsRef,
-					where("publishedStatus", "==", "published"),
-					orderBy("updatedAt", "desc"),
-					limit(ITEMS_PER_PAGE)
-				);
-			} else if (filter === "draft") {
-				q = query(
-					blogsRef,
-					where("publishedStatus", "==", "draft"),
-					orderBy("updatedAt", "desc"),
-					limit(ITEMS_PER_PAGE)
-				);
-			} else {
-				q = query(
-					blogsRef,
-					orderBy("updatedAt", "desc"),
-					limit(ITEMS_PER_PAGE)
-				);
+			// Add filter constraint if specified
+			if (filter === "published" || filter === "draft") {
+				queryConstraints.push(where("publishedStatus", "==", filter));
 			}
 
-			// If not first load, use startAfter for pagination
+			// Always order by updatedAt
+			queryConstraints.push(orderBy("updatedAt", "desc"));
+
+			// Add pagination constraint if not first load
 			if (!isFirstLoad && lastVisible) {
-				if (filter === "published") {
-					q = query(
-						blogsRef,
-						where("publishedStatus", "==", "published"),
-						orderBy("updatedAt", "desc"),
-						startAfter(lastVisible),
-						limit(ITEMS_PER_PAGE)
-					);
-				} else if (filter === "draft") {
-					q = query(
-						blogsRef,
-						where("publishedStatus", "==", "draft"),
-						orderBy("updatedAt", "desc"),
-						startAfter(lastVisible),
-						limit(ITEMS_PER_PAGE)
-					);
-				} else {
-					q = query(
-						blogsRef,
-						orderBy("updatedAt", "desc"),
-						startAfter(lastVisible),
-						limit(ITEMS_PER_PAGE)
-					);
-				}
+				queryConstraints.push(startAfter(lastVisible));
 			}
 
+			// Add limit
+			queryConstraints.push(limit(ITEMS_PER_PAGE));
+
+			// Build the query with all constraints
+			const q = query(blogsRef, ...queryConstraints);
 			const querySnapshot = await getDocs(q);
 
 			// Check if there are more results
