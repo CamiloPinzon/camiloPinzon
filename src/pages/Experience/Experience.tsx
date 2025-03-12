@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { useSEO } from "../../hooks/useSEO";
+import useResponsive from "../../hooks/useResponsive";
 import Hero from "../../components/hero/Hero";
 import { experienceContent } from "../../data/experience.json";
 import "./experience.scss";
@@ -23,6 +24,9 @@ const Experience = () => {
 			"Explore my experience as a front-end developer specializing in React, WordPress, WooCommerce, and modern web solutions. See how I can help your project.",
 	});
 
+	const { current } = useResponsive();
+	const isMobile = current === "xs" || current === "sm";
+
 	const paragraph =
 		"Experienced web developer crafting high-quality, scalable, and efficient digital solutions.";
 	return (
@@ -38,7 +42,7 @@ const Experience = () => {
 			<main className="experience-list container">
 				{experienceContent.reverse().map((item: ExperienceDataI) => {
 					const ExperienceContent = () => (
-						<div className="experience-item-content">
+						<div className={`experience-item-content ${isMobile && "column"}`}>
 							<div className="experience-item-content__left">
 								<p>
 									{item.dateStart} - {item.dateEnd}

@@ -10,6 +10,10 @@
     gap: 30px;
 }
 
+.column {
+    flex-direction: column;
+}
+
 .experience-item-content {
     display: flex;
     gap: 20px;
