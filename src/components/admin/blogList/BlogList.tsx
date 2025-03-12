@@ -132,6 +132,17 @@ const BlogList: React.FC = () => {
 			setIsFirstPage(isFirstLoad);
 		} catch (error) {
 			console.error("Error fetching blogs:", error);
+
+			// Get more details from FirebaseError
+			if (error instanceof Error) {
+				console.error("Error message:", error.message);
+
+				// Check if it's a missing index error
+				if (error.message.includes("index")) {
+					console.error("This is an index error - create the required index");
+				}
+			}
+
 			setError("Error fetching blogs");
 		} finally {
 			setLoading(false);
