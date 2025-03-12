@@ -43,28 +43,61 @@ const BlogList: React.FC = () => {
 		setError(null);
 
 		try {
+			console.log(
+				"Starting fetch with filter:",
+				filter,
+				"isFirstLoad:",
+				isFirstLoad
+			);
 			const blogsRef = collection(db, "blogs");
-			const queryConstraints = [];
+			let q;
 
-			// Add filter constraint if specified
-			if (filter === "published" || filter === "draft") {
-				queryConstraints.push(where("publishedStatus", "==", filter));
-			}
+			// Simplified query building
+			const filterConditions = [];
 
-			// Always order by updatedAt
-			queryConstraints.push(orderBy("updatedAt", "desc"));
+			// Add the ordering first (required for all queries)
+			filterConditions.push(orderBy("updatedAt", "desc"));
 
-			// Add pagination constraint if not first load
+			// Add pagination if needed
 			if (!isFirstLoad && lastVisible) {
-				queryConstraints.push(startAfter(lastVisible));
+				filterConditions.push(startAfter(lastVisible));
 			}
 
-			// Add limit
-			queryConstraints.push(limit(ITEMS_PER_PAGE));
+			// Add limit (required for all queries)
+			filterConditions.push(limit(ITEMS_PER_PAGE));
 
-			// Build the query with all constraints
-			const q = query(blogsRef, ...queryConstraints);
+			// Add different query based on filter
+			if (filter === "published") {
+				// Create a separate query for published blogs
+				q = query(
+					blogsRef,
+					where("publishedStatus", "==", "published"),
+					...filterConditions
+				);
+			} else if (filter === "draft") {
+				// Create a separate query for draft blogs
+				q = query(
+					blogsRef,
+					where("publishedStatus", "==", "draft"),
+					...filterConditions
+				);
+			} else {
+				// No filter, show all blogs
+				q = query(blogsRef, ...filterConditions);
+			}
+
+			// Execute query
+			console.log("Executing query for filter:", filter);
 			const querySnapshot = await getDocs(q);
+			console.log(`Query returned ${querySnapshot.docs.length} documents`);
+
+			// Debug: Show the first document if available
+			if (querySnapshot.docs.length > 0) {
+				console.log("First document data:", {
+					id: querySnapshot.docs[0].id,
+					publishedStatus: querySnapshot.docs[0].data().publishedStatus,
+				});
+			}
 
 			// Check if there are more results
 			setHasMore(querySnapshot.docs.length === ITEMS_PER_PAGE);
@@ -79,6 +112,15 @@ const BlogList: React.FC = () => {
 				...doc.data(),
 			})) as BlogPost[];
 
+			// Debug: Check the first few items we're about to set
+			console.log(
+				"Blog data sample:",
+				blogData.slice(0, 2).map((blog) => ({
+					id: blog.id,
+					publishedStatus: blog.publishedStatus,
+				}))
+			);
+
 			// Update blogs state
 			if (isFirstLoad) {
 				setBlogs(blogData);
@@ -88,9 +130,9 @@ const BlogList: React.FC = () => {
 
 			// Update first page state
 			setIsFirstPage(isFirstLoad);
-		} catch (err) {
+		} catch (error) {
+			console.error("Error fetching blogs:", error);
 			setError("Error fetching blogs");
-			console.error("Error fetching blogs:", err);
 		} finally {
 			setLoading(false);
 		}
