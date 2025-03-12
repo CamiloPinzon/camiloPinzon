@@ -56,7 +56,6 @@ const Admin = () => {
 			</div>
 
 			<div className="admin-content">
-				<h1>Admin Dashboard</h1>
 				<Outlet />
 			</div>
 		</div>

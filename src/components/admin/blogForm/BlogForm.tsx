@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../utils/firebase/config";
@@ -7,7 +7,7 @@ import { useBlogManagement } from "../../../hooks/useBlogManagement";
 import RichTextEditor from "../richTextEditor/RichTextEditor";
 import { BlogPost } from "../types/blogPostType";
 
-import './blogForm.scss';
+import "./blogForm.scss";
 
 interface FormData {
 	title: string;
@@ -87,9 +87,9 @@ const BlogForm: React.FC = () => {
 	};
 
 	// Handle rich text editor changes
-	const handleContentChange = (content: string) => {
+	const handleContentChange = useCallback((content: string) => {
 		setFormData((prev) => ({ ...prev, content }));
-	};
+	}, []);
 
 	// Handle slug generation from title
 	const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
