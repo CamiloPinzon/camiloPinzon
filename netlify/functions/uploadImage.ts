@@ -1,18 +1,11 @@
 import { Handler } from "@netlify/functions";
 import fetch from "node-fetch";
-import FormData from "form-data";
 
-interface NetlifyFileResponse {
+interface NetlifyDeployFileResponse {
 	url: string;
-	id?: string;
-	name?: string;
-	size?: number;
-	[key: string]: unknown;
-}
-
-interface NetlifyErrorResponse {
-	message: string;
-	code?: string;
+	deploy_id?: string;
+	sha?: string;
+	path?: string;
 	[key: string]: unknown;
 }
 
@@ -56,65 +49,71 @@ export const handler: Handler = async (event) => {
 		const base64Data = matches[2];
 		const buffer = Buffer.from(base64Data, "base64");
 
-		const form = new FormData();
-		form.append("file", buffer, {
-			filename,
-			contentType,
+		// Step 1: Get a direct upload URL
+		const deployFilesUrl = `https://api.netlify.com/api/v1/sites/${siteId}/deploys/files/${filename}`;
+
+		console.log(`Getting upload URL from: ${deployFilesUrl}`);
+
+		const createResponse = await fetch(deployFilesUrl, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${process.env.NETLIFY_API_TOKEN}`,
+			},
 		});
 
-		console.log(
-			`Uploading to: https://api.netlify.com/api/v1/sites/${siteId}/files`
-		);
-
-		const response = await fetch(
-			`https://api.netlify.com/api/v1/sites/${siteId}/files`,
-			{
-				method: "POST",
-				headers: {
-					Authorization: `Bearer ${process.env.NETLIFY_API_TOKEN}`,
-				},
-				body: form,
-			}
-		);
-
-		// Log response details for debugging
-		console.log(`Response status: ${response.status}`);
-		console.log(`Response status text: ${response.statusText}`);
-
-		// Handle non-JSON responses
-		const contentTypeHeader = response.headers.get("content-type");
-		if (!contentTypeHeader || !contentTypeHeader.includes("application/json")) {
-			const textResponse = await response.text();
-			console.error("Non-JSON response:", textResponse);
+		if (!createResponse.ok) {
+			const errorText = await createResponse.text();
+			console.error(
+				`Failed to get upload URL: ${createResponse.status} ${createResponse.statusText}`
+			);
+			console.error(`Error text: ${errorText}`);
 			return {
-				statusCode: response.status,
+				statusCode: createResponse.status,
 				body: JSON.stringify({
-					error: `Netlify API error: ${
-						response.statusText
-					}. Response: ${textResponse.substring(0, 100)}...`,
+					error: `Failed to get upload URL: ${createResponse.statusText}`,
 				}),
 			};
 		}
 
-		if (!response.ok) {
-			const errorData = (await response.json()) as NetlifyErrorResponse;
-			console.error("Netlify API Error:", errorData);
+		const uploadData =
+			(await createResponse.json()) as NetlifyDeployFileResponse;
+		console.log(`Got upload URL: ${uploadData.url}`);
+
+		// Step 2: Upload the file to the provided URL
+		const uploadResponse = await fetch(uploadData.url, {
+			method: "PUT",
+			headers: {
+				"Content-Type": contentType,
+				"Content-Length": buffer.length.toString(),
+			},
+			body: buffer,
+		});
+
+		if (!uploadResponse.ok) {
+			const errorText = await uploadResponse.text();
+			console.error(
+				`Failed to upload file: ${uploadResponse.status} ${uploadResponse.statusText}`
+			);
+			console.error(`Error text: ${errorText}`);
 			return {
-				statusCode: response.status,
+				statusCode: uploadResponse.status,
 				body: JSON.stringify({
-					error: `Netlify API error: ${
-						errorData.message || response.statusText
-					}`,
+					error: `Failed to upload file: ${uploadResponse.statusText}`,
 				}),
 			};
 		}
 
-		const data = (await response.json()) as NetlifyFileResponse;
-		console.log("Upload successful, URL:", data.url);
+		// Step 3: Return the public URL
+		// The public URL is usually in the format: https://{site-name}.netlify.app/{filename}
+		const publicUrl = `https://${
+			process.env.URL || `${siteId}.netlify.app`
+		}/${filename}`;
+		console.log(`Upload successful, public URL: ${publicUrl}`);
 
 		return {
 			statusCode: 200,
-			body: JSON.stringify({ url: data.url }),
+			body: JSON.stringify({ url: publicUrl }),
 		};
 	} catch (error) {
 		console.error(
