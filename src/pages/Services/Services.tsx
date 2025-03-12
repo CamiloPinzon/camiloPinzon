@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
+import { useSEO } from "../../hooks/useSEO";
+
 import Hero from "../../components/hero/Hero";
 import Image from "../../components/image/Image";
 import Button from "../../components/button/Button";
@@ -7,6 +9,12 @@ import Button from "../../components/button/Button";
 import "./services.scss";
 
 const Services = () => {
+	useSEO({
+		title: "Expert Front-End Developer | React, WordPress, TypeScript, ...",
+		description:
+			"I offer front-end development services using React, WordPress & WooCommerce. Get a high-performance, user-friendly website tailored to your needs.",
+	});
+
 	const navigation = useNavigate();
 
 	const handleContactClick = () => {

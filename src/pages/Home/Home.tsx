@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import useResponsive from "../../hooks/useResponsive";
+import { useSEO } from "../../hooks/useSEO";
 
 import Image from "../../components/image/Image";
 import LatestBlogs from "../../components/latestBlogs/LatestBlogs";
@@ -14,6 +15,14 @@ import Modal from "../../components/modal/Modal";
 import "./home.scss";
 
 const Home = () => {
+	useSEO({
+		title: "Expert Front-End Developer | React, WordPress, TypeScript, ...",
+		description:
+			"Freelance front-end developer specializing in React, WordPress & TypeScript. I create fast, modern, and user-friendly websites. Let’s build something great!",
+		image:
+			"https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80",
+	});
+
 	const [isOpenMessageModal, setIsOpenMessageModal] = useState(true);
 	const { current } = useResponsive();
 	const isMobile = current === "xs" || current === "sm";

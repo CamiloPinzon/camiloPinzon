@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+
+import { useSEO } from "../../hooks/useSEO";
 import Hero from "../../components/hero/Hero";
 import { experienceContent } from "../../data/experience.json";
 import "./experience.scss";
@@ -15,6 +17,12 @@ interface ExperienceDataI {
 }
 
 const Experience = () => {
+	useSEO({
+		title: "Expert Front-End Developer | React, WordPress, TypeScript, ...",
+		description:
+			"Explore my experience as a front-end developer specializing in React, WordPress, WooCommerce, and modern web solutions. See how I can help your project.",
+	});
+
 	const paragraph =
 		"Experienced web developer crafting high-quality, scalable, and efficient digital solutions.";
 	return (

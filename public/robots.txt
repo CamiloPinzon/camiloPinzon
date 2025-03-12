@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /login
+Disallow: /admin/
+
+Sitemap: https://camilopinzon.netlify.app/sitemap.xml

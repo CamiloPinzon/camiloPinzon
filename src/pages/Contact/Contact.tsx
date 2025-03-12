@@ -4,6 +4,7 @@ import Image from "../../components/image/Image";
 import ContactForm from "../../components/contactForm/ContactForm";
 
 import useResponsive from "../../hooks/useResponsive";
+import { useSEO } from "../../hooks/useSEO";
 
 import emailIcon from "../../assets/email.svg";
 import phoneIcon from "../../assets/phone.svg";
@@ -11,6 +12,12 @@ import phoneIcon from "../../assets/phone.svg";
 import "./contact.scss";
 
 const Contact = () => {
+	useSEO({
+		title: "Expert Front-End Developer | React, WordPress, TypeScript, ...",
+		description:
+			"Have a project in mind? Get in touch! I specialize in front-end development with React, WordPress & WooCommerce. Let’s build something amazing.",
+	});
+
 	const { current, isXs } = useResponsive();
 	const isMobile = current === "xs" || current === "sm";
 
