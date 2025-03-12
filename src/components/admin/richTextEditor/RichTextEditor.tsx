@@ -26,9 +26,6 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
 			if (input.files && input.files[0]) {
 				try {
 					setUploading(true);
-					// eslint-disable-next-line @typescript-eslint/no-unused-vars
-					const file = input.files[0];
-
 					// Here you would normally call your uploadImage function
 					// For now we're just simulating the flow
 					setTimeout(() => {
