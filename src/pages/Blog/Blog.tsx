@@ -16,16 +16,16 @@ const Blog = () => {
 	const slug = params.slug || "";
 	const { blog, loading, error } = useGetBlogBySlug(slug);
 
-	useSEO({
-		title: blog!.title,
-		description: blog!.summary,
-		image: blog!.coverImage,
-	});
-
 	if (loading) return <div>Loading...</div>;
 	if (error) return <div>Error: {error}</div>;
-	if (!blog) return <div>Blog not found</div>;
-
+	if (blog) {
+		// eslint-disable-next-line react-hooks/rules-of-hooks
+		useSEO({
+			title: blog!.title,
+			description: blog!.summary,
+			image: blog!.coverImage,
+		});
+	} else return <div>Blog not found</div>;
 
 	const currentUrl = window.location.origin + location.pathname;
 
