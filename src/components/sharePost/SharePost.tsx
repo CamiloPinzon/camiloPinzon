@@ -12,7 +12,7 @@ const SharePost: React.FC<SharePostProps> = ({ title, url }) => {
 
 	const shareLinks = {
 		facebook: `https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&u=${encodedUrl}&display=popup&ref=plugin&src=share_button`,
-		twitter: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
+		twitter: `https://x.com/intent/post?title=${encodedTitle}&text=${encodedUrl}`,
 		linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
 		whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
 	};
