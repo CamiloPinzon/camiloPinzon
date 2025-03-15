@@ -7,14 +7,15 @@ interface UserBlogListProps {
 	className?: string;
 	title?: string;
 	itemsPerPage?: number;
+	latest?: boolean;
 }
 
 const UserBlogList: FC<UserBlogListProps> = ({
 	className = "",
 	title = "Latest Blog Posts",
 	itemsPerPage = 6,
+	latest = false,
 }) => {
-	// Use the publishedOnly option to restrict to published posts only
 	const {
 		blogs,
 		loading,
@@ -27,6 +28,7 @@ const UserBlogList: FC<UserBlogListProps> = ({
 	} = useFetchBlogs({
 		publishedOnly: true,
 		itemsPerPage,
+		latest,
 	});
 
 	if (loading && blogs.length === 0) {
@@ -49,7 +51,8 @@ const UserBlogList: FC<UserBlogListProps> = ({
 		<div className={`blog-list ${className}`}>
 			<h2 className="blog-list__title">{title}</h2>
 
-			{blogs.map((blog) => (
+			{
+				blogs.map((blog) => (
 				<div key={blog.id} className="blog-list__card">
 					<img
 						className="blog-list__card-image"

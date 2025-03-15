@@ -36,6 +36,7 @@ interface UseFetchBlogsOptions {
 	publishedOnly?: boolean;
 	initialFilter?: BlogFilter;
 	itemsPerPage?: number;
+	latest?: boolean;
 }
 
 export const useFetchBlogs = (options: UseFetchBlogsOptions = {}) => {
@@ -43,6 +44,7 @@ export const useFetchBlogs = (options: UseFetchBlogsOptions = {}) => {
 		publishedOnly = false,
 		initialFilter = "all",
 		itemsPerPage = 10,
+		latest = false,
 	} = options;
 
 	// If publishedOnly is true, force the filter to be 'published'
@@ -108,7 +110,8 @@ export const useFetchBlogs = (options: UseFetchBlogsOptions = {}) => {
 				q = query(
 					blogsRef,
 					where("publishedStatus", "==", "published"),
-					...filterConditions
+					...filterConditions,
+					...(latest === true ? [limit(3)] : [])
 				);
 			} else if (filter === "draft") {
 				// Create a query for draft blogs
