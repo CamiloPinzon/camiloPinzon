@@ -1,0 +1,70 @@
+.share-post {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+
+    &__label {
+        font-weight: 600;
+        margin-right: 1rem;
+        display: inline-block;
+    }
+
+    &__list {
+        display: inline-flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__item {
+        margin-right: 0.5rem;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__link {
+        text-decoration: none;
+        padding: 0.3rem 0.7rem;
+        border-radius: 3px;
+        font-size: 0.9rem;
+        transition: opacity 0.2s ease;
+        color: #fff;
+
+        &:hover {
+            opacity: 0.85;
+        }
+
+        &--facebook {
+            background-color: #3b5998;
+        }
+
+        &--twitter {
+            background-color: #1da1f2;
+        }
+
+        &--linkedin {
+            background-color: #0077b5;
+        }
+
+        &--whatsapp {
+            background-color: #25d366;
+        }
+    }
+}
+
+// Add responsive styles
+@media (max-width: 576px) {
+    .share-post {
+        &__list {
+            display: flex;
+            margin-top: 0.5rem;
+        }
+
+        &__label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+    }
+}

@@ -17,3 +17,9 @@ export interface BlogPost {
 	createdAt: Date;
 	updatedAt: Date;
 }
+
+export interface BlogState {
+	blog: BlogPost | null;
+	loading: boolean;
+	error: string | null;
+}

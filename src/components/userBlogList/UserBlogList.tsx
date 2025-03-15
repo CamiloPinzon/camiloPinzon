@@ -56,16 +56,18 @@ const UserBlogList: FC<UserBlogListProps> = ({
 						src={blog.coverImage}
 						alt={blog.title}
 					/>
-					<h3 className="blog-list__card-title">{blog.title}</h3>
-					<p className="blog-list__card-date">
-						Posted on: {formatDate(blog.createdAt)}
-					</p>
-					<p className="blog-list__card-excerpt">
-						{blog.summary || blog.content.substring(0, 150)}...
-					</p>
-					<a className="blog-list__card-link" href={`/blogs/${blog.id}`}>
-						Read More
-					</a>
+					<div className="blog-list__content">
+						<h3 className="blog-list__card-title">{blog.title}</h3>
+						<p className="blog-list__card-date">
+							Posted on: {formatDate(blog.createdAt)}
+						</p>
+						<p className="blog-list__card-excerpt">
+							{blog.summary || blog.content.substring(0, 150)}...
+						</p>
+						<a className="blog-list__card-link" href={`/blogs/${blog.slug}`}>
+							Read More
+						</a>
+					</div>
 				</div>
 			))}
 

@@ -25,7 +25,8 @@ export type BlogPost = {
 	title: string;
 	content: string;
 	summary?: string;
-    coverImage?: string;
+	coverImage?: string;
+	slug: string;
 	// Add other blog post properties here
 };
 
