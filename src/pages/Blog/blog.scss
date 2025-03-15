@@ -127,3 +127,24 @@
         }
     }
 }
+
+/* For your display page */
+.quill-content .ql-code-block-container {
+    background-color: #23241f;
+    color: #f8f8f2;
+    overflow: visible;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-family: monospace;
+    position: relative;
+    box-sizing: border-box;
+    cursor: text;
+}
+
+/* Style for individual code blocks */
+.quill-content .ql-code-block {
+    padding: 0.25rem 0;
+    white-space: pre;
+}
