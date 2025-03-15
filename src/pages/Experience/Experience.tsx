@@ -24,6 +24,7 @@ const Experience = () => {
 			"Explore my experience as a front-end developer specializing in React, WordPress, WooCommerce, and modern web solutions. See how I can help your project.",
 	});
 
+	const content = experienceContent.reverse();
 	const { current } = useResponsive();
 	const isMobile = current === "xs" || current === "sm";
 
@@ -40,7 +41,7 @@ const Experience = () => {
 				/>
 			</div>
 			<main className="experience-list container">
-				{experienceContent.reverse().map((item: ExperienceDataI) => {
+				{content.map((item: ExperienceDataI) => {
 					const ExperienceContent = () => (
 						<div className={`experience-item-content ${isMobile && "column"}`}>
 							<div className="experience-item-content__left">
