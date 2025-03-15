@@ -1,4 +1,3 @@
-import React from "react";
 import "./sharePost.scss";
 
 interface SharePostProps {
@@ -13,7 +12,7 @@ const SharePost: React.FC<SharePostProps> = ({ title, url }) => {
 	const shareLinks = {
 		facebook: `https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&u=${encodedUrl}&display=popup&ref=plugin&src=share_button`,
 		twitter: `https://x.com/intent/post?title=${encodedTitle}&text=${encodedUrl}`,
-		linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+		linkedin: `https://www.linkedin.com/feed/?linkOrigin=LI_BADGE&shareActive=true&shareUrl=${encodedUrl}&text=${encodedTitle}`,
 		whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
 	};
 
