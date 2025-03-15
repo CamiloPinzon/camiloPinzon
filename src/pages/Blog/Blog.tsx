@@ -1,3 +1,4 @@
+import { useSEO } from "../../hooks/useSEO";
 import { useParams } from "react-router-dom";
 
 import SharePost from "../../components/sharePost/SharePost";
@@ -11,14 +12,20 @@ interface RouteParams {
 }
 
 const Blog = () => {
-	// Type the useParams hook correctly
 	const params = useParams<keyof RouteParams>();
 	const slug = params.slug || "";
 	const { blog, loading, error } = useGetBlogBySlug(slug);
 
+	useSEO({
+		title: blog!.title,
+		description: blog!.summary,
+		image: blog!.coverImage,
+	});
+
 	if (loading) return <div>Loading...</div>;
 	if (error) return <div>Error: {error}</div>;
 	if (!blog) return <div>Blog not found</div>;
+
 
 	const currentUrl = window.location.origin + location.pathname;
 
