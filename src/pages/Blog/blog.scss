@@ -127,3 +127,20 @@
         }
     }
 }
+
+/* Blog.css */
+.quill-content pre {
+    background-color: #f3f3f3;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+    font-family: monospace;
+}
+
+.quill-content code {
+    background-color: #f3f3f3;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: monospace;
+}

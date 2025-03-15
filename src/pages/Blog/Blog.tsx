@@ -5,6 +5,9 @@ import SharePost from "../../components/sharePost/SharePost";
 import { useGetBlogBySlug } from "../../hooks/useGetBlogBySlug";
 
 import "./blog.scss";
+import "react-quill-new/dist/quill.snow.css";
+
+// Define the params interface correctly for useParams
 interface RouteParams {
 	slug: string;
 }
@@ -30,7 +33,7 @@ const Blog = () => {
 		<div className="blog">
 			<h1 className="blog__title">{blog.title}</h1>
 			<div
-				className="blog__content"
+				className="quill-content"
 				dangerouslySetInnerHTML={{ __html: blog.content }}
 			/>
 			{blog.tags && blog.tags.length > 0 && (
