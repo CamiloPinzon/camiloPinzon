@@ -1,7 +1,7 @@
 import { useSEO } from "../../hooks/useSEO";
 import { useParams } from "react-router-dom";
 
-import Tags from "../../components/tags/tags";
+import Tags from "../../components/tags/Tags";
 import SharePost from "../../components/sharePost/SharePost";
 import { useGetBlogBySlug } from "../../hooks/useGetBlogBySlug";
 

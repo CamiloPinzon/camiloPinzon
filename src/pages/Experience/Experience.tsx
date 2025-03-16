@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSEO } from "../../hooks/useSEO";
 import useResponsive from "../../hooks/useResponsive";
 import Hero from "../../components/hero/Hero";
-import Tags from "../../components/tags/tags";
+import Tags from "../../components/tags/Tags";
 import { experienceContent } from "../../data/experience.json";
 import "./experience.scss";
 
