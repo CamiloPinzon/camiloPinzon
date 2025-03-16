@@ -16,8 +16,7 @@
 
     &__content {
         margin-bottom: 1.5rem;
-
-        // Style elements within the blog content
+        
         h2 {
             font-size: 1.5rem;
             margin: 1.2rem 0 0.8rem;
@@ -71,53 +70,15 @@
             }
         }
     }
-
-    &__tags {
-        margin-top: 2rem;
-        border-top: 1px solid #eee;
-        padding-top: 1rem;
-
-        &-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        &-list {
-            display: flex;
-            flex-wrap: wrap;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        &-item {
-            background-color: #f0f0f0;
-            color: #666;
-            padding: 0.3rem 0.7rem;
-            border-radius: 2rem;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-            transition: background-color 0.2s ease;
-
-            &:hover {
-                background-color: #e0e0e0;
-            }
-        }
-    }
-
-    // Extra small devices (phones, 320px and up)
+    
     @media (min-width: 320px) {
         padding: 1rem;
     }
-
-    // Small devices (large phones, 480px and up)
+    
     @media (min-width: 480px) {
         padding: 1.5rem;
     }
-
-    // Medium devices (tablets, 768px and up)
+    
     @media (min-width: 768px) {
         padding: 2rem 1rem;
 
@@ -143,18 +104,8 @@
                 margin: 1.5rem 0;
             }
         }
-
-        &__tags {
-            margin-top: 2.5rem;
-            padding-top: 1.2rem;
-
-            &-title {
-                font-size: 1.2rem;
-            }
-        }
     }
-
-    // Large devices (desktops, 992px and up)
+    
     @media (min-width: 992px) {
         &__title {
             font-size: 2.5rem;
@@ -169,15 +120,9 @@
                 font-size: 1.5rem;
             }
         }
-
-        &__tags {
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-        }
     }
 }
 
-/* For your display page - keeping these as standard CSS as in your original */
 .quill-content .ql-code-block-container {
     background-color: #23241f;
     color: #f8f8f2;
@@ -192,15 +137,12 @@
     cursor: text;
 }
 
-/* Style for individual code blocks */
 .quill-content .ql-code-block {
     padding: 0.25rem 0;
     white-space: pre;
-    overflow-x: auto;
-    /* Added for better mobile experience */
+    overflow-x: auto
 }
 
-/* Making code blocks responsive */
 @media (max-width: 480px) {
     .quill-content .ql-code-block-container {
         padding: 3px 7px;

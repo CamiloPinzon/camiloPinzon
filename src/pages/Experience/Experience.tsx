@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSEO } from "../../hooks/useSEO";
 import useResponsive from "../../hooks/useResponsive";
 import Hero from "../../components/hero/Hero";
+import Tags from "../../components/tags/tags";
 import { experienceContent } from "../../data/experience.json";
 import "./experience.scss";
 
@@ -54,11 +55,7 @@ const Experience = () => {
 								<p>{item.position}</p>
 								<p dangerouslySetInnerHTML={{ __html: item.description }}></p>
 								<div className="technologies">
-									{item.technologies.map((tech, index) => (
-										<span key={index} className="tech-tag">
-											{tech}
-										</span>
-									))}
+									<Tags tags={item.technologies} />
 								</div>
 							</div>
 						</div>

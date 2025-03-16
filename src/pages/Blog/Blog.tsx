@@ -1,6 +1,7 @@
 import { useSEO } from "../../hooks/useSEO";
 import { useParams } from "react-router-dom";
 
+import Tags from "../../components/tags/tags";
 import SharePost from "../../components/sharePost/SharePost";
 import { useGetBlogBySlug } from "../../hooks/useGetBlogBySlug";
 
@@ -36,18 +37,7 @@ const Blog = () => {
 				className="quill-content"
 				dangerouslySetInnerHTML={{ __html: blog.content }}
 			/>
-			{blog.tags && blog.tags.length > 0 && (
-				<div className="blog__tags">
-					<p className="blog__tags-title">Tags:</p>
-					<ul className="blog__tags-list">
-						{blog.tags.map((tag, index) => (
-							<li key={index} className="blog__tags-item">
-								{tag}
-							</li>
-						))}
-					</ul>
-				</div>
-			)}
+			{blog.tags && blog.tags.length > 0 && <Tags tags={blog.tags} />}
 			<div className="container">
 				<SharePost title={blog.title} url={currentUrl} />
 			</div>
