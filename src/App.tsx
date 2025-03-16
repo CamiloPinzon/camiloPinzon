@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import {
-	BrowserRouter,
 	Routes,
 	Route,
 	Navigate,
@@ -37,27 +36,23 @@ function App() {
 
 	return (
 		<>
-			<BrowserRouter>
-				<Header />
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/services" element={<Services />} />
-					<Route path="/blogs" element={<Blogs />} />
-					<Route path="/blogs/:slug" element={<Blog />} />
-					<Route path="/contact" element={<Contact />} />
-					<Route path="/experience" element={<Experience />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/admin" element={<Admin />}>
-						{/* Use relative paths for nested routes */}
-						<Route path="blogs" element={<BlogList />} />
-						<Route path="blogs/new" element={<BlogForm />} />
-						<Route path="blogs/edit/:id" element={<BlogForm />} />
-					</Route>
-					{/* This would conflict with the "/" route above */}
-					<Route path="*" element={<Navigate to="/login" replace />} />
-				</Routes>
-				<Footer />
-			</BrowserRouter>
+			<Header />
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/services" element={<Services />} />
+				<Route path="/blogs" element={<Blogs />} />
+				<Route path="/blogs/:slug" element={<Blog />} />
+				<Route path="/contact" element={<Contact />} />
+				<Route path="/experience" element={<Experience />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/admin" element={<Admin />}>
+					<Route path="blogs" element={<BlogList />} />
+					<Route path="blogs/new" element={<BlogForm />} />
+					<Route path="blogs/edit/:id" element={<BlogForm />} />
+				</Route>
+				<Route path="*" element={<Navigate to="/login" replace />} />
+			</Routes>
+			<Footer />
 		</>
 	);
 }
