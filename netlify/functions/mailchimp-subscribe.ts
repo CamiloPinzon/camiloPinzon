@@ -2,6 +2,21 @@ import { Handler } from "@netlify/functions";
 import mailchimp from "@mailchimp/mailchimp_marketing";
 import nodemailer from "nodemailer";
 
+// Define interfaces for error types
+interface MailchimpError {
+	status: number;
+	response?: {
+		text: string;
+	};
+	message?: string;
+}
+
+interface MailchimpErrorResponse {
+	title?: string;
+	detail?: string;
+	status?: number;
+}
+
 mailchimp.setConfig({
 	apiKey: process.env.MAILCHIMP_API_KEY,
 	server: process.env.MAILCHIMP_SERVER_PREFIX,
@@ -26,150 +41,268 @@ const handler: Handler = async (event) => {
 			};
 		}
 
-		const response = await mailchimp.lists.addListMember(
-			process.env.MAILCHIMP_LIST_ID as string,
-			{
-				email_address: email,
-				status: "subscribed",
-				merge_fields: {
-					FNAME: payload.firstName || "New Suscriber",
-					LNAME: payload.lastName || "",
+		// Log configuration for debugging
+		console.log(`Using Mailchimp list ID: ${process.env.MAILCHIMP_LIST_ID}`);
+		console.log(`Using server prefix: ${process.env.MAILCHIMP_SERVER_PREFIX}`);
+
+		try {
+			const response = await mailchimp.lists.addListMember(
+				process.env.MAILCHIMP_LIST_ID as string,
+				{
+					email_address: email,
+					status: "subscribed",
+					merge_fields: {
+						FNAME: payload.firstName || "New Subscriber", // Fixed typo in "Subscriber"
+						LNAME: payload.lastName || "",
+					},
+					tags: ["newsletter"],
+				}
+			);
+
+			// If we get here, the Mailchimp subscription was successful
+			console.log("Successfully subscribed to Mailchimp:", response.id);
+
+			// Now handle email sending
+			const transporter = nodemailer.createTransport({
+				host: process.env.EMAIL_HOST,
+				port: parseInt(process.env.EMAIL_PORT || "587"),
+				secure: process.env.EMAIL_SECURE === "true",
+				auth: {
+					user: process.env.EMAIL_USER,
+					pass: process.env.EMAIL_PASSWORD,
 				},
-				tags: ["newsletter"],
-			}
-		);
+				tls: {
+					rejectUnauthorized: true,
+				},
+				pool: true,
+				maxConnections: 5,
+			});
 
-		const transporter = nodemailer.createTransport({
-			host: process.env.EMAIL_HOST,
-			port: parseInt(process.env.EMAIL_PORT || "587"),
-			secure: process.env.EMAIL_SECURE === "true",
-			auth: {
-				user: process.env.EMAIL_USER,
-				pass: process.env.EMAIL_PASSWORD,
-			},
-			tls: {
-				rejectUnauthorized: true,
-			},
-			pool: true,
-			maxConnections: 5,
-		});
+			const firstName = payload.firstName || "there";
 
-		const firstName = payload.firstName || "there";
-		
-		const htmlEmail = `
+			const htmlEmail = `
       <!DOCTYPE html>
-      <html>
-      <head>
-        <style>
-          body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 600px;
-            margin: 0 auto;
-          }
-          .container {
-            padding: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-          }
-          .header {
-            background-color: #f8f9fa;
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid #e0e0e0;
-          }
-          .footer {
-            font-size: 12px;
-            text-align: center;
-            margin-top: 20px;
-            color: #666;
-          }
-          h1 {
-            color: #2c3e50;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h1>Welcome to Our Newsletter!</h1>
-          </div>
-          
-          <p>Hello ${firstName},</p>
-          
-          <p>Thank you for subscribing to our newsletter. We're excited to have you join our community!</p>
-          
-          <p>Here's what you can expect from us:</p>
-          <ul>
-            <li>Regular updates about new developments, development education content, and more</li>
-            <li>Tips and insights from our experts</li>
-          </ul>
-          
-          <p>If you have any questions, feel free to reply to this email or contact us at ${
-						process.env.EMAIL_FROM
-					}.</p>
-          
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    
+    .email-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    .header {
+      background-color: #0066cc;
+      padding: 30px 20px;
+      text-align: center;
+    }
+    
+    .header h1 {
+      color: #ffffff;
+      font-size: 24px;
+      margin: 0;
+      font-weight: 700;
+    }
+    
+    .content {
+      padding: 30px;
+    }
+    
+    .content p {
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
+    
+    .content ul {
+      padding-left: 20px;
+      margin-bottom: 24px;
+    }
+    
+    .content ul li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    
+    .signature {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    
+    .footer {
+      background-color: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      border-top: 1px solid #eee;
+    }
+    
+    .footer p {
+      margin: 5px 0;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 480px) {
+      .email-wrapper {
+        padding: 10px;
+      }
+      
+      .header {
+        padding: 20px 15px;
+      }
+      
+      .header h1 {
+        font-size: 20px;
+      }
+      
+      .content {
+        padding: 20px 15px;
+      }
+      
+      .content p, .content ul li {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="container">
+      <div class="header">
+        <h1>Welcome to Our Newsletter!</h1>
+      </div>
+      
+      <div class="content">
+        <p>Hello ${firstName},</p>
+        
+        <p>Thank you for subscribing to our newsletter. We're excited to have you join our community!</p>
+        
+        <p>Here's what you can expect from us:</p>
+        <ul>
+          <li>Regular updates about new developments, development education content, and more</li>
+          <li>Tips and insights from our experts</li>
+        </ul>
+        
+        <p>If you have any questions, feel free to reply to this email or contact us at ${
+					process.env.EMAIL_FROM
+				}.</p>
+        
+        <div class="signature">
           <p>Best regards,<br>Camilo Pinz&oacute;n</p>
-          
-          <div class="footer">
-            <p>© ${new Date().getFullYear()} Your Company. All rights reserved.</p>
-            <p>You're receiving this email because you signed up for our newsletter.</p>
-          </div>
         </div>
-      </body>
-      </html>
+      </div>
+      
+      <div class="footer">
+        <p>&copy; ${new Date().getFullYear()} Your Company. All rights reserved.</p>
+        <p>You're receiving this email because you signed up for our newsletter.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
     `;
 
-		// Send the email
-		try {
-			await transporter.sendMail({
-				from: `"Camilo Pinz&oacute;n" <${process.env.EMAIL_FROM}>`,
-				to: email,
-				subject: "Welcome to Our Newsletter!",
-				html: htmlEmail,
-				headers: {
-					Precedence: "bulk",
-				},
-				text: "You're receiving this email because you signed up for our newsletter.",
-			});
-		} catch (emailError) {
-			console.error("Error sending welcome email:", emailError);
-		}
-
-		return {
-			statusCode: 200,
-			body: JSON.stringify({
-				message: "Successfully subscribed to Mailchimp",
-				id: response.id,
-			}),
-		};
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	} catch (error: any) {
-		console.error("Error subscribing to Mailchimp:", error);
-
-		if (error.status === 400 && error.response?.text) {
+			// Send the email
 			try {
-				const errorData = JSON.parse(error.response.text);
-				if (errorData.title === "Member Exists") {
-					console.log("Member already exists in Mailchimp");
+				await transporter.sendMail({
+					from: `"Camilo Pinz&oacute;n" <${process.env.EMAIL_FROM}>`,
+					to: email,
+					subject: "Welcome to Our Newsletter!",
+					html: htmlEmail,
+					headers: {
+						Precedence: "bulk",
+					},
+					text: "You're receiving this email because you signed up for our newsletter.",
+				});
+				console.log("Welcome email sent successfully");
+			} catch (emailError) {
+				console.error("Error sending welcome email:", emailError);
+				// Continue execution even if email fails
+			}
+
+			return {
+				statusCode: 200,
+				body: JSON.stringify({
+					message: "Successfully subscribed to Mailchimp",
+					id: response.id,
+				}),
+			};
+		} catch (error) {
+			// Cast to our defined error type
+			const mailchimpError = error as MailchimpError;
+			console.error(
+				"Mailchimp API Error:",
+				JSON.stringify(mailchimpError, null, 2)
+			);
+
+			// Check for Member Exists error
+			if (mailchimpError.status === 400 && mailchimpError.response) {
+				try {
+					const errorResponse = JSON.parse(
+						mailchimpError.response.text
+					) as MailchimpErrorResponse;
+					console.log("Parsed Mailchimp error:", errorResponse);
+
+					if (errorResponse.title === "Member Exists") {
+						return {
+							statusCode: 200, // Return 200 for already subscribed members
+							body: JSON.stringify({
+								message: "Already subscribed to the newsletter",
+							}),
+						};
+					}
+
+					// Return the specific error from Mailchimp for other 400 errors
 					return {
-						statusCode: 200,
+						statusCode: 400,
 						body: JSON.stringify({
-							message: "Already subscribed to the newsletter",
+							message: "Error subscribing to newsletter",
+							error: errorResponse.title || "Mailchimp API Error",
+							detail: errorResponse.detail || "No additional details",
 						}),
 					};
+				} catch (parseError) {
+					console.error("Error parsing Mailchimp error response:", parseError);
 				}
-			} catch (parseError) {
-				console.error("Error parsing Mailchimp error response:", parseError);
 			}
-		}
 
+			throw mailchimpError; // Re-throw to be caught by outer try-catch
+		}
+	} catch (error) {
+		const generalError = error as Error & {
+			status?: number;
+			response?: { text: string };
+		};
+		console.error("Error in subscription handler:", generalError);
+
+		// Provide more detailed error information
 		return {
 			statusCode: 500,
 			body: JSON.stringify({
 				message: "Error subscribing to newsletter",
-				error: error.message || "Unknown error",
+				error: generalError.message || "Unknown error",
+				statusCode: generalError.status || 500,
+				details: generalError.response
+					? generalError.response.text
+					: "No additional details",
 			}),
 		};
 	}
