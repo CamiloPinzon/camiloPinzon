@@ -55,145 +55,70 @@ const handler: Handler = async (event) => {
 		});
 
 		const firstName = payload.firstName || "there";
-
+		
 		const htmlEmail = `
       <!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      line-height: 1.6;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
-    }
-    
-    .email-wrapper {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    
-    .container {
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
-    
-    .header {
-      background-color: #0066cc;
-      padding: 30px 20px;
-      text-align: center;
-    }
-    
-    .header h1 {
-      color: #ffffff;
-      font-size: 24px;
-      margin: 0;
-      font-weight: 700;
-    }
-    
-    .content {
-      padding: 30px;
-    }
-    
-    .content p {
-      margin-bottom: 16px;
-      font-size: 16px;
-    }
-    
-    .content ul {
-      padding-left: 20px;
-      margin-bottom: 24px;
-    }
-    
-    .content ul li {
-      margin-bottom: 8px;
-      line-height: 1.5;
-    }
-    
-    .signature {
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px solid #eee;
-    }
-    
-    .footer {
-      background-color: #f5f5f5;
-      padding: 20px;
-      text-align: center;
-      font-size: 13px;
-      color: #666;
-      border-top: 1px solid #eee;
-    }
-    
-    .footer p {
-      margin: 5px 0;
-    }
-    
-    /* Responsive styles */
-    @media (max-width: 480px) {
-      .email-wrapper {
-        padding: 10px;
-      }
-      
-      .header {
-        padding: 20px 15px;
-      }
-      
-      .header h1 {
-        font-size: 20px;
-      }
-      
-      .content {
-        padding: 20px 15px;
-      }
-      
-      .content p, .content ul li {
-        font-size: 15px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="email-wrapper">
-    <div class="container">
-      <div class="header">
-        <h1>Welcome to Our Newsletter!</h1>
-      </div>
-      
-      <div class="content">
-        <p>Hello ${firstName},</p>
-        
-        <p>Thank you for subscribing to our newsletter. We're excited to have you join our community!</p>
-        
-        <p>Here's what you can expect from us:</p>
-        <ul>
-          <li>Regular updates about new developments, development education content, and more</li>
-          <li>Tips and insights from our experts</li>
-        </ul>
-        
-        <p>If you have any questions, feel free to reply to this email or contact us at ${
-					process.env.EMAIL_FROM
-				}.</p>
-        
-        <div class="signature">
+      <html>
+      <head>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+          }
+          .container {
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+          }
+          .header {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+          }
+          .footer {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+          }
+          h1 {
+            color: #2c3e50;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>Welcome to Our Newsletter!</h1>
+          </div>
+          
+          <p>Hello ${firstName},</p>
+          
+          <p>Thank you for subscribing to our newsletter. We're excited to have you join our community!</p>
+          
+          <p>Here's what you can expect from us:</p>
+          <ul>
+            <li>Regular updates about new developments, development education content, and more</li>
+            <li>Tips and insights from our experts</li>
+          </ul>
+          
+          <p>If you have any questions, feel free to reply to this email or contact us at ${
+						process.env.EMAIL_FROM
+					}.</p>
+          
           <p>Best regards,<br>Camilo Pinz&oacute;n</p>
+          
+          <div class="footer">
+            <p>© ${new Date().getFullYear()} Your Company. All rights reserved.</p>
+            <p>You're receiving this email because you signed up for our newsletter.</p>
+          </div>
         </div>
-      </div>
-      
-      <div class="footer">
-        <p>&copy; ${new Date().getFullYear()} Your Company. All rights reserved.</p>
-        <p>You're receiving this email because you signed up for our newsletter.</p>
-      </div>
-    </div>
-  </div>
-</body>
-</html>
+      </body>
+      </html>
     `;
 
 		// Send the email
