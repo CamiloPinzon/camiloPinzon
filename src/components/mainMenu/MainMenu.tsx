@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
+import { analytics, logEvent } from "../../utils/firebase/config";
 
 import useResponsive from "../../hooks/useResponsive";
 
 import "./mainMenu.scss";
 
 const MainMenu = () => {
+	const navigate = useNavigate();
 	const [isOpen, setIsOpen] = useState(false);
 	const [cvDropdownOpen, setCvDropdownOpen] = useState(false);
 	const { current } = useResponsive();
@@ -23,6 +26,15 @@ const MainMenu = () => {
 	const closeMenu = () => {
 		setIsOpen(false);
 		setCvDropdownOpen(false);
+	};
+	const handleCvClick = (language: string) => {
+		closeMenu();
+		logEvent(analytics, "cta_click", {
+			cta_name: `download_cv_${language}`,
+			page: window.location.pathname,
+		});
+		if (language === "en") navigate("./public/downloads/CV_2025_oxford_en.pdf");
+		else navigate("./public/downloads/CV_2025_oxford_es.pdf");
 	};
 
 	const mobileMenu = (
@@ -110,9 +122,8 @@ const MainMenu = () => {
 								<div className="main-menu__mobile-dropdown-menu">
 									<a
 										className="main-menu__link"
-										href="./public/downloads/CV_2025_oxford_en.pdf"
 										download
-										onClick={closeMenu}
+										onClick={handleCvClick.bind(null, "en")}
 									>
 										English
 									</a>
@@ -120,7 +131,7 @@ const MainMenu = () => {
 										className="main-menu__link"
 										href="./public/downloads/CV_2025_oxford_es.pdf"
 										download
-										onClick={closeMenu}
+										onClick={handleCvClick.bind(null, "es")}
 									>
 										Español
 									</a>
