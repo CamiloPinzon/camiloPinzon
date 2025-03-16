@@ -96,9 +96,6 @@ const SuscribeForm = () => {
 						}),
 					}
 				);
-				// We don't need to check Mailchimp result here - we'll consider
-				// the operation successful if Firebase succeeded. Mailchimp is treated
-				// as a "nice to have" secondary operation.
 				console.log(
 					"Mailchimp subscription attempt:",
 					await mailchimpResult.json()
