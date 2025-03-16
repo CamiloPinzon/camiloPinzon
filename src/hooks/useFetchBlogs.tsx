@@ -79,14 +79,6 @@ export const useFetchBlogs = (options: UseFetchBlogsOptions = {}) => {
 		setError(null);
 
 		try {
-			console.log(
-				"Starting fetch with filter:",
-				filter,
-				"isFirstLoad:",
-				isFirstLoad,
-				"publishedOnly:",
-				publishedOnly
-			);
 			const blogsRef = collection(db, "blogs");
 			let q;
 
@@ -125,10 +117,7 @@ export const useFetchBlogs = (options: UseFetchBlogsOptions = {}) => {
 				q = query(blogsRef, ...filterConditions);
 			}
 
-			// Execute query
-			console.log("Executing query for filter:", filter);
 			const querySnapshot = await getDocs(q);
-			console.log(`Query returned ${querySnapshot.docs.length} documents`);
 
 			// Check if there are more results
 			setHasMore(querySnapshot.docs.length === ITEMS_PER_PAGE);

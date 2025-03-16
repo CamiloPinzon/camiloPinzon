@@ -96,10 +96,8 @@ const SuscribeForm = () => {
 						}),
 					}
 				);
-				console.log(
-					"Mailchimp subscription attempt:",
-					await mailchimpResult.json()
-				);
+
+				if (!mailchimpResult.ok) await mailchimpResult.json();
 			} catch (mailchimpError) {
 				console.error("Mailchimp subscription error:", mailchimpError);
 			}

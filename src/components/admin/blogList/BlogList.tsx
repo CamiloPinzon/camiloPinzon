@@ -43,12 +43,6 @@ const BlogList: React.FC = () => {
 		setError(null);
 
 		try {
-			console.log(
-				"Starting fetch with filter:",
-				filter,
-				"isFirstLoad:",
-				isFirstLoad
-			);
 			const blogsRef = collection(db, "blogs");
 			let q;
 
@@ -85,21 +79,7 @@ const BlogList: React.FC = () => {
 				// No filter, show all blogs
 				q = query(blogsRef, ...filterConditions);
 			}
-
-			// Execute query
-			console.log("Executing query for filter:", filter);
 			const querySnapshot = await getDocs(q);
-			console.log(`Query returned ${querySnapshot.docs.length} documents`);
-
-			// Debug: Show the first document if available
-			if (querySnapshot.docs.length > 0) {
-				console.log("First document data:", {
-					id: querySnapshot.docs[0].id,
-					publishedStatus: querySnapshot.docs[0].data().publishedStatus,
-				});
-			}
-
-			// Check if there are more results
 			setHasMore(querySnapshot.docs.length === ITEMS_PER_PAGE);
 
 			// Store the last document for next pagination
@@ -111,15 +91,6 @@ const BlogList: React.FC = () => {
 				id: doc.id,
 				...doc.data(),
 			})) as BlogPost[];
-
-			// Debug: Check the first few items we're about to set
-			console.log(
-				"Blog data sample:",
-				blogData.slice(0, 2).map((blog) => ({
-					id: blog.id,
-					publishedStatus: blog.publishedStatus,
-				}))
-			);
 
 			// Update blogs state
 			if (isFirstLoad) {

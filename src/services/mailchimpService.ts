@@ -16,8 +16,6 @@ export const mailchimpService = {
 		data: SubscriberData
 	): Promise<{ success: boolean; message: string; id?: string }> {
 		try {
-			console.log("Calling Mailchimp subscribe function for:", data.email);
-
 			const response = await fetch("/.netlify/functions/mailchimp-subscribe", {
 				method: "POST",
 				headers: {
@@ -35,8 +33,6 @@ export const mailchimpService = {
 					message: responseData.message || "Failed to subscribe to newsletter",
 				};
 			}
-
-			console.log("Mailchimp subscription successful:", responseData);
 			return {
 				success: true,
 				message: "Successfully subscribed to newsletter",

@@ -41,10 +41,6 @@ const handler: Handler = async (event) => {
 			};
 		}
 
-		// Log configuration for debugging
-		console.log(`Using Mailchimp list ID: ${process.env.MAILCHIMP_LIST_ID}`);
-		console.log(`Using server prefix: ${process.env.MAILCHIMP_SERVER_PREFIX}`);
-
 		try {
 			const response = await mailchimp.lists.addListMember(
 				process.env.MAILCHIMP_LIST_ID as string,
@@ -58,9 +54,6 @@ const handler: Handler = async (event) => {
 					tags: ["newsletter"],
 				}
 			);
-
-			// If we get here, the Mailchimp subscription was successful
-			console.log("Successfully subscribed to Mailchimp:", response.id);
 
 			// Now handle email sending
 			const transporter = nodemailer.createTransport({
@@ -206,7 +199,7 @@ const handler: Handler = async (event) => {
 				}.</p>
         
         <div class="signature">
-          <p>Best regards,<br>Camilo Pinz&oacute;n</p>
+          <p>Best regards,<br>Camilo Pinzón</p>
         </div>
       </div>
       
@@ -223,7 +216,7 @@ const handler: Handler = async (event) => {
 			// Send the email
 			try {
 				await transporter.sendMail({
-					from: `"Camilo Pinz&oacute;n" <${process.env.EMAIL_FROM}>`,
+					from: `"Camilo Pinzón" <${process.env.EMAIL_FROM}>`,
 					to: email,
 					subject: "Welcome to Our Newsletter!",
 					html: htmlEmail,
@@ -232,7 +225,6 @@ const handler: Handler = async (event) => {
 					},
 					text: "You're receiving this email because you signed up for our newsletter.",
 				});
-				console.log("Welcome email sent successfully");
 			} catch (emailError) {
 				console.error("Error sending welcome email:", emailError);
 				// Continue execution even if email fails
@@ -259,7 +251,6 @@ const handler: Handler = async (event) => {
 					const errorResponse = JSON.parse(
 						mailchimpError.response.text
 					) as MailchimpErrorResponse;
-					console.log("Parsed Mailchimp error:", errorResponse);
 
 					if (errorResponse.title === "Member Exists") {
 						return {
