@@ -1,4 +1,11 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import {
+	BrowserRouter,
+	Routes,
+	Route,
+	Navigate,
+	useLocation,
+} from "react-router-dom";
 
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
@@ -13,9 +20,21 @@ import Admin from "./pages/Admin/Admin";
 import BlogList from "./components/admin/blogList/BlogList";
 import BlogForm from "./components/admin/blogForm/BlogForm";
 
+import { analytics, logEvent } from "./utils/firebase/config";
+
 import "./App.scss";
 
 function App() {
+	const location = useLocation();
+
+	useEffect(() => {
+		logEvent(analytics, "page_view", {
+			page_path: location.pathname,
+			page_location: window.location.href,
+			page_title: document.title,
+		});
+	}, [location]);
+
 	return (
 		<>
 			<BrowserRouter>
