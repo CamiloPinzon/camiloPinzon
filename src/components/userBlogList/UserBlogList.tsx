@@ -1,4 +1,4 @@
-import { FC } from "react";
+import Card from "../card/Card";
 import { useFetchBlogs } from "../../hooks/useFetchBlogs";
 
 import "./userBlog.scss";
@@ -10,7 +10,7 @@ interface UserBlogListProps {
 	latest?: boolean;
 }
 
-const UserBlogList: FC<UserBlogListProps> = ({
+const UserBlogList: React.FC<UserBlogListProps> = ({
 	className = "",
 	title = "Latest Blog Posts",
 	itemsPerPage = 6,
@@ -51,27 +51,28 @@ const UserBlogList: FC<UserBlogListProps> = ({
 		<div className={`blog-list ${className}`}>
 			<h2 className="blog-list__title">{title}</h2>
 
-			{
-				blogs.map((blog) => (
-				<div key={blog.id} className="blog-list__card">
-					<img
-						className="blog-list__card-image"
-						src={blog.coverImage}
-						alt={blog.title}
-					/>
-					<div className="blog-list__content">
-						<h3 className="blog-list__card-title">{blog.title}</h3>
-						<p className="blog-list__card-date">
-							Posted on: {formatDate(blog.createdAt)}
-						</p>
-						<p className="blog-list__card-excerpt">
-							{blog.summary || blog.content.substring(0, 150)}...
-						</p>
-						<a className="blog-list__card-link" href={`/blogs/${blog.slug}`}>
-							Read More
-						</a>
+			{blogs.map((blog) => (
+				<Card>
+					<div key={blog.id} className="blog-list__item">
+						<img
+							className="blog-list__item-image"
+							src={blog.coverImage}
+							alt={blog.title}
+						/>
+						<div className="blog-list__content">
+							<h3 className="blog-list__item-title">{blog.title}</h3>
+							<p className="blog-list__item-date">
+								Posted on: {formatDate(blog.createdAt)}
+							</p>
+							<p className="blog-list__item-excerpt">
+								{blog.summary || blog.content.substring(0, 150)}...
+							</p>
+							<a className="blog-list__item-link" href={`/blogs/${blog.slug}`}>
+								Read More
+							</a>
+						</div>
 					</div>
-				</div>
+				</Card>
 			))}
 
 			{blogs.length === 0 && (

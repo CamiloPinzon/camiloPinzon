@@ -4,6 +4,7 @@ import { useSEO } from "../../hooks/useSEO";
 import useResponsive from "../../hooks/useResponsive";
 import Hero from "../../components/hero/Hero";
 import Tags from "../../components/tags/Tags";
+import Card from "../../components/card/Card";
 import { experienceContent } from "../../data/experience.json";
 import "./experience.scss";
 
@@ -69,10 +70,14 @@ const Experience = () => {
 									target="_blank"
 									className="experience-item__link"
 								>
-									<ExperienceContent />
+									<Card>
+										<ExperienceContent />
+									</Card>
 								</Link>
 							) : (
-								<ExperienceContent />
+								<Card>
+									<ExperienceContent />
+								</Card>
 							)}
 						</article>
 					);
