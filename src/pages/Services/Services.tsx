@@ -37,18 +37,41 @@ const Services = () => {
 							alt="Website Development"
 							kind="medium"
 						/>
-						<h2>Website Development</h2>
-						<p>
-							From sleek WordPress sites to fully customized websites using
-							React.js, I create high-performance websites that resonate with
-							your brand and engage your audience. Whether you need a blog, a
-							portfolio, or a business site, my development services ensure a
-							responsive, SEO-optimized, and visually appealing website that
-							drives traffic and conversions
+						<h2 className="services-item__title">Website Development</h2>
+						<i className="services-item__subtitle">
+							Modern, Fast & Optimized Websites
+						</i>
+						<p className="services-item__description">
+							Your website is your digital storefront—it should be fast,
+							engaging, and optimized for success. I build custom,
+							high-performance websites using WordPress and modern front-end
+							technologies, ensuring a seamless experience for your users.
 						</p>
-						<Button type="button" style="primary" onClick={handleContactClick}>
-							Contact Me
-						</Button>
+						<p className="services-item__list-title">What’s Included:</p>
+						<ul className="services-item__list">
+							<li>
+								Custom Design & Development – Tailored to your brand and
+								audience.
+							</li>
+							<li>SEO Optimization – Better visibility on search engines.</li>
+							<li>Mobile-Responsive Design – Perfect on all devices.</li>
+							<li>
+								Performance & Security – Speed and protection for a reliable
+								site.
+							</li>
+							<li>Scalability – Built to grow with your business.</li>
+						</ul>
+						<p className="services-item__cta">
+							Let’s create a website that stands out and drives results. Get in
+							touch today!
+							<Button
+								type="button"
+								style="primary"
+								onClick={handleContactClick}
+							>
+								Contact Me
+							</Button>
+						</p>
 					</div>
 				</Card>
 				<Card>
@@ -58,17 +81,48 @@ const Services = () => {
 							alt="E-commerce Development"
 							kind="medium"
 						/>
-						<h2>E-commerce Development</h2>
-						<p>
-							Boost your online sales with a powerful e-commerce platform that
-							delivers a seamless shopping experience. I specialize in building
-							e-commerce websites that are secure, scalable, and easy to manage.
-							From product listings to payment gateways, every aspect is
-							optimized to convert visitors into loyal customers.
+						<h2 className="services-item__title">E-Commerce Development</h2>
+						<i className="services-item__subtitle">
+							Sell Online with a Powerful Store
+						</i>
+						<p className="services-item__description">
+							A well-built online store can boost your sales and improve
+							customer experience. I develop high-performing e-commerce websites
+							using WooCommerce, ensuring your store is fast, secure, and easy
+							to manage.
 						</p>
-						<Button type="button" style="primary" onClick={handleContactClick}>
-							Contact Me
-						</Button>
+						<p className="services-item__list-title">What’s Included:</p>
+						<ul className="services-item__list">
+							<li>Custom Store Design – Beautiful, user-friendly layouts.</li>
+							<li>
+								Payment & Shipping Integration – Secure and seamless
+								transactions.
+							</li>
+							<li>
+								Product Management System – Easy to add, edit, and organize
+								products.
+							</li>
+							<li>
+								Mobile Optimization – A smooth shopping experience on any
+								device.
+							</li>
+							<li>
+								SEO & Speed Optimization – Better rankings and faster
+								performance.
+							</li>
+						</ul>
+						<p className="services-item__cta">
+							Whether you’re starting a new store or upgrading an existing one,
+							I’ll help you sell more with an optimized e-commerce platform.
+							Let’s build your online store today!
+							<Button
+								type="button"
+								style="primary"
+								onClick={handleContactClick}
+							>
+								Contact Me
+							</Button>
+						</p>
 					</div>
 				</Card>
 				<Card>
@@ -78,8 +132,11 @@ const Services = () => {
 							alt="Frontend React Development"
 							kind="medium"
 						/>
-						<h2>Frontend React Development</h2>
-						<p>
+						<h2 className="services-item__title">Frontend React Development</h2>
+						<i className="services-item__subtitle">
+							Scalable & Modern Web Apps
+						</i>
+						<p className="services-item__description">
 							Elevate your web presence with dynamic, fast-loading, and
 							interactive user interfaces built with React.js. I bring your
 							ideas to life with cutting-edge frontend development that
@@ -87,9 +144,91 @@ const Services = () => {
 							single-page application or a complex web app, my React.js
 							solutions are designed to engage users and boost your business.
 						</p>
-						<Button type="button" style="primary" onClick={handleContactClick}>
-							Contact Me
-						</Button>
+						<p className="services-item__list-title">What’s Included:</p>
+						<ul className="services-item__list">
+							<li>
+								Custom React Development – Tailored components and UI for your
+								needs.
+							</li>
+							<li>
+								State Management (Redux, Context API) – Scalable and efficient
+								apps.
+							</li>
+							<li>
+								API Integrations – Connect your app with back-end services.
+							</li>
+							<li>
+								Performance Optimization – Fast loading speeds and smooth
+								interactions.
+							</li>
+							<li>
+								Responsive & Accessible Design – Works perfectly on all devices.
+							</li>
+						</ul>
+						<p className="services-item__cta">
+							Let’s bring your web application to life with cutting-edge
+							front-end technology. Start your project today!
+							<Button
+								type="button"
+								style="primary"
+								onClick={handleContactClick}
+							>
+								Contact Me
+							</Button>
+						</p>
+					</div>
+				</Card>
+				<Card>
+					<div className="services-item">
+						<Image
+							src="./images/webmaster.jpg"
+							alt="Webmaster Service"
+							kind="medium"
+						/>
+						<h2 className="services-item__title">Webmaster Service</h2>
+						<i className="services-item__subtitle">
+							Keep Your Website Running Smoothly
+						</i>
+						<p className="services-item__description">
+							Your website is a crucial part of your business—don’t let
+							technical issues slow you down. With my Webmaster Service, I
+							ensure your site stays secure, updated, and performing at its
+							best.
+						</p>
+						<p className="services-item__list-title">What’s Included:</p>
+						<ul className="services-item__list">
+							<li>
+								Website Maintenance – Regular updates for WordPress, plugins,
+								and themes.
+							</li>
+							<li>
+								Security & Backups – Protect your site with security monitoring
+								and scheduled backups.
+							</li>
+							<li>
+								Performance Optimization – Improve loading speed and user
+								experience.
+							</li>
+							<li>
+								Content Updates – Need to change text, images, or add new pages?
+								I’ve got you covered.
+							</li>
+							<li>
+								Troubleshooting & Support – Quick fixes for bugs, errors, and
+								technical issues.
+							</li>
+						</ul>
+						<p className="services-item__cta">
+							Let me handle the technical side so you can focus on growing your
+							business. Get in touch today!
+							<Button
+								type="button"
+								style="primary"
+								onClick={handleContactClick}
+							>
+								Contact Me
+							</Button>
+						</p>
 					</div>
 				</Card>
 			</main>
