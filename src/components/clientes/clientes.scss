@@ -1,0 +1,22 @@
+.clientes {
+    padding-top: 50px;
+
+    &__title {
+        font-size: 2rem;
+        font-weight: bold;
+        padding-inline-start: 50px;
+    }
+
+    &__text {
+        font-size: 1.2rem;
+        padding-inline-start: 50px;
+    }
+
+    &__logos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-block: 50px;
+    }
+}

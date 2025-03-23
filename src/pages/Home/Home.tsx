@@ -3,7 +3,7 @@ import { useSEO } from "../../hooks/useSEO";
 
 import Image from "../../components/image/Image";
 import LatestBlogs from "../../components/latestBlogs/LatestBlogs";
-
+import Clientes from "../../components/clientes/Clientes";
 import heroImage from "../../assets/home_hero_desktop.jpg";
 import ProfileInfo from "../../components/profileInfo/ProfileInfo";
 import TabedNavigation from "../../components/tabedNavigation/TabedNavigation";
@@ -45,6 +45,9 @@ const Home = () => {
 				<div className="container">
 					<FeaturedRepos />
 				</div>
+			</div>
+			<div className="home__clientes container">
+				<Clientes />
 			</div>
 		</div>
 	);

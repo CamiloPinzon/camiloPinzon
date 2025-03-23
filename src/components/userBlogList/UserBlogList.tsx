@@ -79,29 +79,30 @@ const UserBlogList: React.FC<UserBlogListProps> = ({
 				<p className="blog-list__empty-message">No blog posts available.</p>
 			)}
 
-			{/* Pagination controls */}
-			<div className="blog-list__pagination">
-				{!isFirstPage && (
-					<button
-						className="blog-list__pagination-button blog-list__pagination-button--first"
-						onClick={handleBackToFirst}
-						type="button"
-					>
-						Back to First Page
-					</button>
-				)}
+			{!latest && (
+				<div className="blog-list__pagination">
+					{!isFirstPage && (
+						<button
+							className="blog-list__pagination-button blog-list__pagination-button--first"
+							onClick={handleBackToFirst}
+							type="button"
+						>
+							Back to First Page
+						</button>
+					)}
 
-				{hasMore && (
-					<button
-						className="blog-list__pagination-button blog-list__pagination-button--more"
-						onClick={handleLoadMore}
-						disabled={loading}
-						type="button"
-					>
-						{loading ? "Loading more posts..." : "Load More Posts"}
-					</button>
-				)}
-			</div>
+					{hasMore && (
+						<button
+							className="blog-list__pagination-button blog-list__pagination-button--more"
+							onClick={handleLoadMore}
+							disabled={loading}
+							type="button"
+						>
+							{loading ? "Loading more posts..." : "Load More Posts"}
+						</button>
+					)}
+				</div>
+			)}
 		</div>
 	);
 };
