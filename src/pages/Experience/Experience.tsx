@@ -1,14 +1,18 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import { useTranslation } from "react-i18next";
+import { NAMESPACES } from "../../i18n/namespaces";
 
 import { useSEO } from "../../hooks/useSEO";
 import useResponsive from "../../hooks/useResponsive";
 import Hero from "../../components/hero/Hero";
 import Tags from "../../components/tags/Tags";
 import Card from "../../components/card/Card";
-import { experienceContent } from "../../data/experience.json";
 import "./experience.scss";
+import { SupportedLanguage } from "../../i18n/languageOptions";
 
-interface ExperienceDataI {
+interface ExperienceItem {
 	id: number;
 	company: string;
 	position: string;
@@ -19,31 +23,61 @@ interface ExperienceDataI {
 	link?: string;
 }
 
+interface ExperienceData {
+	experienceContent: ExperienceItem[];
+}
+
 const Experience = () => {
+	const [experienceContent, setExperienceContent] = useState<ExperienceItem[]>(
+		[]
+	);
+	const { t } = useTranslation(NAMESPACES.COMMON);
+	const { i18n } = useTranslation();
+	const currentLanguage = i18n.language as SupportedLanguage;
+
 	useSEO({
 		title: "Expert Front-End Developer | React, WordPress, TypeScript, ...",
 		description:
 			"Explore my experience as a front-end developer specializing in React, WordPress, WooCommerce, and modern web solutions. See how I can help your project.",
 	});
 
-	const content = experienceContent.reverse();
+	useEffect(() => {
+		try {
+			const fetchExperience = async () => {
+				const response = await fetch(
+					`./data/experience_${currentLanguage}.json`
+				);
+				const data: ExperienceData = await response.json();
+
+				if (!data.experienceContent || !Array.isArray(data.experienceContent)) {
+					console.error("Invalid data format:", data);
+					return;
+				}
+
+				setExperienceContent(data.experienceContent);
+			};
+
+			fetchExperience();
+		} catch (error) {
+			console.error("Error fetching experience data:", error);
+		}
+	}, [currentLanguage]);
+
+	const content = [...experienceContent].reverse();
 	const { current } = useResponsive();
 	const isMobile = current === "xs" || current === "sm";
-
-	const paragraph =
-		"Experienced web developer crafting high-quality, scalable, and efficient digital solutions.";
 	return (
 		<section className="experience-container">
 			<div className="experience-hero">
 				<Hero
 					bgImage="./images/experienceHero.jpg"
-					title="Bringing Ideas to Life with Code"
-					paragraph={paragraph}
+					title={t("experience:title")}
+					paragraph={t("experience:text")}
 					style="light"
 				/>
 			</div>
 			<main className="experience-list container">
-				{content.map((item: ExperienceDataI) => {
+				{content.map((item: ExperienceItem) => {
 					const ExperienceContent = () => (
 						<div className={`experience-item-content ${isMobile && "column"}`}>
 							<div className="experience-item-content__left">

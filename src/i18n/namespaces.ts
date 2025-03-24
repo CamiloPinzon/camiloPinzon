@@ -5,4 +5,5 @@ export const NAMESPACES = {
 	LATEST_BLOGS: "latestBlogs",
 	FEATURED_REPOS: "featuredRepos",
 	CLIENTES: "clients",
+	EXPERIENCE: "experience",
 } as const;
