@@ -15,6 +15,7 @@ import enLatestBlogs from "./resources/en/latestBlogs.json";
 import enFeaturedRepos from "./resources/en/featuredRepos.json";
 import enClientes from "./resources/en/clients.json";
 import enExperience from "./resources/en/experience.json";
+import enServices from "./resources/en/services.json";
 
 /* Spanish*/
 
@@ -25,6 +26,7 @@ import esLatestBlogs from "./resources/es/latestBlogs.json";
 import esFeaturedRepos from "./resources/es/featuredRepos.json";
 import esClientes from "./resources/es/clients.json";
 import esExperience from "./resources/es/experience.json";
+import esServices from "./resources/es/services.json";
 
 /*Resources Config*/
 
@@ -37,6 +39,7 @@ const resources = {
 		[NAMESPACES.FEATURED_REPOS]: enFeaturedRepos,
 		[NAMESPACES.CLIENTES]: enClientes,
 		[NAMESPACES.EXPERIENCE]: enExperience,
+		[NAMESPACES.SERVICES]: enServices,
 	},
 	es: {
 		[NAMESPACES.COMMON]: esCommon,
@@ -46,6 +49,7 @@ const resources = {
 		[NAMESPACES.FEATURED_REPOS]: esFeaturedRepos,
 		[NAMESPACES.CLIENTES]: esClientes,
 		[NAMESPACES.EXPERIENCE]: esExperience,
+		[NAMESPACES.SERVICES]: esServices,
 	},
 };
 

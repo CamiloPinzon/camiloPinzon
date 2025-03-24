@@ -1,0 +1,60 @@
+{
+	"services": [
+		{
+			"title": "Website Development",
+			"image": "./images/website_development.jpg",
+			"subtitle": "Modern, Fast & Optimized Websites",
+			"description": "Your website is your digital storefront—it should be fast, engaging, and optimized for success. I build custom, high-performance websites using WordPress and modern front-end technologies, ensuring a seamless experience for your users.",
+			"includedItems": [
+				"Custom Design & Development – Tailored to your brand and audience.",
+				"SEO Optimization – Better visibility on search engines.",
+				"Mobile-Responsive Design – Perfect on all devices.",
+				"Performance & Security – Speed and protection for a reliable site.",
+				"Scalability – Built to grow with your business."
+			],
+			"ctaText": "Let's create a website that stands out and drives results. Get in touch today!"
+		},
+		{
+			"title": "E-Commerce Development",
+			"image": "./images/ecommerce.jpg",
+			"subtitle": "Sell Online with a Powerful Store",
+			"description": "A well-built online store can boost your sales and improve customer experience. I develop high-performing e-commerce websites using WooCommerce, ensuring your store is fast, secure, and easy to manage.",
+			"includedItems": [
+				"Custom Store Design – Beautiful, user-friendly layouts.",
+				"Payment & Shipping Integration – Secure and seamless transactions.",
+				"Product Management System – Easy to add, edit, and organize products.",
+				"Mobile Optimization – A smooth shopping experience on any device.",
+				"SEO & Speed Optimization – Better rankings and faster performance."
+			],
+			"ctaText": "Whether you're starting a new store or upgrading an existing one, I'll help you sell more with an optimized e-commerce platform. Let's build your online store today!"
+		},
+		{
+			"title": "Frontend React Development",
+			"image": "./images/Frontend.jpg",
+			"subtitle": "Scalable & Modern Web Apps",
+			"description": "Elevate your web presence with dynamic, fast-loading, and interactive user interfaces built with React.js. I bring your ideas to life with cutting-edge frontend development that prioritizes user experience, performance, and SEO. Whether it's a single-page application or a complex web app, my React.js solutions are designed to engage users and boost your business.",
+			"includedItems": [
+				"Custom React Development – Tailored components and UI for your needs.",
+				"State Management (Redux, Context API) – Scalable and efficient apps.",
+				"API Integrations – Connect your app with back-end services.",
+				"Performance Optimization – Fast loading speeds and smooth interactions.",
+				"Responsive & Accessible Design – Works perfectly on all devices."
+			],
+			"ctaText": "Let's bring your web application to life with cutting-edge front-end technology. Start your project today!"
+		},
+		{
+			"title": "Webmaster Service",
+			"image": "./images/webmaster.jpg",
+			"subtitle": "Keep Your Website Running Smoothly",
+			"description": "Your website is a crucial part of your business—don't let technical issues slow you down. With my Webmaster Service, I ensure your site stays secure, updated, and performing at its best.",
+			"includedItems": [
+				"Website Maintenance – Regular updates for WordPress, plugins, and themes.",
+				"Security & Backups – Protect your site with security monitoring and scheduled backups.",
+				"Performance Optimization – Improve loading speed and user experience.",
+				"Content Updates – Need to change text, images, or add new pages? I've got you covered.",
+				"Troubleshooting & Support – Quick fixes for bugs, errors, and technical issues."
+			],
+			"ctaText": "Let me handle the technical side so you can focus on growing your business. Get in touch today!"
+		}
+	]
+}

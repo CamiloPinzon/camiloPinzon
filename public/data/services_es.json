@@ -1,0 +1,60 @@
+{
+	"services": [
+		{
+			"title": "Desarrollo de Sitios Web",
+			"image": "./images/website_development.jpg",
+			"subtitle": "Sitios Web Modernos, Rápidos y Optimizados",
+			"description": "Tu sitio web es tu escaparate digital: debe ser rápido, atractivo y optimizado para el éxito. Construyo sitios web personalizados y de alto rendimiento utilizando WordPress y tecnologías front-end modernas, garantizando una experiencia perfecta para tus usuarios.",
+			"includedItems": [
+				"Diseño y Desarrollo Personalizado – Adaptado a tu marca y audiencia.",
+				"Optimización SEO – Mayor visibilidad en motores de búsqueda.",
+				"Diseño Responsivo – Perfecto en todos los dispositivos.",
+				"Rendimiento y Seguridad – Velocidad y protección para un sitio confiable.",
+				"Escalabilidad – Construido para crecer con tu negocio."
+			],
+			"ctaText": "Creemos un sitio web que destaque y genere resultados. ¡Contáctame hoy!"
+		},
+		{
+			"title": "Desarrollo de E-Commerce",
+			"image": "./images/ecommerce.jpg",
+			"subtitle": "Vende en Línea con una Tienda Potente",
+			"description": "Una tienda en línea bien construida puede impulsar tus ventas y mejorar la experiencia del cliente. Desarrollo sitios web de comercio electrónico de alto rendimiento utilizando WooCommerce, asegurando que tu tienda sea rápida, segura y fácil de administrar.",
+			"includedItems": [
+				"Diseño de Tienda Personalizado – Diseños atractivos y fáciles de usar.",
+				"Integración de Pagos y Envíos – Transacciones seguras y fluidas.",
+				"Sistema de Gestión de Productos – Fácil de agregar, editar y organizar productos.",
+				"Optimización Móvil – Una experiencia de compra suave en cualquier dispositivo.",
+				"Optimización de SEO y Velocidad – Mejores rankings y rendimiento más rápido."
+			],
+			"ctaText": "Ya sea que estés iniciando una nueva tienda o actualizando una existente, te ayudaré a vender más con una plataforma de comercio electrónico optimizada. ¡Construyamos tu tienda en línea hoy!"
+		},
+		{
+			"title": "Desarrollo Frontend con React",
+			"image": "./images/Frontend.jpg",
+			"subtitle": "Aplicaciones Web Escalables y Modernas",
+			"description": "Eleva tu presencia web con interfaces de usuario dinámicas, de carga rápida e interactivas construidas con React.js. Doy vida a tus ideas con un desarrollo frontend de vanguardia que prioriza la experiencia de usuario, el rendimiento y el SEO. Ya sea una aplicación de una sola página o una aplicación web compleja, mis soluciones con React.js están diseñadas para atraer usuarios e impulsar tu negocio.",
+			"includedItems": [
+				"Desarrollo React Personalizado – Componentes y UI a medida de tus necesidades.",
+				"Gestión de Estado (Redux, Context API) – Aplicaciones escalables y eficientes.",
+				"Integraciones de API – Conecta tu aplicación con servicios backend.",
+				"Optimización de Rendimiento – Velocidades de carga rápidas e interacciones fluidas.",
+				"Diseño Responsivo y Accesible – Funciona perfectamente en todos los dispositivos."
+			],
+			"ctaText": "Démosle vida a tu aplicación web con tecnología frontend de vanguardia. ¡Inicia tu proyecto hoy!"
+		},
+		{
+			"title": "Servicio de Webmaster",
+			"image": "./images/webmaster.jpg",
+			"subtitle": "Mantén tu Sitio Web Funcionando Sin Problemas",
+			"description": "Tu sitio web es una parte crucial de tu negocio: no dejes que los problemas técnicos te frenen. Con mi Servicio de Webmaster, me aseguro de que tu sitio se mantenga seguro, actualizado y funcionando de la mejor manera.",
+			"includedItems": [
+				"Mantenimiento de Sitio Web – Actualizaciones regulares de WordPress, plugins y temas.",
+				"Seguridad y Copias de Seguridad – Protege tu sitio con monitoreo de seguridad y copias de seguridad programadas.",
+				"Optimización de Rendimiento – Mejora la velocidad de carga y la experiencia del usuario.",
+				"Actualizaciones de Contenido – ¿Necesitas cambiar texto, imágenes o agregar nuevas páginas? Te tengo cubierto.",
+				"Soporte y Resolución de Problemas – Soluciones rápidas para errores y problemas técnicos."
+			],
+			"ctaText": "Déjame encargarme del lado técnico para que puedas concentrarte en hacer crecer tu negocio. ¡Contáctame hoy!"
+		}
+	]
+}
