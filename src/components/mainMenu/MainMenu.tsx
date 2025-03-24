@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
+import { useTranslation } from "react-i18next";
+import { NAMESPACES } from "../../i18n/namespaces";
+
 import { analytics, logEvent } from "../../utils/firebase/config";
 
 import useResponsive from "../../hooks/useResponsive";
@@ -12,6 +15,8 @@ const MainMenu = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [cvDropdownOpen, setCvDropdownOpen] = useState(false);
 	const { current } = useResponsive();
+
+	const { t } = useTranslation(NAMESPACES.COMMON);
 
 	const isMobile = current === "xs" || current === "sm";
 
@@ -65,7 +70,7 @@ const MainMenu = () => {
 							to="/"
 							onClick={closeMenu}
 						>
-							Home
+							{t("common:home")}
 						</NavLink>
 						<NavLink
 							className={({ isActive }) =>
@@ -76,7 +81,7 @@ const MainMenu = () => {
 							to="/experience"
 							onClick={closeMenu}
 						>
-							Experience
+							{t("common:experience")}
 						</NavLink>
 						<NavLink
 							className={({ isActive }) =>
@@ -87,7 +92,7 @@ const MainMenu = () => {
 							to="/services"
 							onClick={closeMenu}
 						>
-							Services
+							{t("common:services")}
 						</NavLink>
 						<NavLink
 							className={({ isActive }) =>
@@ -98,7 +103,7 @@ const MainMenu = () => {
 							to="/blogs"
 							onClick={closeMenu}
 						>
-							Blogs
+							{t("common:blogs")}
 						</NavLink>
 						<NavLink
 							className={({ isActive }) =>
@@ -109,14 +114,14 @@ const MainMenu = () => {
 							to="/contact"
 							onClick={closeMenu}
 						>
-							Contact
+							{t("common:contact")}
 						</NavLink>
 						<div className="main-menu__mobile-dropdown">
 							<button
 								className="main-menu__dropdown-title main-menu__mobile-dropdown-button"
 								onClick={toggleCvDropdown}
 							>
-								Download CV {cvDropdownOpen ? "▲" : "▼"}
+								{t("common:download")} {cvDropdownOpen ? "▲" : "▼"}
 							</button>
 							{cvDropdownOpen && (
 								<div className="main-menu__mobile-dropdown-menu">
@@ -125,7 +130,7 @@ const MainMenu = () => {
 										download
 										onClick={handleCvClick.bind(null, "en")}
 									>
-										English
+										{t("common:english")}
 									</a>
 									<a
 										className="main-menu__link"
@@ -133,7 +138,7 @@ const MainMenu = () => {
 										download
 										onClick={handleCvClick.bind(null, "es")}
 									>
-										Español
+										{t("common:spanish")}
 									</a>
 								</div>
 							)}
@@ -154,7 +159,7 @@ const MainMenu = () => {
 				}
 				to="/"
 			>
-				Home
+				{t("common:home")}
 			</NavLink>
 			<NavLink
 				className={({ isActive }) =>
@@ -164,7 +169,7 @@ const MainMenu = () => {
 				}
 				to="/experience"
 			>
-				Experience
+				{t("common:experience")}
 			</NavLink>
 			<NavLink
 				className={({ isActive }) =>
@@ -174,7 +179,7 @@ const MainMenu = () => {
 				}
 				to="/services"
 			>
-				Services
+				{t("common:services")}
 			</NavLink>
 			<NavLink
 				className={({ isActive }) =>
@@ -184,14 +189,16 @@ const MainMenu = () => {
 				}
 				to="/blogs"
 			>
-				Blogs
+				{t("common:blogs")}
 			</NavLink>
 			<div
 				className="main-menu__dropdown"
 				onMouseEnter={() => setCvDropdownOpen(true)}
 				onMouseLeave={() => setCvDropdownOpen(false)}
 			>
-				<span className="main-menu__dropdown-title">Download CV</span>
+				<span className="main-menu__dropdown-title">
+					{t("common:download")}
+				</span>
 				{cvDropdownOpen && (
 					<div className="main-menu__dropdown-menu">
 						<a
@@ -199,14 +206,14 @@ const MainMenu = () => {
 							href="./public/downloads/CV_2025_oxford_en.pdf"
 							download
 						>
-							English
+							{t("common:english")}
 						</a>
 						<a
 							className="main-menu__link"
 							href="./public/downloads/CV_2025_oxford_es.pdf"
 							download
 						>
-							Español
+							{t("common:spanish")}
 						</a>
 					</div>
 				)}

@@ -1,0 +1,41 @@
+[
+	{
+		"id": 842548986,
+		"name": "Context-Api",
+		"html_url": "https://github.com/CamiloPinzon/Context-API",
+		"description": "Esta es una aplicación sencilla de React que demuestra cómo implementar un alternador de tema (modo claro/oscuro) usando la Context API. El tema se gestiona globalmente y se puede cambiar desde cualquier componente dentro de la aplicación."
+	},
+	{
+		"id": 851401014,
+		"name": "login-form-validation",
+		"html_url": "https://github.com/CamiloPinzon/login-form-validation",
+		"description": "Aprende a gestionar el estado de un formulario, manejar la validación y proporcionar retroalimentación adecuada a los usuarios."
+	},
+	{
+		"id": 873357353,
+		"name": "Facebook-Pixel-Inserter",
+		"html_url": "https://github.com/CamiloPinzon/Facebook-Pixel-Inserter",
+		"description": "Facebook Pixel Inserter es un plugin personalizado para WordPress que permite a los administradores agregar fácilmente su ID de Facebook Pixel a través de una página de configuración en el administrador. Luego, el plugin inserta automáticamente el código de seguimiento de Facebook Pixel en el encabezado del sitio web, habilitando el análisis y seguimiento de anuncios en Facebook."
+	},
+	{
+		"id": 865714403,
+		"name": "tita-pokemon-test",
+		"html_url": "https://github.com/CamiloPinzon/tita-pokemon-test",
+		"description": "Una aplicación web que permite a los usuarios buscar, ver y navegar por los detalles de los Pokémon. La aplicación utiliza la PokéAPI para obtener datos de los Pokémon y mostrarlos en un formato interactivo.",
+		"deployed_url": "https://pokedex-tita.netlify.app/"
+	},
+	{
+		"id": 782248009,
+		"name": "weather-app",
+		"html_url": "https://github.com/CamiloPinzon/weather-app",
+		"description": "Esta es una aplicación sencilla del clima que permite a los usuarios verificar las condiciones climáticas actuales de una ubicación específica.",
+		"deployed_url": "https://own-weatherapp.netlify.app/"
+	},
+	{
+		"id": 670821052,
+		"name": "currency_exchanger",
+		"html_url": "https://github.com/CamiloPinzon/currency_exchanger",
+		"description": "Este componente lista varias monedas y realiza la conversión a la moneda deseada luego de actualizar los valores consumiendo una API mediante FETCH",
+		"deployed_url": "https://golden-banoffee-b17102.netlify.app/"
+	}
+]

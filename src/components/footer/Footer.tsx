@@ -1,5 +1,8 @@
 import useResponsive from "../../hooks/useResponsive";
 
+import { useTranslation } from "react-i18next";
+import { NAMESPACES } from "../../i18n/namespaces";
+
 import SocialIcons from "../socialIcons/socialIcons";
 import LegalFooter from "../legalFooter/LegarFooter";
 import MenuFooter from "../menuFooter/MenuFooter";
@@ -8,6 +11,7 @@ import SuscribeForm from "../suscribeForm/SuscribeForm";
 import "./footer.scss";
 
 const Footer = () => {
+	const { t } = useTranslation(NAMESPACES.COMMON);
 	const { current } = useResponsive();
 	const isMobile = current === "xs" || current === "sm" || current === "md";
 	return (
@@ -22,8 +26,8 @@ const Footer = () => {
 					<MenuFooter />
 				</div>
 				<div className="footer__up-right">
-					<h3>Suscribe for updates</h3>
-					<i>Stay updated with the latest blogs.</i>
+					<h3>{t("common:susbribe-title")}</h3>
+					<i>{t("common:susbribe-description")}</i>
 					<SuscribeForm />
 				</div>
 			</div>

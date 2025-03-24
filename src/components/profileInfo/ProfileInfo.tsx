@@ -4,6 +4,9 @@ import Image from "../image/Image";
 import Button from "../button/Button";
 import SocialIcons from "../socialIcons/socialIcons";
 
+import { useTranslation } from "react-i18next";
+import { NAMESPACES } from "../../i18n/namespaces";
+
 import ProfilePic from "../../assets/profile_pic__sm.jpg";
 import emailIcon from "../../assets/email.svg";
 import phoneIcon from "../../assets/phone.svg";
@@ -11,8 +14,8 @@ import phoneIcon from "../../assets/phone.svg";
 import "./profileInfo.scss";
 
 const ProfileInfo = () => {
+	const { t } = useTranslation(NAMESPACES.PROFILE_INFO);
 	const navigate = useNavigate();
-
 	const navigateToContact = () => {
 		navigate("/contact");
 	};
@@ -30,20 +33,16 @@ const ProfileInfo = () => {
 					<SocialIcons />
 				</div>
 				<br />
-				<h2>INTRODUCTION</h2>
-				<p>
-					Self-taught and dedicated. A web developer with ability to assimilate
-					work under pressure and great facility for teamwork, no matter if it’s
-					locally or remote. He brings his experience to find solutions for all
-					the possible problems that can happen in all the project stages and
-					brings calm to the customer.
-				</p>
+				<h2>{t("profileInfo:about_title")}</h2>
+				<p>{t("profileInfo:introduction")}</p>
 				<br />
-				<h2>CONTACT</h2>
+				<h2>{t("profileInfo:contact_title")}</h2>
 				<ul className="profile-info__content-contact">
 					<li>
 						<Image src={emailIcon} alt="Email Icon" kind="icon" />
-						<a href="mailto:pinzonac@gmail.com">pinzonac@gmail.com</a>
+						<a href="mailto:camilopinzondeveloper@gmail.com">
+							{t("profileInfo:send_email")}
+						</a>
 					</li>
 					<li>
 						<Image src={phoneIcon} alt="Phone Icon" kind="icon" />
@@ -51,7 +50,7 @@ const ProfileInfo = () => {
 					</li>
 				</ul>
 				<Button onClick={navigateToContact} type="button" style="primary">
-					Contact
+					{t("profileInfo:contact_button")}
 				</Button>
 			</div>
 		</div>

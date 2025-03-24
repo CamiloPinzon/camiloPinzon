@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import Button from "../button/Button";
 import Image from "../image/Image";
 
+import { useTranslation } from "react-i18next";
+import { NAMESPACES } from "../../i18n/namespaces";
+import LanguageSwitcher from "../languageSwitcher/LanguageSwitcher";
+
 import ProfilePic from "../../assets/profile-pic__xs.jpg";
 
 import "./headerRightNav.scss";
@@ -11,14 +15,17 @@ import "./headerRightNav.scss";
 const HeaderRightNav = () => {
 	const navigate = useNavigate();
 
+	const { t } = useTranslation(NAMESPACES.COMMON);
+
 	const handleContactClick = () => {
 		navigate("/contact");
 	};
 	return (
 		<div className="header-right-nav">
 			<Button onClick={handleContactClick} type="button" style="primary">
-				Contact
+				{t("common:contact")}
 			</Button>
+			<LanguageSwitcher variant="toggle" />
 			<Link to="/">
 				<Image src={ProfilePic} alt="profile picture" kind="small_rounded" />
 			</Link>

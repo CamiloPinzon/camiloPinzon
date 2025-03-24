@@ -21,7 +21,7 @@
 		"id": 865714403,
 		"name": "tita-pokemon-test",
 		"html_url": "https://github.com/CamiloPinzon/tita-pokemon-test",
-		"description": "FrontEnd test",
+		"description": "A web application that allows users to search, view, and navigate Pokémon details. The app utilizes the PokéAPI to fetch Pokémon data and display it in an interactive format.",
 		"deployed_url": "https://pokedex-tita.netlify.app/"
 	},
 	{
@@ -35,7 +35,7 @@
 		"id": 670821052,
 		"name": "currency_exchanger",
 		"html_url": "https://github.com/CamiloPinzon/currency_exchanger",
-		"description": "JFF currency exchanger",
+		"description": "This component lists various currencies and performs the conversion to the desired currency after updating the values by consuming an API using FETCH.",
 		"deployed_url": "https://golden-banoffee-b17102.netlify.app/"
 	}
 ]

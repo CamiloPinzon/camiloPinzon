@@ -51,8 +51,8 @@ const UserBlogList: React.FC<UserBlogListProps> = ({
 		<div className={`blog-list ${className}`}>
 			<h2 className="blog-list__title">{title}</h2>
 
-			{blogs.map((blog) => (
-				<Card>
+			{blogs.map((blog, idx) => (
+				<Card key={idx}>
 					<div key={blog.id} className="blog-list__item">
 						<img
 							className="blog-list__item-image"
