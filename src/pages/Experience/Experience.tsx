@@ -70,7 +70,7 @@ const Experience = () => {
 		<section className="experience-container">
 			<div className="experience-hero">
 				<Hero
-					bgImage="./images/experienceHero.jpg"
+					bgImage="./images/experienceHero.webp"
 					title={t("experience:title")}
 					paragraph={t("experience:text")}
 					style="light"
