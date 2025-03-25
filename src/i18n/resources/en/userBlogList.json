@@ -2,5 +2,6 @@
 	"error_loading": "Error loading blog posts:",
 	"read": "Read More",
 	"no_posts": "No blog posts available.",
-	"to_first": "Back to first page"
+	"to_first": "Back to first page",
+	"published_on": "Published on"
 }

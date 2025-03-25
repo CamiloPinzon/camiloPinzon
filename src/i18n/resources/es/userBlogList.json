@@ -2,5 +2,6 @@
 	"error_loading": "Error al cargar las publicaciones del blog:",
 	"read": "Leer más",
 	"no_posts": "No hay publicaciones de blog disponibles.",
-	"to_first": "Volver a la primera página"
+	"to_first": "Volver a la primera página",
+	"published_on": "Publicado el"
 }
