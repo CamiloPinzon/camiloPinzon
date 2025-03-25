@@ -18,6 +18,7 @@ import enExperience from "./resources/en/experience.json";
 import enServices from "./resources/en/services.json";
 import enContact from "./resources/en/contact.json";
 import enContactForm from "./resources/en/contactForm.json";
+import enUserBlogList from "./resources/en/userBlogList.json";
 
 /* Spanish*/
 
@@ -31,6 +32,7 @@ import esExperience from "./resources/es/experience.json";
 import esServices from "./resources/es/services.json";
 import esContact from "./resources/es/contact.json";
 import esContactForm from "./resources/es/contactForm.json";
+import esUserBlogList from "./resources/es/userBlogList.json";
 
 /*Resources Config*/
 
@@ -46,6 +48,7 @@ const resources = {
 		[NAMESPACES.SERVICES]: enServices,
 		[NAMESPACES.CONTACT]: enContact,
 		[NAMESPACES.CONTACT_FORM]: enContactForm,
+		[NAMESPACES.USER_BLOG_LIST]: enUserBlogList,
 	},
 	es: {
 		[NAMESPACES.COMMON]: esCommon,
@@ -58,6 +61,7 @@ const resources = {
 		[NAMESPACES.SERVICES]: esServices,
 		[NAMESPACES.CONTACT]: esContact,
 		[NAMESPACES.CONTACT_FORM]: esContactForm,
+		[NAMESPACES.USER_BLOG_LIST]: esUserBlogList,
 	},
 };
 

@@ -14,6 +14,9 @@ import {
 } from "firebase/firestore";
 import { db } from "../utils/firebase/config";
 
+import { useTranslation } from "react-i18next";
+import { SupportedLanguage } from "../i18n/languageOptions";
+
 // Define proper types for Firestore Timestamp
 export type FirestoreDate = Timestamp;
 
@@ -40,6 +43,8 @@ interface UseFetchBlogsOptions {
 }
 
 export const useFetchBlogs = (options: UseFetchBlogsOptions = {}) => {
+	const { i18n } = useTranslation();
+	const currentLanguage = i18n.language as SupportedLanguage;
 	const {
 		publishedOnly = false,
 		initialFilter = "all",
@@ -102,6 +107,7 @@ export const useFetchBlogs = (options: UseFetchBlogsOptions = {}) => {
 				q = query(
 					blogsRef,
 					where("publishedStatus", "==", "published"),
+					where("lng", "==", currentLanguage),
 					...filterConditions,
 					...(latest === true ? [limit(3)] : [])
 				);
@@ -164,7 +170,7 @@ export const useFetchBlogs = (options: UseFetchBlogsOptions = {}) => {
 	// Load first page when filter changes
 	useEffect(() => {
 		fetchBlogs(true);
-	}, [filter]);
+	}, [filter, currentLanguage]);
 
 	// Initial load
 	useEffect(() => {

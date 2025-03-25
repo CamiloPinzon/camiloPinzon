@@ -1,6 +1,9 @@
 import Card from "../card/Card";
 import { useFetchBlogs } from "../../hooks/useFetchBlogs";
 
+import { useTranslation } from "react-i18next";
+import { NAMESPACES } from "../../i18n/namespaces";
+
 import "./userBlog.scss";
 
 interface UserBlogListProps {
@@ -8,6 +11,7 @@ interface UserBlogListProps {
 	title?: string;
 	itemsPerPage?: number;
 	latest?: boolean;
+	lng?: "en" | "es";
 }
 
 const UserBlogList: React.FC<UserBlogListProps> = ({
@@ -16,6 +20,7 @@ const UserBlogList: React.FC<UserBlogListProps> = ({
 	itemsPerPage = 6,
 	latest = false,
 }) => {
+	const { t } = useTranslation(NAMESPACES.USER_BLOG_LIST);
 	const {
 		blogs,
 		loading,
@@ -42,7 +47,7 @@ const UserBlogList: React.FC<UserBlogListProps> = ({
 	if (error) {
 		return (
 			<div className={`blog-list-error ${className}`}>
-				Error loading blog posts: {error}
+				{`${t("userBlogList:error_loading")} ${error}`}
 			</div>
 		);
 	}
@@ -68,7 +73,7 @@ const UserBlogList: React.FC<UserBlogListProps> = ({
 								{blog.summary || blog.content.substring(0, 150)}...
 							</p>
 							<a className="blog-list__item-link" href={`/blogs/${blog.slug}`}>
-								Read More
+								{t("userBlogList:read")}
 							</a>
 						</div>
 					</div>
@@ -76,7 +81,7 @@ const UserBlogList: React.FC<UserBlogListProps> = ({
 			))}
 
 			{blogs.length === 0 && (
-				<p className="blog-list__empty-message">No blog posts available.</p>
+				<p className="blog-list__empty-message">{t("userBlogList:no_posts")}</p>
 			)}
 
 			{!latest && (
@@ -87,7 +92,7 @@ const UserBlogList: React.FC<UserBlogListProps> = ({
 							onClick={handleBackToFirst}
 							type="button"
 						>
-							Back to First Page
+							{t("userBlogList:to_first")}
 						</button>
 					)}
 
