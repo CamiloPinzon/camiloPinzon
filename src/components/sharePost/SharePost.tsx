@@ -1,3 +1,6 @@
+import { useTranslation } from "react-i18next";
+import { NAMESPACES } from "../../i18n/namespaces";
+
 import "./sharePost.scss";
 
 interface SharePostProps {
@@ -6,6 +9,7 @@ interface SharePostProps {
 }
 
 const SharePost: React.FC<SharePostProps> = ({ title, url }) => {
+	const { t } = useTranslation(NAMESPACES.SHARE_POST);
 	const encodedTitle = encodeURIComponent(title);
 	const encodedUrl = encodeURIComponent(url);
 
@@ -18,7 +22,7 @@ const SharePost: React.FC<SharePostProps> = ({ title, url }) => {
 
 	return (
 		<div className="share-post">
-			<span className="share-post__label">Share this post:</span>
+			<span className="share-post__label">{t("sharePost:share")}:</span>
 			<ul className="share-post__list">
 				<li className="share-post__item">
 					<a
