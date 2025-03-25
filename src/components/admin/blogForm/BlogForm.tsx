@@ -10,6 +10,7 @@ import { BlogPost } from "../types/blogPostType";
 import "./blogForm.scss";
 
 interface FormData {
+	lng: "en" | "es";
 	title: string;
 	slug: string;
 	summary: string;
@@ -18,7 +19,7 @@ interface FormData {
 	coverImage: File | null;
 }
 
-const BlogForm: React.FC = () => {
+const BlogForm = () => {
 	const { id } = useParams<{ id: string }>();
 	const isEditMode = Boolean(id);
 	const navigate = useNavigate();
@@ -28,6 +29,7 @@ const BlogForm: React.FC = () => {
 		useBlogManagement();
 
 	const [formData, setFormData] = useState<FormData>({
+		lng: "en",
 		title: "",
 		slug: "",
 		summary: "",
@@ -53,6 +55,7 @@ const BlogForm: React.FC = () => {
 					if (docSnap.exists()) {
 						const data = docSnap.data() as BlogPost;
 						setFormData({
+							lng: data.lng,
 							title: data.title,
 							slug: data.slug,
 							summary: data.summary,
@@ -84,6 +87,11 @@ const BlogForm: React.FC = () => {
 	) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({ ...prev, [name]: value }));
+	};
+
+	const handleLngChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+		const lng = event.target.value as "en" | "es";
+		setFormData((prev) => ({ ...prev, lng }));
 	};
 
 	// Handle rich text editor changes
@@ -140,6 +148,7 @@ const BlogForm: React.FC = () => {
 
 			// Prepare blog post data
 			const blogPostData = {
+				lng: formData.lng,
 				title: formData.title,
 				slug: formData.slug,
 				summary: formData.summary,
@@ -185,6 +194,20 @@ const BlogForm: React.FC = () => {
 
 			<form className="blog-form__form" onSubmit={handleSubmit}>
 				<div className="blog-form__group">
+					<label className="blog-form__label" htmlFor="lng">
+						Language
+					</label>
+					<select
+						className="blog-form__select"
+						id="lng"
+						name="lng"
+						value={formData.lng}
+						onChange={handleLngChange}
+						required
+					>
+						<option value="en">English</option>
+						<option value="es">Spanish</option>
+					</select>
 					<label className="blog-form__label" htmlFor="title">
 						Title
 					</label>

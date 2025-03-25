@@ -60,8 +60,9 @@ $spacing-lg: 24px;
         color: $text-color;
     }
 
-    // Input element
-    &__input {
+    // Input element & select element
+    &__input,
+    &__select {
         padding: $spacing-md;
         border: 1px solid $border-color;
         border-radius: $border-radius;
