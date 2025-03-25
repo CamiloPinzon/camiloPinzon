@@ -20,6 +20,7 @@ import enContact from "./resources/en/contact.json";
 import enContactForm from "./resources/en/contactForm.json";
 import enUserBlogList from "./resources/en/userBlogList.json";
 import enSharePost from "./resources/en/sharePost.json";
+import enBlogs from "./resources/en/blogs.json";
 
 /* Spanish*/
 
@@ -35,6 +36,7 @@ import esContact from "./resources/es/contact.json";
 import esContactForm from "./resources/es/contactForm.json";
 import esUserBlogList from "./resources/es/userBlogList.json";
 import esSharePost from "./resources/es/sharePost.json";
+import esBlogs from "./resources/es/blogs.json";
 
 /*Resources Config*/
 
@@ -52,6 +54,7 @@ const resources = {
 		[NAMESPACES.CONTACT_FORM]: enContactForm,
 		[NAMESPACES.USER_BLOG_LIST]: enUserBlogList,
 		[NAMESPACES.SHARE_POST]: enSharePost,
+		[NAMESPACES.BLOGS]: enBlogs,
 	},
 	es: {
 		[NAMESPACES.COMMON]: esCommon,
@@ -66,6 +69,7 @@ const resources = {
 		[NAMESPACES.CONTACT_FORM]: esContactForm,
 		[NAMESPACES.USER_BLOG_LIST]: esUserBlogList,
 		[NAMESPACES.SHARE_POST]: esSharePost,
+		[NAMESPACES.BLOGS]: esBlogs,
 	},
 };
 

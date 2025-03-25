@@ -11,4 +11,5 @@ export const NAMESPACES = {
 	CONTACT_FORM: "contactForm",
 	USER_BLOG_LIST: "userBlogList",
 	SHARE_POST: "sharePost",
+	BLOGS: "blogs",
 } as const;
