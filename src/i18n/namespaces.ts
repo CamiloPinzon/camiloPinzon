@@ -7,4 +7,6 @@ export const NAMESPACES = {
 	CLIENTES: "clients",
 	EXPERIENCE: "experience",
 	SERVICES: "services",
+	CONTACT: "contact",
+	CONTACT_FORM: "contactForm",
 } as const;

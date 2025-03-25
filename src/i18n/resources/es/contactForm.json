@@ -1,0 +1,16 @@
+{
+	"success_title": "¡Entendido! 👍",
+	"success_text": "¡Gracias por tu mensaje! Nos pondremos en contacto contigo en breve.",
+	"error_title": "Algo salió mal",
+	"error_text": "Por favor, inténtalo de nuevo más tarde.",
+	"error_loading": "reCAPTCHA aún no se ha cargado",
+	"error_token": "No se pudo obtener el token de reCAPTCHA",
+	"error_timeout": "La operación excedió el tiempo de espera de 5 segundos",
+	"error_unexpected": "Ocurrió un error inesperado. Por favor, inténtalo de nuevo más tarde.",
+	"fullName": "Nombre completo",
+	"email": "Correo electrónico",
+	"company": "Nombre de la empresa",
+	"phone": "Número de teléfono",
+	"message": "Mensaje",
+	"submit": "Enviar"
+}

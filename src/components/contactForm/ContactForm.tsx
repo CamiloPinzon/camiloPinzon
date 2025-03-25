@@ -3,6 +3,9 @@ import { FirebaseError } from "firebase/app";
 
 import useResponsive from "../../hooks/useResponsive";
 
+import { useTranslation } from "react-i18next";
+import { NAMESPACES } from "../../i18n/namespaces";
+
 import Button from "../button/Button";
 import Modal from "../modal/Modal";
 import { useRecaptcha } from "../../hooks/useRecaptcha";
@@ -19,17 +22,17 @@ const defaultFormFields = {
 	message: "",
 };
 
-const successTexts = {
-	title: "Got It! 👍",
-	text: "Thanks for your message! We’ll be in touch shortly.",
-};
-
-const defaultErrorTexts = {
-	title: "Something went wrong",
-	text: "Please try again later.",
-};
-
 const ContactForm = () => {
+	const { t } = useTranslation(NAMESPACES.CONTACT_FORM);
+	const successTexts = {
+		title: t("contactForm:success_title"),
+		text: t("contactForm:success_text"),
+	};
+
+	const defaultErrorTexts = {
+		title: t("contactForm:error_title"),
+		text: t("contactForm:error_text"),
+	};
 	const { current } = useResponsive();
 	const isMobile = current === "xs" || current === "sm";
 	const [formFields, setFormFields] = useState(defaultFormFields);
@@ -56,7 +59,10 @@ const ContactForm = () => {
 		setLoaderModal(true);
 
 		if (loading) {
-			setErrorTexts({ ...defaultErrorTexts, text: "reCAPTCHA not yet loaded" });
+			setErrorTexts({
+				...defaultErrorTexts,
+				text: t("contactForm:error_loading"),
+			});
 			setIsOpenErrorModal(true);
 			return;
 		}
@@ -66,7 +72,7 @@ const ContactForm = () => {
 			if (!token) {
 				setErrorTexts({
 					...defaultErrorTexts,
-					text: "Failed to get reCAPTCHA token",
+					text: t("contactForm:error_token"),
 				});
 				setIsOpenErrorModal(true);
 				return;
@@ -74,7 +80,7 @@ const ContactForm = () => {
 
 			const timeoutPromise = new Promise((_, reject) => {
 				setTimeout(() => {
-					reject(new Error("Operation timed out after 5 seconds"));
+					reject(new Error(t("contactForm:error_timeout")));
 				}, 5000);
 			});
 
@@ -87,10 +93,12 @@ const ContactForm = () => {
 			setLoaderModal(false);
 			if (
 				error instanceof Error &&
-				error.message === "Operation timed out after 5 seconds"
+				error.message === t("contactForm:error_timeout")
 			) {
-				console.error("The operation timed out");
-				setErrorTexts({ ...defaultErrorTexts, text: "Operation timed out" });
+				setErrorTexts({
+					...defaultErrorTexts,
+					text: t("contactForm:error_timeout"),
+				});
 				setIsOpenErrorModal(true);
 			} else if (error instanceof FirebaseError) {
 				setErrorTexts({ ...defaultErrorTexts, text: error.message });
@@ -98,7 +106,7 @@ const ContactForm = () => {
 			} else {
 				setErrorTexts({
 					...defaultErrorTexts,
-					text: "An unexpected error occurred",
+					text: t("contactForm:error_unexpected"),
 				});
 				setIsOpenErrorModal(true);
 			}
@@ -133,7 +141,7 @@ const ContactForm = () => {
 					<input
 						type="text"
 						name="fullName"
-						placeholder="Full Name"
+						placeholder={t("contactForm:fullName")}
 						value={fullName}
 						onChange={handleOnChange}
 						required
@@ -141,7 +149,7 @@ const ContactForm = () => {
 					<input
 						type="email"
 						name="email"
-						placeholder="Email"
+						placeholder={t("contactForm:email")}
 						value={email}
 						onChange={handleOnChange}
 						required
@@ -151,14 +159,14 @@ const ContactForm = () => {
 					<input
 						type="text"
 						name="company"
-						placeholder="Company Name"
+						placeholder={t("contactForm:company")}
 						value={company}
 						onChange={handleOnChange}
 					/>
 					<input
 						type="text"
 						name="phone"
-						placeholder="Phone Number"
+						placeholder={t("contactForm:phone")}
 						value={phone}
 						onChange={handleOnChange}
 						required
@@ -168,7 +176,7 @@ const ContactForm = () => {
 					<textarea
 						name="message"
 						id="messageField"
-						placeholder="Message"
+						placeholder={t("contactForm:message")}
 						rows={10}
 						value={message}
 						onChange={handleOnChange}
@@ -178,7 +186,7 @@ const ContactForm = () => {
 				<div data-netlify-recaptcha="true"></div>
 				<div className="contact-form__form-row submit-container">
 					<Button type="submit" style="primary">
-						Send
+						{t("contactForm:submit")}
 					</Button>
 				</div>
 			</form>

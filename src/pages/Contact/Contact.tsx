@@ -3,6 +3,9 @@ import Button from "../../components/button/Button";
 import Image from "../../components/image/Image";
 import ContactForm from "../../components/contactForm/ContactForm";
 
+import { useTranslation } from "react-i18next";
+import { NAMESPACES } from "../../i18n/namespaces";
+
 import useResponsive from "../../hooks/useResponsive";
 import { useSEO } from "../../hooks/useSEO";
 
@@ -12,6 +15,7 @@ import phoneIcon from "../../assets/phone.svg";
 import "./contact.scss";
 
 const Contact = () => {
+	const { t } = useTranslation(NAMESPACES.CONTACT);
 	useSEO({
 		title: "Expert Front-End Developer | React, WordPress, TypeScript, ...",
 		description:
@@ -20,10 +24,6 @@ const Contact = () => {
 
 	const { current, isXs } = useResponsive();
 	const isMobile = current === "xs" || current === "sm";
-
-	const paragraph = `Feel free to reach out anytime! Whether you need assistance or
-							just want to connect, send me a message, and let's build something
-							great together.`;
 
 	const handleEmailLink = () => {
 		window.location.href = "mailto:camilopinzondeveloper@gmail.com";
@@ -36,12 +36,12 @@ const Contact = () => {
 		<div className="contact">
 			<Hero
 				bgImage="./images/contactHero.png"
-				title="Let's Collaborate."
-				paragraph={paragraph}
+				title={t("contact:hero_title")}
+				paragraph={t("contact:hero_text")}
 				style="light"
 			/>
 			<main className="contact-main container">
-				<h2>Get in touch</h2>
+				<h2>{t("contact:title")}</h2>
 				<div className={`contact-main__contact-links ${isMobile && "column"}`}>
 					<Button onClick={handleEmailLink} type="button" style="secondary">
 						<Image src={emailIcon} alt="email icon" kind="light_icon" />
@@ -53,7 +53,7 @@ const Contact = () => {
 					</Button>
 				</div>
 				<div className="contact-main__contact-form">
-					<h3>Drop me a line.</h3>
+					<h3>{t("contact:form_title")}</h3>
 					<ContactForm />
 				</div>
 			</main>

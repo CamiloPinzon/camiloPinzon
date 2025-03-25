@@ -1,0 +1,16 @@
+{
+	"success_title": "Got It! 👍",
+	"success_text": "Thanks for your message! We’ll be in touch shortly.",
+	"error_title": "Something went wrong",
+	"error_text": "Please try again later.",
+	"error_loading": "reCAPTCHA not yet loaded",
+	"error_token": "Failed to get reCAPTCHA token",
+	"error_timeout": "Operation timed out after 5 seconds",
+	"error_unexpected": "An unexpected error occurred. Please try again later.",
+	"fullName": "Full Name",
+	"email": "Email",
+	"company": "Company Name",
+	"phone": "Phone Number",
+	"message": "Message",
+	"submit": "Send"
+}
