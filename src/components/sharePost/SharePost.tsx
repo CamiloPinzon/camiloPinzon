@@ -14,7 +14,7 @@ const SharePost: React.FC<SharePostProps> = ({ title, url }) => {
 	const encodedUrl = encodeURIComponent(url);
 
 	const shareLinks = {
-		facebook: `https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&u=${encodedUrl}&title=${encodedTitle}&display=popup&ref=plugin&src=share_button`,
+		facebook: `https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&u=${encodedUrl}&text=${encodedTitle}&display=popup&ref=plugin&src=share_button`,
 		twitter: `https://x.com/intent/post?title=${encodedTitle}&text=${encodedUrl}`,
 		linkedin: `https://www.linkedin.com/feed/?linkOrigin=LI_BADGE&shareActive=true&shareUrl=${encodedUrl}&text=${encodedTitle}`,
 		whatsapp: `https://wa.me/?text=${encodedUrl}`,
