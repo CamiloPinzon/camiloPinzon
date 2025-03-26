@@ -60,7 +60,7 @@ const Services = () => {
 	return (
 		<div className="services-container">
 			<Hero
-				bgImage="./images/servicesHero.jpg"
+				bgImage="./images/servicesHero.webp"
 				title={t("services:title")}
 				paragraph={t("services:text")}
 				style="light"

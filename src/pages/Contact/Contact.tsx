@@ -35,7 +35,7 @@ const Contact = () => {
 	return (
 		<div className="contact">
 			<Hero
-				bgImage="./images/contactHero.png"
+				bgImage="./images/contactHero.webp"
 				title={t("contact:hero_title")}
 				paragraph={t("contact:hero_text")}
 				style="light"

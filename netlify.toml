@@ -14,3 +14,9 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+  [[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Encoding = "br, gzip"
+    Vary = "Accept-Encoding"

@@ -4,7 +4,6 @@ import { useSEO } from "../../hooks/useSEO";
 import Image from "../../components/image/Image";
 import LatestBlogs from "../../components/latestBlogs/LatestBlogs";
 import Clientes from "../../components/clientes/Clientes";
-import heroImage from "../../assets/home_hero_desktop.jpg";
 import ProfileInfo from "../../components/profileInfo/ProfileInfo";
 import TabedNavigation from "../../components/tabedNavigation/TabedNavigation";
 import FeaturedRepos from "../../components/featuredRepos/FeaturedRepos";
@@ -24,7 +23,11 @@ const Home = () => {
 	return (
 		<div className="home">
 			<div className="home__hero">
-				<Image src={heroImage} alt="hero image" kind="full_hero" />
+				<Image
+					src="./images/home_hero_desktop.webp"
+					alt="hero image"
+					kind="full_hero"
+				/>
 			</div>
 			<div
 				className={`home__profile ${
