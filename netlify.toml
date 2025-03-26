@@ -18,5 +18,5 @@
   [[headers]]
   for = "/*"
   [headers.values]
-    Content-Encoding = "br, gzip"
+    Content-Encoding = "gzip"
     Vary = "Accept-Encoding"
