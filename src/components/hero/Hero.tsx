@@ -14,7 +14,13 @@ interface HeroProps {
 const Hero = ({ bgImage, title, paragraph, button, style }: HeroProps) => {
 	return (
 		<div className={`hero ${style}`}>
-			<img src={bgImage} alt={title} className="hero__image" />
+			<img
+				src={bgImage}
+				alt={title}
+				className="hero__image"
+				loading="eager"
+				fetchPriority="high"
+			/>
 			<div className={`hero__content container`}>
 				<h1>{title}</h1>
 				<p>
