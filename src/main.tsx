@@ -1,18 +1,17 @@
-import { Suspense, lazy } from "react";
+import { Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import { UserProvider } from "./contexts/user.context.tsx";
 import { RecaptchaProvider } from "./contexts/recaptcha.context.tsx";
 
+import App from "./App.tsx";
 import { LanguageProvider } from "./contexts/language.context.tsx";
 import Modal from "./components/modal/Modal.tsx";
 
 import "./i18n";
 
 import "./index.scss";
-
-const App = lazy(() => import("./App"));
 
 createRoot(document.getElementById("root")!).render(
 	<LanguageProvider>
