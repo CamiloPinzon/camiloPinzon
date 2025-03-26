@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 import { NAMESPACES } from "../../i18n/namespaces";
@@ -11,12 +11,11 @@ import useResponsive from "../../hooks/useResponsive";
 import "./mainMenu.scss";
 
 const MainMenu = () => {
-	const navigate = useNavigate();
 	const [isOpen, setIsOpen] = useState(false);
 	const [cvDropdownOpen, setCvDropdownOpen] = useState(false);
 	const { current } = useResponsive();
 
-	const downloadPath = "./public/downloads/";
+	const downloadPath = "/downloads/";
 	const enFileCV = "2025_en_Camilo-Pinzon_CV";
 	const esFileCV = "2025_es_Camilo-Pinzon_CV";
 
@@ -45,9 +44,24 @@ const MainMenu = () => {
 		});
 
 		const fileName = language === "en" ? enFileCV : esFileCV;
-		const filePath = `${downloadPath}${fileName}.pdf`;
+		const fullPath = window.location.origin + downloadPath + fileName + ".pdf";
 
-		navigate(filePath);
+		console.log("Attempting to download:", fullPath);
+
+		fetch(fullPath)
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Network response was not ok");
+				}
+				return response.blob();
+			})
+			.then((blob) => {
+				const url = window.URL.createObjectURL(blob);
+				window.location.href = url;
+			})
+			.catch((error) => {
+				console.error("Download failed:", error);
+			});
 	};
 
 	const mobileMenu = (
