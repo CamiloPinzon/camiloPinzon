@@ -46,7 +46,7 @@ const MainMenu = () => {
 		const fileName = language === "en" ? enFileCV : esFileCV;
 		const filePath = downloadPath + fileName + ".pdf";
 
-		window.location.href = `${filePath}?download=true?target=_blank`;
+		window.open(filePath, "_blank");
 	};
 
 	const mobileMenu = (
