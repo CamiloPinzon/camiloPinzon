@@ -1,4 +1,4 @@
-import { StrictMode, Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
@@ -15,18 +15,16 @@ import "./index.scss";
 const App = lazy(() => import("./App"));
 
 createRoot(document.getElementById("root")!).render(
-	<StrictMode>
-		<LanguageProvider>
-			<Suspense
-				fallback={<Modal isOpen={true} type="loader" onClose={() => {}} />}
-			></Suspense>
-			<UserProvider>
-				<RecaptchaProvider siteKey={import.meta.env.VITE_RECAPTCHA_KEY}>
-					<BrowserRouter>
-						<App />
-					</BrowserRouter>
-				</RecaptchaProvider>
-			</UserProvider>
-		</LanguageProvider>
-	</StrictMode>
+	<LanguageProvider>
+		<Suspense
+			fallback={<Modal isOpen={true} type="loader" onClose={() => {}} />}
+		></Suspense>
+		<UserProvider>
+			<RecaptchaProvider siteKey={import.meta.env.VITE_RECAPTCHA_KEY}>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</RecaptchaProvider>
+		</UserProvider>
+	</LanguageProvider>
 );
