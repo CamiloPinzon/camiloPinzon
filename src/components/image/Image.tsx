@@ -8,7 +8,10 @@ interface ImageProps {
 
 const Image = ({ src, alt, kind }: ImageProps) => {
 	return (
-		<div className={`image image__${kind}`}>
+		<div
+			className={`image image__${kind}`}
+			{...(kind === "full_hero" && { loading: "eager", fetchPriority: "high" })}
+		>
 			<img src={src} alt={alt} />
 		</div>
 	);
