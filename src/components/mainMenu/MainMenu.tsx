@@ -16,6 +16,10 @@ const MainMenu = () => {
 	const [cvDropdownOpen, setCvDropdownOpen] = useState(false);
 	const { current } = useResponsive();
 
+	const downloadPath = "./public/downloads/";
+	const enFileCV = "2025_en_Camilo-Pinzon_CV";
+	const esFileCV = "2025_es_Camilo-Pinzon_CV";
+
 	const { t } = useTranslation(NAMESPACES.COMMON);
 
 	const isMobile = current === "xs" || current === "sm";
@@ -38,8 +42,8 @@ const MainMenu = () => {
 			cta_name: `download_cv_${language}`,
 			page: window.location.pathname,
 		});
-		if (language === "en") navigate("./public/downloads/CV_2025_oxford_en.pdf");
-		else navigate("./public/downloads/CV_2025_oxford_es.pdf");
+		if (language === "en") navigate(`${downloadPath}${enFileCV}.pdf`);
+		else navigate(`${downloadPath}${esFileCV}.pdf`);
 	};
 
 	const mobileMenu = (
@@ -134,7 +138,6 @@ const MainMenu = () => {
 									</a>
 									<a
 										className="main-menu__link"
-										href="./public/downloads/CV_2025_oxford_es.pdf"
 										download
 										onClick={handleCvClick.bind(null, "es")}
 									>
@@ -203,14 +206,14 @@ const MainMenu = () => {
 					<div className="main-menu__dropdown-menu">
 						<a
 							className="main-menu__link"
-							href="./public/downloads/CV_2025_oxford_en.pdf"
+							onClick={handleCvClick.bind(null, "en")}
 							download
 						>
 							{t("common:english")}
 						</a>
 						<a
 							className="main-menu__link"
-							href="./public/downloads/CV_2025_oxford_es.pdf"
+							onClick={handleCvClick.bind(null, "es")}
 							download
 						>
 							{t("common:spanish")}
