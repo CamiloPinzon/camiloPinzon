@@ -76,7 +76,11 @@ const UserBlogList: React.FC<UserBlogListProps> = ({
 							<p className="blog-list__item-excerpt">
 								{blog.summary || blog.content.substring(0, 150)}...
 							</p>
-							<a className="blog-list__item-link" href={`/blogs/${blog.slug}`}>
+							<a
+								className="blog-list__item-link"
+								href={`/blogs/${blog.slug}`}
+								aria-label={`Read more about ${blog.title}`}
+							>
 								{t("userBlogList:read")}
 							</a>
 						</div>
