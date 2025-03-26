@@ -44,24 +44,9 @@ const MainMenu = () => {
 		});
 
 		const fileName = language === "en" ? enFileCV : esFileCV;
-		const fullPath = window.location.origin + downloadPath + fileName + ".pdf";
+		const filePath = downloadPath + fileName + ".pdf";
 
-		console.log("Attempting to download:", fullPath);
-
-		fetch(fullPath)
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("Network response was not ok");
-				}
-				return response.blob();
-			})
-			.then((blob) => {
-				const url = window.URL.createObjectURL(blob);
-				window.location.href = url;
-			})
-			.catch((error) => {
-				console.error("Download failed:", error);
-			});
+		window.location.href = `${filePath}?download=true?target=_blank`;
 	};
 
 	const mobileMenu = (
