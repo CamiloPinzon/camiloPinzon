@@ -38,12 +38,16 @@ const MainMenu = () => {
 	};
 	const handleCvClick = (language: string) => {
 		closeMenu();
+
 		logEvent(analytics, "cta_click", {
 			cta_name: `download_cv_${language}`,
 			page: window.location.pathname,
 		});
-		if (language === "en") navigate(`${downloadPath}${enFileCV}.pdf`);
-		else navigate(`${downloadPath}${esFileCV}.pdf`);
+
+		const fileName = language === "en" ? enFileCV : esFileCV;
+		const filePath = `${downloadPath}${fileName}.pdf`;
+
+		navigate(filePath);
 	};
 
 	const mobileMenu = (
