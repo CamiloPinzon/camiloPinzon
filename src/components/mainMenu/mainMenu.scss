@@ -1,7 +1,11 @@
 .main-menu {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     align-items: center;
+
+    &__dropdown {
+        padding-block: 10px;
+    }
 
     &__link,
     &__dropdown-title {
@@ -9,6 +13,7 @@
         text-decoration: none;
         color: #030303;
         transition: color 0.3s ease, background 0.3s ease;
+        padding-block: 10px;
 
         &:hover {
             color: #007bff;
@@ -29,6 +34,8 @@
         display: flex;
         gap: 8px;
         align-items: center;
+        min-height: 48px;
+        min-width: 48px;
     }
 
     &--mobile {
@@ -45,6 +52,8 @@
     }
 
     &__mobile-toggle {
+        position: relative;
+        z-index: 1000;
         background: none;
         border: none;
         cursor: pointer;
