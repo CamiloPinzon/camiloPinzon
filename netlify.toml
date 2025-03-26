@@ -1,22 +1,14 @@
 [build]
   command = "npm run build"
-  publish = "dist" # Change if your output directory is different
+  publish = "dist"
   functions = "netlify/functions"
 
-# This ensures that function requests are properly routed
 [[redirects]]
   from = "/netlify/functions/*"
   to = "/netlify/functions/:splat"
   status = 200
 
-# This makes sure your SPA routes work correctly
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-  [[headers]]
-  for = "/*"
-  [headers.values]
-    Content-Encoding = "gzip"
-    Vary = "Accept-Encoding"
