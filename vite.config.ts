@@ -4,7 +4,11 @@ import compression from "vite-plugin-compression";
 
 export default defineConfig({
 	plugins: [
-		react(),
+		react({
+			babel: {
+				plugins: [["@babel/plugin-transform-runtime", { useESModules: true }]],
+			},
+		}),
 		compression({
 			verbose: true,
 			algorithm: "gzip",
@@ -15,25 +19,45 @@ export default defineConfig({
 	],
 	build: {
 		rollupOptions: {
+			treeshake: {
+				moduleSideEffects: true,
+				preset: "recommended",
+			},
 			output: {
-				manualChunks(id) {
-					// Separate node_modules code into a vendor chunk
-					if (id.includes("node_modules")) {
-						return "vendor";
-					}
-					// You can add more specific chunks here if needed
+				manualChunks: {
+					"react-core": ["react"],
+					"react-dom": ["react-dom"],
+					"ui-components": ["lucide-react"],
+					analytics: ["@analytics/google-tag-manager"],
 				},
+				chunkFileNames: "assets/[name]-[hash].js",
+				assetFileNames: "assets/[name]-[hash][extname]",
 			},
 		},
-		// Additional build optimizations
 		target: "esnext",
 		minify: "esbuild",
-		sourcemap: false,
-		// Improve chunk loading strategy
+		sourcemap: process.env.NODE_ENV === "development",
 		chunkSizeWarningLimit: 1000,
 		cssCodeSplit: true,
+		assetsInlineLimit: 4096,
+		reportCompressedSize: false,
 	},
 	optimizeDeps: {
 		exclude: ["lucide-react"],
+		include: ["react", "react-dom"],
+		esbuildOptions: {
+			target: "esnext",
+			supported: {
+				"top-level-await": true,
+			},
+		},
+	},
+	server: {
+		hmr: {
+			overlay: true,
+		},
+	},
+	preview: {
+		port: 4173,
 	},
 });
