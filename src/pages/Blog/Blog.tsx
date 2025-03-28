@@ -1,14 +1,14 @@
-import { useSEO } from "../../hooks/useSEO";
 import { useParams } from "react-router-dom";
 
 import Tags from "../../components/tags/Tags";
 import SharePost from "../../components/sharePost/SharePost";
+import Modal from "../../components/modal/Modal";
 import { useGetBlogBySlug } from "../../hooks/useGetBlogBySlug";
+import { useSEO } from "../../hooks/useSEO";
 
 import "./blog.scss";
 import "react-quill-new/dist/quill.snow.css";
 
-// Define the params interface correctly for useParams
 interface RouteParams {
 	slug: string;
 }
@@ -24,7 +24,10 @@ const Blog = () => {
 		image: blog?.coverImage,
 	});
 
-	if (loading) return <div>Loading...</div>;
+	if (loading) {
+		return <Modal isOpen={true} onClose={() => {}} type="loader" />;
+	}
+
 	if (error) return <div>Error: {error}</div>;
 	if (!blog) return <div>Blog not found</div>;
 

@@ -1,4 +1,6 @@
+import React from "react";
 import Card from "../card/Card";
+import Modal from "../modal/Modal";
 import { useFetchBlogs } from "../../hooks/useFetchBlogs";
 
 import { useTranslation } from "react-i18next";
@@ -39,11 +41,7 @@ const UserBlogList: React.FC<UserBlogListProps> = ({
 	});
 
 	if (loading && blogs.length === 0) {
-		return (
-			<div className={`blog-list-loading ${className}`}>
-				{t("userBlogList:loading")}
-			</div>
-		);
+		return <Modal isOpen={true} onClose={() => {}} type="loader" />;
 	}
 
 	if (error) {
