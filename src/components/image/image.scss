@@ -28,8 +28,8 @@
 
 .image__medium {
     img {
-        width: 250px;
-        height: auto;
+        max-height: 150px;
+        max-width: 250px;
     }
 }
 

@@ -19,6 +19,13 @@ const Clientes = () => {
 						kind="medium"
 					/>
 				</div>
+				<div className="clientes__logos--item">
+					<Image
+						src="./images/epicRosa-300x300.webp"
+						alt="Epic Media"
+						kind="medium"
+					/>
+				</div>
 			</div>
 		</div>
 	);
