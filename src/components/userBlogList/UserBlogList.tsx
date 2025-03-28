@@ -64,6 +64,8 @@ const UserBlogList: React.FC<UserBlogListProps> = ({
 							className="blog-list__item-image"
 							src={blog.coverImage}
 							alt={blog.title}
+							loading="lazy"
+							title={blog.title}
 						/>
 						<div className="blog-list__content">
 							<h3 className="blog-list__item-title">{blog.title}</h3>
