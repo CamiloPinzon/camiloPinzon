@@ -26,6 +26,13 @@ const Clientes = () => {
 						kind="medium"
 					/>
 				</div>
+				<div className="clientes__logos--item">
+					<Image
+						src="./images/PYL_LOGO.png"
+						alt="P&L Contructor"
+						kind="medium"
+					/>
+				</div>
 			</div>
 		</div>
 	);
