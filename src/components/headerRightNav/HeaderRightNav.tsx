@@ -8,8 +8,6 @@ import { useTranslation } from "react-i18next";
 import { NAMESPACES } from "../../i18n/namespaces";
 import LanguageSwitcher from "../languageSwitcher/LanguageSwitcher";
 
-import ProfilePic from "../../assets/profile-pic__xs.jpg";
-
 import "./headerRightNav.scss";
 
 const HeaderRightNav = () => {
@@ -27,7 +25,11 @@ const HeaderRightNav = () => {
 			</Button>
 			<LanguageSwitcher variant="toggle" />
 			<Link to="/">
-				<Image src={ProfilePic} alt="profile picture" kind="small_rounded" />
+				<Image
+					src="/public/images/profile.webp"
+					alt="profile picture"
+					kind="small_rounded"
+				/>
 			</Link>
 		</div>
 	);

@@ -7,7 +7,6 @@ import SocialIcons from "../socialIcons/socialIcons";
 import { useTranslation } from "react-i18next";
 import { NAMESPACES } from "../../i18n/namespaces";
 
-import ProfilePic from "../../assets/profile_pic__sm.jpg";
 import emailIcon from "../../assets/email.svg";
 import phoneIcon from "../../assets/phone.svg";
 
@@ -22,7 +21,11 @@ const ProfileInfo = () => {
 	return (
 		<div className="profile-info">
 			<div className="profile-info__image">
-				<Image src={ProfilePic} alt="profile picture" kind="profile_rounded" />
+				<Image
+					src="/public/images/profile.webp"
+					alt="profile picture"
+					kind="profile_rounded"
+				/>
 			</div>
 			<div className="profile-info__content">
 				<h1>Camilo Pinzón</h1>
