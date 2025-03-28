@@ -48,5 +48,10 @@
 		"id": 9,
 		"img": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
 		"name": "Firebase"
+	},
+	{
+		"id": 10,
+		"img": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/netlify/netlify-original.svg",
+		"name": "Netlify"
 	}
 ]
