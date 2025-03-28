@@ -16,6 +16,7 @@ const Image = ({ src, alt, kind }: ImageProps) => {
 					loading: "eager",
 					fetchPriority: "high",
 				})}
+				title={alt}
 			/>
 		</div>
 	);
