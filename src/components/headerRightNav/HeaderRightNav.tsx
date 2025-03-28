@@ -26,7 +26,7 @@ const HeaderRightNav = () => {
 			<LanguageSwitcher variant="toggle" />
 			<Link to="/">
 				<Image
-					src="/public/images/profile.webp"
+					src="/images/profile.webp"
 					alt="profile picture"
 					kind="small_rounded"
 				/>

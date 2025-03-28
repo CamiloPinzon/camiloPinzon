@@ -22,7 +22,7 @@ const ProfileInfo = () => {
 		<div className="profile-info">
 			<div className="profile-info__image">
 				<Image
-					src="/public/images/profile.webp"
+					src="/images/profile.webp"
 					alt="profile picture"
 					kind="profile_rounded"
 				/>
