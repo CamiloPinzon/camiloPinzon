@@ -1,4 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../../utils/firebase/config";
+
+import { useTranslation } from "react-i18next";
+import { SupportedLanguage } from "../../i18n/languageOptions";
 
 import Tags from "../../components/tags/Tags";
 import SharePost from "../../components/sharePost/SharePost";
@@ -14,9 +20,24 @@ interface RouteParams {
 }
 
 const Blog = () => {
+	const { i18n } = useTranslation();
+	const currentLanguage = i18n.language as SupportedLanguage;
 	const params = useParams<keyof RouteParams>();
 	const slug = params.slug || "";
-	const { blog, loading, error } = useGetBlogBySlug(slug);
+	const navigate = useNavigate();
+
+	const {
+		blog,
+		loading: blogLoading,
+		error: blogError,
+	} = useGetBlogBySlug(slug);
+	const [redirectState, setRedirectState] = useState({
+		isLoading: false,
+		error: null as string | null,
+	});
+
+	// This ref prevents redirection attempts after component unmount
+	const isMounted = useRef(true);
 
 	useSEO({
 		title: blog ? blog.title : "Loading Blog...",
@@ -24,12 +45,87 @@ const Blog = () => {
 		image: blog?.coverImage,
 	});
 
-	if (loading) {
+	// Clean up function to prevent state updates after unmount
+	useEffect(() => {
+		return () => {
+			isMounted.current = false;
+		};
+	}, []);
+
+	useEffect(() => {
+		// Only proceed if we have a blog
+		if (!blog) return;
+
+		const blogLng = blog.pairId?.split("_")[0];
+
+		// If the language matches, no need to redirect
+		if (currentLanguage === blogLng) return;
+
+		const blogId = blog.pairId?.split("_")[1];
+		if (!blogId) return;
+
+		// Set loading state
+		setRedirectState({ isLoading: true, error: null });
+
+		const fetchAndRedirect = async () => {
+			try {
+				// Create a query against the collection
+				const blogsRef = collection(db, "blogs");
+				const q = query(
+					blogsRef,
+					where("pairId", "==", `${currentLanguage}_${blogId}`),
+					where("publishedStatus", "==", "published")
+				);
+
+				const querySnapshot = await getDocs(q);
+
+				// Check if component is still mounted before updating state
+				if (!isMounted.current) return;
+
+				if (querySnapshot.empty) {
+					setRedirectState({
+						isLoading: false,
+						error: "Blog not available in selected language",
+					});
+				} else {
+					// Get the slug from the first matching document
+					const doc = querySnapshot.docs[0];
+					const blogData = doc.data();
+					const targetSlug = blogData.slug;
+
+					// Redirect to the blog with this slug
+					navigate(`/blogs/${targetSlug}`);
+
+					// Update state
+					setRedirectState({ isLoading: false, error: null });
+				}
+			} catch (err) {
+				// Handle errors
+				if (isMounted.current) {
+					setRedirectState({
+						isLoading: false,
+						error:
+							err instanceof Error ? err.message : "An unknown error occurred",
+					});
+				}
+			}
+		};
+
+		fetchAndRedirect();
+	}, [blog, currentLanguage]);
+
+	// Combine loading states
+	const isLoading = blogLoading || redirectState.isLoading;
+
+	// Handle all error and loading states
+	if (blogError) return <div>Error: {blogError}</div>;
+	if (!blog) return <div>Blog not found</div>;
+	if (isLoading) {
 		return <Modal isOpen={true} onClose={() => {}} type="loader" />;
 	}
-
-	if (error) return <div>Error: {error}</div>;
-	if (!blog) return <div>Blog not found</div>;
+	if (redirectState.error) {
+		return <div>Error changing language: {redirectState.error}</div>;
+	}
 
 	const currentUrl = window.location.origin + location.pathname;
 

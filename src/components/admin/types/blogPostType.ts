@@ -15,6 +15,7 @@ export interface BlogPost {
 	};
 	publishedStatus: "draft" | "published";
 	publishedDate?: Date;
+	pairId?: string;
 	createdAt: Date;
 	updatedAt: Date;
 }
