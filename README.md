@@ -22,9 +22,6 @@ I'm a passionate **front-end developer** focused on crafting modern, high-perfor
 
 ---
 
-### 📊 GitHub Stats  
-![Your GitHub stats](https://github-readme-stats.vercel.app/api?username=your-github-username&show_icons=true&theme=radical)  
-
 📫 **Let's connect:**  
 [![Website](https://img.shields.io/badge/-Website-000?style=flat-square&logo=vercel&logoColor=white)](https://camilopinzon.netlify.app/)  
 [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/your-linkedin)  
