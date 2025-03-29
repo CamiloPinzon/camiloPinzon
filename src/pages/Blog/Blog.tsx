@@ -36,7 +36,6 @@ const Blog = () => {
 		error: null as string | null,
 	});
 
-	// This ref prevents redirection attempts after component unmount
 	const isMounted = useRef(true);
 
 	useSEO({
@@ -45,7 +44,6 @@ const Blog = () => {
 		image: blog?.coverImage,
 	});
 
-	// Clean up function to prevent state updates after unmount
 	useEffect(() => {
 		return () => {
 			isMounted.current = false;
@@ -73,7 +71,6 @@ const Blog = () => {
 
 				const querySnapshot = await getDocs(q);
 
-				// Check if component is still mounted before updating state
 				if (!isMounted.current) return;
 
 				if (querySnapshot.empty) {
@@ -87,7 +84,6 @@ const Blog = () => {
 					const targetSlug = blogData.slug;
 
 					navigate(`/blogs/${targetSlug}`);
-
 					setRedirectState({ isLoading: false, error: null });
 				}
 			} catch (err) {
@@ -104,15 +100,14 @@ const Blog = () => {
 		fetchAndRedirect();
 	}, [blog, currentLanguage]);
 
-	// Combine loading states
 	const isLoading = blogLoading || redirectState.isLoading;
 
-	// Handle all error and loading states
-	if (blogError) return <div>Error: {blogError}</div>;
-	if (!blog) return <div>Blog not found</div>;
 	if (isLoading) {
 		return <Modal isOpen={true} onClose={() => {}} type="loader" />;
 	}
+
+	if (blogError) return <div>Error: {blogError}</div>;
+	if (!blog) return <div>Blog not found</div>;
 	if (redirectState.error) {
 		return <div>Error changing language: {redirectState.error}</div>;
 	}
