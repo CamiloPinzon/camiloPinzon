@@ -53,23 +53,17 @@ const Blog = () => {
 	}, []);
 
 	useEffect(() => {
-		// Only proceed if we have a blog
 		if (!blog) return;
-
 		const blogLng = blog.pairId?.split("_")[0];
-
-		// If the language matches, no need to redirect
 		if (currentLanguage === blogLng) return;
 
 		const blogId = blog.pairId?.split("_")[1];
 		if (!blogId) return;
 
-		// Set loading state
 		setRedirectState({ isLoading: true, error: null });
 
 		const fetchAndRedirect = async () => {
 			try {
-				// Create a query against the collection
 				const blogsRef = collection(db, "blogs");
 				const q = query(
 					blogsRef,
@@ -88,19 +82,15 @@ const Blog = () => {
 						error: "Blog not available in selected language",
 					});
 				} else {
-					// Get the slug from the first matching document
 					const doc = querySnapshot.docs[0];
 					const blogData = doc.data();
 					const targetSlug = blogData.slug;
 
-					// Redirect to the blog with this slug
 					navigate(`/blogs/${targetSlug}`);
 
-					// Update state
 					setRedirectState({ isLoading: false, error: null });
 				}
 			} catch (err) {
-				// Handle errors
 				if (isMounted.current) {
 					setRedirectState({
 						isLoading: false,
