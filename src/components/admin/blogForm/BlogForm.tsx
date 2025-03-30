@@ -17,6 +17,7 @@ interface FormData {
 	content: string;
 	tags: string;
 	coverImage: File | null;
+	pairId?: string;
 }
 
 const BlogForm = () => {
@@ -36,6 +37,7 @@ const BlogForm = () => {
 		content: "",
 		tags: "",
 		coverImage: null,
+		pairId: "",
 	});
 
 	const [coverImagePreview, setCoverImagePreview] = useState<string | null>(
@@ -146,11 +148,19 @@ const BlogForm = () => {
 				coverImageUrl = await uploadImage(formData.coverImage);
 			}
 
+			const date = new Date();
+			const day = String(date.getDate()).padStart(2, '0');
+			const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+			const year = date.getFullYear();
+
+			const formattedDate = `${day}${month}${year}`;
+
 			// Prepare blog post data
 			const blogPostData = {
 				lng: formData.lng,
 				title: formData.title,
 				slug: formData.slug,
+				pairId: `${formData.lng}_${formattedDate}`,
 				summary: formData.summary,
 				content: formData.content,
 				tags: formData.tags
