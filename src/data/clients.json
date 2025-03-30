@@ -1,0 +1,22 @@
+{
+	"clients": [
+		{
+			"id": 1,
+			"name": "Motomercado.co",
+			"image": "/images/logo-motomercado.png",
+			"url": "https://motomercado.co/"
+		},
+		{
+			"id": 2,
+			"name": "Epic Media",
+			"image": "/images/epicRosa-300x300.webp",
+			"url": "https://epicmedia.com.co/"
+		},
+		{
+			"id": 3,
+			"name": "P&L Contructor",
+			"image": "/images/PYL_LOGO.png",
+			"url": "https://pylconstructor183.com/"
+		}
+	]
+}
