@@ -10,11 +10,13 @@ $spacing-sm: 8px;
 $spacing-md: 16px;
 $spacing-lg: 24px;
 
-// Reemplazo de darken y lighten con adjust-color
-$hover-color: adjust-color($primary-color, $lightness: -10%);
-$light-error: adjust-color($error-color, $lightness: 38%);
-$placeholder-color: adjust-color($text-color, $lightness: 40%);
-$light-bg-hover: adjust-color($light-bg, $lightness: -5%);
+// Modern color adjustments using color.scale() from Sass modules
+@use "sass:color";
+
+$hover-color: color.scale($primary-color, $lightness: -10%);
+$light-error: color.scale($error-color, $lightness: 38%);
+$placeholder-color: color.scale($text-color, $lightness: 40%);
+$light-bg-hover: color.scale($light-bg, $lightness: -5%);
 
 // Blog form block
 .blog-form {
@@ -23,7 +25,7 @@ $light-bg-hover: adjust-color($light-bg, $lightness: -5%);
     padding: $spacing-lg;
     background-color: $bg-color;
     border-radius: $border-radius;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
 
     &__group {
         display: flex;
