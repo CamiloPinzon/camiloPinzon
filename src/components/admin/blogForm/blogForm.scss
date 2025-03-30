@@ -25,6 +25,19 @@ $light-bg-hover: adjust-color($light-bg, $lightness: -5%);
     border-radius: $border-radius;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
+    &__group {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: $spacing-lg;
+        gap: $spacing-md;
+    }
+
     &__title {
         font-size: 28px;
         margin-bottom: $spacing-lg;
