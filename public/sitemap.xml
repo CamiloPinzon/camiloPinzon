@@ -19,7 +19,7 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://camilopinzon.netlify.app/blog</loc>
+    <loc>https://camilopinzon.netlify.app/blogs</loc>
     <lastmod>2024-03-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -28,6 +28,114 @@
     <loc>https://camilopinzon.netlify.app/contact</loc>
     <lastmod>2024-03-14</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/what-is-and-how-works-the-javascript-engine</loc>
+    <lastmod>2025-03-14</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/explorando-las-caractersticas-clave-de-react-19</loc>
+    <lastmod>2025-03-25</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/understanding-variables-and-data-types-in-javascript</loc>
+    <lastmod>2025-03-25</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/key-concepts-every-developer-should-know</loc>
+    <lastmod>2025-03-25</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/conceptos-clave-que-todo-desarrollador-deberia-conocer</loc>
+    <lastmod>2025-03-25</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/comprendiendo-variables-y-tipos-de-datos-en-javascript</loc>
+    <lastmod>2025-03-25</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/how-to-customize-your-github-profile-with-a-readmemd</loc>
+    <lastmod>2025-03-29</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/react-19s-game-changer-the-react-compiler</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/que-es-y-como-funciona-el-motor-de-javascript</loc>
+    <lastmod>2025-03-24</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/type-vs-interface-en-typescript-cundo-y-cmo-usar-cada-uno</loc>
+    <lastmod>2025-03-28</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/cmo-personalizar-tu-perfil-de-github-con-un-readmemd</loc>
+    <lastmod>2025-03-29</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/mtodos-del-ciclo-de-vida-del-componente-o-hooks</loc>
+    <lastmod>2025-03-25</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/component-lifecycle-methods-or-hooks</loc>
+    <lastmod>2025-03-25</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/type-vs-interface-in-typescript-when-and-how-to-use-each</loc>
+    <lastmod>2025-03-27</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/exploring-the-key-features-of-react-19</loc>
+    <lastmod>2025-03-25</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/el-cambio-revolucionario-de-react-19-el-react-compiler</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/la-tendencia-ai-estilo-ghibli-un-llamado-a-la-responsabilidad-en-el-uso-de-la-ia</loc>
+    <lastmod>2025-04-02</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/the-studio-ghibli-ai-trend-a-wake-up-call-for-responsible-ai-use</loc>
+    <lastmod>2025-04-02</lastmod>
+    <changefreq>never</changefreq>
     <priority>1.0</priority>
   </url>
 </urlset>

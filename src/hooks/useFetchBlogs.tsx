@@ -30,7 +30,6 @@ export type BlogPost = {
 	summary?: string;
 	coverImage?: string;
 	slug: string;
-	// Add other blog post properties here
 };
 
 export type BlogFilter = "all" | "published" | "draft";
