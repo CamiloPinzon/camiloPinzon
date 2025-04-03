@@ -2,6 +2,8 @@ import React, { useRef, useState, useMemo, useCallback } from "react";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 
+import { useBlogManagement } from "../../../hooks/useBlogManagement";
+
 interface RichTextEditorProps {
 	value: string;
 	onChange: (content: string) => void;
@@ -10,6 +12,8 @@ interface RichTextEditorProps {
 const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
 	const quillRef = useRef<ReactQuill>(null);
 	const [uploading, setUploading] = useState(false);
+
+	const { uploadImage } = useBlogManagement();
 
 	// Generate a stable ID for the editor instance
 	const [editorId] = useState(
@@ -26,38 +30,32 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
 			if (input.files && input.files[0]) {
 				try {
 					setUploading(true);
-					// Here you would normally call your uploadImage function
-					// For now we're just simulating the flow
-					setTimeout(() => {
-						const quill = quillRef.current?.getEditor();
-						if (quill) {
-							// Get current selection or default to end
-							const range = quill.getSelection() || {
-								index: quill.getLength(),
-								length: 0,
-							};
 
-							// For demo purposes - in real app replace with actual URL from your upload
-							const dummyUrl = "https://placehold.co/300";
+					const quill = quillRef.current?.getEditor();
+					if (!quill) throw new Error("Quill editor not found.");
 
-							// Insert image
-							quill.insertEmbed(range.index, "image", dummyUrl);
+					for (const file of input.files) {
+						// uploadImage returns a URL string, not an object
+						const imageUrl = await uploadImage(file);
+						const range = quill.getSelection() || {
+							index: quill.getLength(),
+							length: 0,
+						};
 
-							// Move cursor after the image
-							quill.setSelection(range.index + 1, 0);
+						// Insert the image URL directly
+						quill.insertEmbed(range.index, "image", imageUrl);
+						quill.setSelection(range.index + 1, 0, "silent");
+					}
 
-							// Ensure editor has focus
-							quill.focus();
-							setUploading(false);
-						}
-					}, 1000);
+					quill.focus();
+					setUploading(false);
 				} catch (error) {
 					console.error("Error handling image:", error);
 					setUploading(false);
 				}
 			}
 		};
-	}, []);
+	}, [uploadImage]);
 
 	const formats = useMemo(
 		() => [
