@@ -15,7 +15,6 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
 
 	const { uploadImage } = useBlogManagement();
 
-	// Generate a stable ID for the editor instance
 	const [editorId] = useState(
 		() => `editor-${Math.random().toString(36).substring(2, 9)}`
 	);
@@ -35,16 +34,22 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
 					if (!quill) throw new Error("Quill editor not found.");
 
 					for (const file of input.files) {
-						// uploadImage returns a URL string, not an object
 						const imageUrl = await uploadImage(file);
 						const range = quill.getSelection() || {
 							index: quill.getLength(),
 							length: 0,
 						};
 
-						// Insert the image URL directly
+						// Insert image at current cursor position
 						quill.insertEmbed(range.index, "image", imageUrl);
-						quill.setSelection(range.index + 1, 0, "silent");
+
+						// Move cursor after the image
+						quill.setSelection(range.index + 1, 0);
+
+						// Important: Manually trigger a change event
+						// This ensures the onChange callback is called with the updated content
+						const currentContent = quill.root.innerHTML;
+						onChange(currentContent);
 					}
 
 					quill.focus();
@@ -55,7 +60,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
 				}
 			}
 		};
-	}, [uploadImage]);
+	}, [uploadImage, onChange]);
 
 	const formats = useMemo(
 		() => [
