@@ -42,7 +42,9 @@ const AdminMenu = () => {
 				target="_popup"
 				className="main-menu__link"
 				rel="noopener noreferrer"
-			></a>
+			>
+				Send newsletter email
+			</a>
 		</nav>
 	);
 };
