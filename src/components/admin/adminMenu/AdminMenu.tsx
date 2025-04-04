@@ -37,6 +37,12 @@ const AdminMenu = () => {
 			>
 				Create New Blog
 			</NavLink>
+			<a
+				href="http://camilopinzon.netlify.app/.netlify/functions/send-newsletter"
+				target="_popup"
+				className="main-menu__link"
+				rel="noopener noreferrer"
+			></a>
 		</nav>
 	);
 };

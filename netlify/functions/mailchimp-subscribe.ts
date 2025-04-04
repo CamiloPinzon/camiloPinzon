@@ -204,7 +204,7 @@ const handler: Handler = async (event) => {
       </div>
       
       <div class="footer">
-        <p>&copy; ${new Date().getFullYear()} Your Company. All rights reserved.</p>
+        <p>&copy; ${new Date().getFullYear()} Camilo Pinzon Developer. All rights reserved.</p>
         <p>You're receiving this email because you signed up for our newsletter.</p>
       </div>
     </div>
