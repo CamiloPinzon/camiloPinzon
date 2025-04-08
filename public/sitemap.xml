@@ -138,4 +138,28 @@
     <changefreq>never</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/actions-en-react-19-dile-adios-al-codigo-repetitivo-y-hola-a-la-limpieza</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/react-19-actions-say-goodbye-to-boilerplate-and-hello-to-cleaner-code</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/how-much-water-does-ai-really-use-myths-realities-and-surprising-comparisons</loc>
+    <lastmod>2025-04-05</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/cunta-agua-usa-la-inteligencia-artificial</loc>
+    <lastmod>2025-04-05</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
 </urlset>
