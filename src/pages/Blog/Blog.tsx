@@ -116,6 +116,12 @@ const Blog = () => {
 
 	return (
 		<div className="blog">
+			<title>{blog.title}</title>
+			<meta name="description" content={blog.summary} />
+			<meta property="og:title" content={blog.title} />
+			<meta property="og:description" content={blog.summary} />
+			<meta property="og:image" content={blog.coverImage} />
+			<meta property="og:url" content={currentUrl} />
 			<h1 className="blog__title">{blog.title}</h1>
 			<div
 				className="quill-content"

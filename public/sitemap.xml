@@ -162,4 +162,28 @@
     <changefreq>never</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/vibe-coding-and-the-future-of-developers</loc>
+    <lastmod>2025-04-09</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/vibe-coding-y-el-futuro-de-los-desarrolladores</loc>
+    <lastmod>2025-04-09</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/kiss-the-principle-every-dev-should-mentally-tattoo</loc>
+    <lastmod>2025-04-11</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://camilopinzon.netlify.app/blogs/kiss-el-principio-que-todo-dev-debera-tatuarse-mentalmente</loc>
+    <lastmod>2025-04-11</lastmod>
+    <changefreq>never</changefreq>
+    <priority>1.0</priority>
+  </url>
 </urlset>
