@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { NAMESPACES } from "../../i18n/namespaces";
 
-import { useSEO } from "../../hooks/useSEO";
 import useResponsive from "../../hooks/useResponsive";
 import Hero from "../../components/hero/Hero";
 import Tags from "../../components/tags/Tags";
@@ -35,12 +34,6 @@ const Experience = () => {
 	const { i18n } = useTranslation();
 	const currentLanguage = i18n.language as SupportedLanguage;
 
-	useSEO({
-		title: "Expert Front-End Developer | React, WordPress, TypeScript, ...",
-		description:
-			"Explore my experience as a front-end developer specializing in React, WordPress, WooCommerce, and modern web solutions. See how I can help your project.",
-	});
-
 	useEffect(() => {
 		try {
 			const fetchExperience = async () => {
@@ -68,6 +61,8 @@ const Experience = () => {
 	const isMobile = current === "xs" || current === "sm";
 	return (
 		<section className="experience-container">
+			<title>{t("experience:title")}</title>
+			<meta name="description" content={t("experience:text")} />
 			<div className="experience-hero">
 				<Hero
 					bgImage="./images/experienceHero.webp"

@@ -10,7 +10,6 @@ import Tags from "../../components/tags/Tags";
 import SharePost from "../../components/sharePost/SharePost";
 import Modal from "../../components/modal/Modal";
 import { useGetBlogBySlug } from "../../hooks/useGetBlogBySlug";
-import { useSEO } from "../../hooks/useSEO";
 
 import "./blog.scss";
 import "react-quill-new/dist/quill.snow.css";
@@ -37,12 +36,6 @@ const Blog = () => {
 	});
 
 	const isMounted = useRef(true);
-
-	useSEO({
-		title: blog ? blog.title : "Loading Blog...",
-		description: blog ? blog.summary : "Blog content is loading",
-		image: blog?.coverImage,
-	});
 
 	useEffect(() => {
 		return () => {
@@ -122,6 +115,14 @@ const Blog = () => {
 			<meta property="og:description" content={blog.summary} />
 			<meta property="og:image" content={blog.coverImage} />
 			<meta property="og:url" content={currentUrl} />
+			<meta property="og:type" content="article" />
+			<meta property="og:locale" content={currentLanguage} />
+			<meta property="og:site_name" content="Camilo Pinzon" />
+			<meta
+				property="keywords"
+				content={blog.tags?.join(", ")}
+				name="keywords"
+			/>
 			<h1 className="blog__title">{blog.title}</h1>
 			<div
 				className="quill-content"

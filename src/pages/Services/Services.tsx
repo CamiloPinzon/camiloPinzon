@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useSEO } from "../../hooks/useSEO";
 import { useTranslation } from "react-i18next";
 import { NAMESPACES } from "../../i18n/namespaces";
 
@@ -28,11 +27,6 @@ export interface ServicesData {
 
 const Services = () => {
 	const [servicesData, setServicesData] = useState<ServicesData | null>(null);
-	useSEO({
-		title: "Expert Front-End Developer | React, WordPress, TypeScript, ...",
-		description:
-			"I offer front-end development services using React, WordPress & WooCommerce. Get a high-performance, user-friendly website tailored to your needs.",
-	});
 
 	const { t } = useTranslation(NAMESPACES.SERVICES);
 	const { i18n } = useTranslation();
@@ -59,6 +53,8 @@ const Services = () => {
 	};
 	return (
 		<div className="services-container">
+			<title>{t("services:title")}</title>
+			<meta name="description" content={t("services:text")} />
 			<Hero
 				bgImage="./images/servicesHero.webp"
 				title={t("services:title")}

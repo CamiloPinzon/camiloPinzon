@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 import { NAMESPACES } from "../../i18n/namespaces";
 
 import useResponsive from "../../hooks/useResponsive";
-import { useSEO } from "../../hooks/useSEO";
 
 import emailIcon from "../../assets/email.svg";
 import phoneIcon from "../../assets/phone.svg";
@@ -16,11 +15,6 @@ import "./contact.scss";
 
 const Contact = () => {
 	const { t } = useTranslation(NAMESPACES.CONTACT);
-	useSEO({
-		title: "Expert Front-End Developer | React, WordPress, TypeScript, ...",
-		description:
-			"Have a project in mind? Get in touch! I specialize in front-end development with React, WordPress & WooCommerce. Let’s build something amazing.",
-	});
 
 	const { current, isXs } = useResponsive();
 	const isMobile = current === "xs" || current === "sm";
@@ -34,6 +28,8 @@ const Contact = () => {
 	};
 	return (
 		<div className="contact">
+			<title>{t("contact:hero_title")}</title>
+			<meta name="description" content={t("contact:hero_text")} />
 			<Hero
 				bgImage="./images/contactHero.webp"
 				title={t("contact:hero_title")}
