@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics, logEvent } from "firebase/analytics";
+import { getAnalytics, logEvent as firebaseLogEvent, isSupported, Analytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
@@ -14,9 +14,33 @@ export const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+// Initialize Analytics only if supported (avoids errors with ad blockers, etc.)
+let analytics: Analytics | null = null;
+
+// Check if analytics is supported before initializing
+isSupported().then((supported) => {
+	if (supported) {
+		analytics = getAnalytics(app);
+	} else {
+		console.warn("Firebase Analytics is not supported in this environment");
+	}
+}).catch((error) => {
+	console.warn("Error checking Analytics support:", error);
+});
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-export { app, analytics, logEvent };
+// Safe logEvent wrapper that checks if analytics is available
+export const logEvent = (analyticsInstance: Analytics | null, eventName: string, eventParams?: Record<string, unknown>) => {
+	if (analyticsInstance) {
+		try {
+			firebaseLogEvent(analyticsInstance, eventName, eventParams);
+		} catch (error) {
+			console.warn("Error logging event:", error);
+		}
+	}
+};
+
+export { app, analytics };
