@@ -15,30 +15,43 @@ export const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-// Initialize Analytics only if supported (avoids errors with ad blockers, etc.)
+// Initialize Analytics with proper error handling
+// Note: Ad blockers may still block requests, but this won't break the app
 let analytics: Analytics | null = null;
 
-// Check if analytics is supported before initializing
-isSupported().then((supported) => {
-	if (supported) {
-		analytics = getAnalytics(app);
-	} else {
-		console.warn("Firebase Analytics is not supported in this environment");
+// Initialize analytics asynchronously and silently
+(async () => {
+	try {
+		// Only initialize in browser environments
+		if (typeof window === 'undefined') return;
+		
+		// Check if analytics is supported
+		const supported = await isSupported();
+		if (supported) {
+			analytics = getAnalytics(app);
+		}
+	} catch {
+		// Silently fail - analytics is optional
+		// Ad blockers may prevent initialization
 	}
-}).catch((error) => {
-	console.warn("Error checking Analytics support:", error);
-});
+})();
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 // Safe logEvent wrapper that checks if analytics is available
-export const logEvent = (analyticsInstance: Analytics | null, eventName: string, eventParams?: Record<string, unknown>) => {
-	if (analyticsInstance) {
+export const logEvent = (
+	_analyticsInstance: Analytics | null, 
+	eventName: string, 
+	eventParams?: Record<string, unknown>
+) => {
+	// Only log if analytics was successfully initialized
+	if (analytics) {
 		try {
-			firebaseLogEvent(analyticsInstance, eventName, eventParams);
-		} catch (error) {
-			console.warn("Error logging event:", error);
+			firebaseLogEvent(analytics, eventName, eventParams);
+		} catch {
+			// Silently fail - analytics is not critical
+			// This prevents errors from ad blockers breaking the app
 		}
 	}
 };
