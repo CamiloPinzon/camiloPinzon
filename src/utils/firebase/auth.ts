@@ -49,7 +49,9 @@ export const isUserAdmin = async (user: User): Promise<boolean> => {
 	if (!user || !user.email) return false;
 
 	// Quick check against admin emails list
-	if (adminEmail.includes(user.email)) {
+	// Support both single email and comma-separated list
+	const adminEmails = adminEmail ? adminEmail.split(',').map((email: string) => email.trim()) : [];
+	if (adminEmails.includes(user.email)) {
 		return true;
 	}
 

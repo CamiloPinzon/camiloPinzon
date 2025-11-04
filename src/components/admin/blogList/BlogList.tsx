@@ -302,16 +302,16 @@ const BlogList: React.FC = () => {
 													{actionLoading === blog.id ? "..." : "Delete"}
 												</button>
 
-												{blog.publishedStatus === "published" && (
-													<a
-														href={`/blog/${blog.slug}`}
-														target="_blank"
-														rel="noopener noreferrer"
-														className="blog-list__action-button blog-list__action-button--view"
-													>
-														View
-													</a>
-												)}
+											{blog.publishedStatus === "published" && (
+												<a
+													href={`/blogs/${blog.slug}`}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="blog-list__action-button blog-list__action-button--view"
+												>
+													View
+												</a>
+											)}
 											</div>
 										</td>
 									</tr>
