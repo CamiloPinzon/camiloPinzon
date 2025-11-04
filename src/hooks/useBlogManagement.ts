@@ -122,6 +122,45 @@ export const useBlogManagement = () => {
 				publishedDate: status === "published" ? new Date() : null,
 				updatedAt: new Date(),
 			});
+
+			// Send newsletter notification when publishing
+			if (status === "published") {
+				try {
+					// Get the blog data to send in the notification
+					const blogSnapshot = await getDocs(
+						query(collection(db, "blogs"), where("__name__", "==", id))
+					);
+
+					if (!blogSnapshot.empty) {
+						const blogData = blogSnapshot.docs[0].data() as BlogPost;
+
+						// Send notification to newsletter subscribers
+						await fetch("/.netlify/functions/send-blog-notification", {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({
+								blogData: {
+									title: blogData.title,
+									slug: blogData.slug,
+									summary: blogData.summary,
+									coverImage: blogData.coverImage,
+									lng: blogData.lng,
+								},
+							}),
+						});
+
+						console.log("✅ Newsletter notification sent successfully");
+					}
+				} catch (notificationError) {
+					// Don't fail the publish operation if notification fails
+					console.error(
+						"⚠️ Failed to send newsletter notification:",
+						notificationError
+					);
+				}
+			}
 		} catch (err) {
 			setError(err instanceof Error ? err.message : "Unknown error");
 			throw err;
