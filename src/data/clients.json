@@ -17,6 +17,12 @@
 			"name": "P&L Contructor",
 			"image": "/images/PYL_LOGO.png",
 			"url": "https://pylconstructor183.com/"
+		},
+		{
+			"id": 4,
+			"name": "Azahar Coffee",
+			"image": "/images/logo-azahar-coffee.webp",
+			"url": "https://azaharcoffee.com/"
 		}
 	]
 }
