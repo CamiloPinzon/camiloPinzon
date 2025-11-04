@@ -21,6 +21,7 @@ export type UserContextType = {
 	currentUser: User;
 	setCurrentUser: Dispatch<SetStateAction<User>>;
 	isAdmin: boolean;
+	loading: boolean;
 };
 
 export type UserProviderProps = {
@@ -31,11 +32,13 @@ export const UserContext = createContext<UserContextType>({
 	currentUser: null,
 	setCurrentUser: () => null,
 	isAdmin: false,
+	loading: true,
 });
 
 export const UserProvider = ({ children }: UserProviderProps) => {
 	const [currentUser, setCurrentUser] = useState<User | null>(null);
 	const [isAdmin, setIsAdmin] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChangedListener(
@@ -51,10 +54,12 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 					isUserAdmin(user).then((isAdmin) => {
 						setIsAdmin(isAdmin);
 						setCurrentUser(formattedUser);
+						setLoading(false);
 					});
 				} else {
 					setCurrentUser(null);
 					setIsAdmin(false);
+					setLoading(false);
 				}
 			}
 		);
@@ -62,7 +67,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 		return unsubscribe;
 	}, []);
 
-	const value: UserContextType = { currentUser, setCurrentUser, isAdmin };
+	const value: UserContextType = { currentUser, setCurrentUser, isAdmin, loading };
 
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

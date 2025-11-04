@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 import { signOutUser } from "../../utils/firebase/auth";
@@ -9,15 +9,8 @@ import Button from "../../components/button/Button";
 import "./admin.scss";
 
 const Admin = () => {
-	const { currentUser, isAdmin } = useContext(UserContext);
+	const { currentUser, isAdmin, loading } = useContext(UserContext);
 	const navigate = useNavigate();
-	const [loading, setLoading] = useState(true);
-
-	useEffect(() => {
-		if (currentUser !== null) {
-			setLoading(false);
-		}
-	}, [currentUser]);
 
 	useEffect(() => {
 		if (!loading) {
@@ -41,7 +34,7 @@ const Admin = () => {
 	};
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return <div className="loading-container">Loading...</div>;
 	}
 
 	return (
